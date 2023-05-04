@@ -4,6 +4,7 @@ var goalIds = ['looseW', 'healthyEat', 'muscleG', 'detox', 'lightD', 'notS'];
 var optionalItemIds = ['opt1', 'opt2', 'opt3'];
 var prefIds = ['veg', 'nonVeg', 'vegan', 'egg'];
 var allergenIds = ['noAllergen', 'nutFree', 'glutenFree'];
+var subPlan = ['1stp','2ndp','3rdp','4thp','5thp','6thp'];
 var fullMealcost = 0
 var coupons = {
     'WELCOME': 300,
@@ -209,12 +210,16 @@ function setSchedule(){
         return true;
     }
 }
-function setPlan(plan_name, plan_price, days, id, id_, id__, id___){
+function setPlan(plan_name, plan_price, days, id){
     plan.selected_plan = {name: plan_name, price: plan_price, days: days};
     $(`#${id}`).css('background-color', 'rgb(117 224 87 / 55%)');
-    $(`#${id_}`).css('background-color', '');
-    $(`#${id__}`).css('background-color', '');
-    $(`#${id___}`).css('background-color', '');
+    for(let i=0;i<subPlan.length;i++)
+    {
+        if(subPlan[i]!=id)
+        {
+            $(`#${subPlan[i]}`).css('background-color','');
+        }
+    }
     showPlanDetails();
     console.log(plan);
 }

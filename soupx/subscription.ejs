@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex; don">
-                                        <div class="form-group custom-blocks" style="border-radius: 5px; padding: 15px ;margin:10px; width: 90%; float: left; border-style: solid;" onclick="setGoal('Loose Weight', 'looseW')">
+                                        <div class="form-group custom-blocks" style="border-radius: 5px; padding: 15px ;margin:10px; width: 90%; float: left; border-style: solid;" onclick="setGoal('Healthy Eating', 'healthyEat')">
                                             <div class="row">													
                                                 <a id="healthyEat" style="font-size: 22px; text-align: center;" ><object data="icons/salad.png" height="50px" onclick="setGoal('Healthy Eating', 'healthyEat')"></object></a>
                                             </div>
@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex; don">
-                                        <div class="form-group custom-blocks" style="border-radius: 5px; padding: 15px ;; margin:10px; width: 90%; float: left; border-style: solid;" onclick="setGoal('Loose Weight', 'looseW')">
+                                        <div class="form-group custom-blocks" style="border-radius: 5px; padding: 15px ;; margin:10px; width: 90%; float: left; border-style: solid;" onclick="setGoal('Muscle Gain', 'muscleG')">
                                             <div class="row">													
                                                 <a id="muscleG" style="font-size: 22px; text-align: center;" ><object data="icons/muscles.png" height="50px" onclick="setGoal('Muscle Gain', 'muscleG')"></object></a>
                                             </div>
@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex; don">
-                                        <div class="form-group custom-blocks" style="border-radius: 5px; padding: 15px ; width: 90%; margin:10px; float: left; border-style: solid;" onclick="setGoal('Detox', 'detox')">
+                                        <div class="form-group custom-blocks" style="border-radius: 5px; padding: 15px ; width: 90%; margin:10px; float: left; border-style: solid;" onclick="setGoal('Light Dinner', 'lightD')">
                                             <div class="row">												
                                                 <a id="lightD" style="font-size: 22px; text-align: center;" ><object data="icons/bowl-of-soup.png" height="50px" onclick="setGoal('Light Dinner', 'lightD')"></object></a>
                                             </div>
@@ -102,7 +102,7 @@
                                     
                                     
                                         <div class="d-flex; don">
-                                            <div class="form-group custom-blocks" style="border-radius: 5px; padding: 30px ;; margin:10px; width: 90%; float: left; border-style: solid;" onclick="setGoal('Loose Weight', 'looseW')">
+                                            <div class="form-group custom-blocks" style="border-radius: 5px; padding: 30px ;; margin:10px; width: 90%; float: left; border-style: solid;" onclick="setGoal('Not Sure', 'notS')">
                                             <div class="row">	
                                 												
                                                 <a id="notS" style="font-size: 15px; text-align: center; font-size: 20px; font-weight: 800;"  onclick="setGoal('Not Sure', 'notS')">Not sure?</a>
@@ -128,11 +128,7 @@
                         <div class="vector-img-one">
                             <img src="assets/img/vb1.png" alt="">
                         </div>
-                        <div class="actions">
-                            <ul>
-                                <li><span id="next-button-c" class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span></li>
-                            </ul>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- div 2 -->
@@ -160,9 +156,37 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="card" style="width: 100%;" id="2ndp" onclick="setPlan('Wellness 14 Days', '2646', 14, '2ndp', '3rdp', '1stp', '4thp')"> 
+                                    <div class="card" style="width: 100%;" id="2ndp" onclick="setPlan('Wellness 14 Days', '2646', 14, '2ndp')"> 
                                         <div class="card-header">
                                             <h4>Wellness 14 Days</h4>
+                                            <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 25%</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="custom_row_plan"><tiny>₹</tiny> <h3>189</h3><p>/meal</p></div><br><br>
+                                            <div class="custom_row_plan"><tiny>₹</tiny>&nbsp; 2,646</p></div><br>
+                                            <div class="custom_row_plan"><p><i class="icon-hotel-room_service"></i>&nbsp;14 Meals &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist</p></div>
+                                        </div>											
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card" style="width: 100%; background-color: rgb(117 224 87 / 55%);" id="1stp" onclick="setPlan('Trial 90 Days', '1463', 90, '5thp')">
+                                        <div class="card-header">
+                                            <h4>Trial 90 Days</h4>
+                                            <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 15%</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="custom_row_plan"><tiny>₹</tiny> <h3>209</h3><p>/meal</p></div><br><br>
+                                            <div class="custom_row_plan"><tiny>₹</tiny>&nbsp; 1,463 </div><br>
+                                            <div class="custom_row_plan"><p><i class="icon-hotel-room_service"></i>&nbsp;7 Meals &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist</p></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card" style="width: 100%;" id="2ndp" onclick="setPlan('Wellness 180 Days', '2646', 180, '6thp')"> 
+                                        <div class="card-header">
+                                            <h4>Wellness 180 Days</h4>
                                             <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 25%</p>
                                         </div>
                                         <div class="card-body">
@@ -642,7 +666,7 @@
     <script src="assets/js/slick.min.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="assets/js/main.js"></script>
-    <!-- <script src="assets/js/custom.js"></script> -->
+    <script src="assets/js/custom.js"></script>
     <script src="assets/js/switch.js"></script>
     <script>
         jQuery(document).ready(function ($){
@@ -674,5 +698,8 @@
         $("#customFile").change(function() {
             filename = this.files[0].name
         });
+
+        
+
     </script>
 </body>

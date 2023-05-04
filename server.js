@@ -33,13 +33,13 @@ var con = mysql.createConnection({
   password: "SoupXadmin",
   database: "SoupX_db",
 });
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  con.query('CREATE TABLE IF NOT EXISTS explore_leads(id int NOT NULL AUTO_INCREMENT, phone varchar(30), verification varchar(10), PRIMARY KEY(id));', function(error, result, fields) {
-    // console.log(result);
-  });
-});
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+//   con.query('CREATE TABLE IF NOT EXISTS explore_leads(id int NOT NULL AUTO_INCREMENT, phone varchar(30), verification varchar(10), PRIMARY KEY(id));', function(error, result, fields) {
+//     // console.log(result);
+//   });
+// });
 
 app.set('view engine', 'ejs');
 
