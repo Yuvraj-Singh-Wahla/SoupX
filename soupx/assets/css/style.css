@@ -1319,6 +1319,39 @@ wizard 4
 .service-checkbox:checked ~ .w-service-box .tooltip-info:after {
   display: block;
 }
+.don{
+  width: 90%;
+  justify-content: center;
+  margin-left: 1rem;
+  
+}
+.input1{
+  border-radius: 10px;
+  padding: 11px 23px 10px 13px;
+  border-color: #000;
+  
+  margin-right: 20px;
+  
+  
+}
+.input2{
+  justify-content: center;
+}
+.input3{
+  padding: 12px 73px 14px 73px;
+}
+.input4{
+  
+  flex-wrap:wrap ;
+  align-items: center;
+}
+.job{
+  margin-left: 27rem;
+  padding-top:119px ;
+  padding-bottom: 20px;
+  font-size: 2rem;
+  font-weight: 500;
+}
 
 .service-checkbox:checked ~ .w-service-box {
   border: 3px solid #0d4f09;
@@ -1378,6 +1411,10 @@ wizard 5
   padding-left: 30px;
   -webkit-appearance: none;
   border: 2px solid #b4d4e4;
+}
+.place{
+  margin-top: 150px;
+  margin-right: 200px;
 }
 
 /*---------------------------------------------------- */
@@ -1919,6 +1956,15 @@ wizard 5
   height: 50px;
   border: 3px solid #b4d4e4;
 }
+.akash{
+  float: left;
+  color: #474747;
+  font-size: 19px;
+  text-align: right;
+  font-weight: 600;
+  margin: 15px 30px 0px 0px;
+  justify-content: center;
+}
 label{
   float: left;
   color: #474747;
@@ -1935,6 +1981,7 @@ label{
   padding: 22px; 
   width: 40%; 
   margin-bottom: 40px;
+  margin-right: 30px;
   float: right; 
   border-style: solid;
 }
