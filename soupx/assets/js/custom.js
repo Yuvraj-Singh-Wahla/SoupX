@@ -1,6 +1,6 @@
 var plan = {};
 var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-var goalIds = ['looseW', 'healthyEat', 'muscleG', 'detox', 'lightD', 'notS'];
+var goalIds = ['looseW', 'healthyEat', 'muscleG', 'detox', 'lightD', 'notS','vegita','nonvegita'];
 var optionalItemIds = ['opt1', 'opt2', 'opt3'];
 var prefIds = ['veg', 'nonVeg', 'vegan', 'egg'];
 var allergenIds = ['noAllergen', 'nutFree', 'glutenFree'];
