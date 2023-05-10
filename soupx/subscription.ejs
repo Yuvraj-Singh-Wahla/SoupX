@@ -25,14 +25,14 @@
                 <span class="multisteps-form__progress-btn js-active" title="Application data"><i class="far fa-user"></i><span>Goal</span></span>
                 <span class="multisteps-form__progress-btn" title="Tax residency"><i style="color:#B0B0B0;" class="far fa-user"></i><span>Meal Plan</span></span>
                 <span class="multisteps-form__progress-btn" title="Indentity documents"><i style="color:#B0B0B0;" class="far fa-user"></i><span>Personal Details</span></span>
-                <span class="multisteps-form__progress-btn" title="Investability"><i style="color:#B0B0B0;" class="far fa-user"></i><span>Checkout & Pay</span></span>
+                <span id = "snp" class="multisteps-form__progress-btn" title="Investability"><i style="color:#B0B0B0;" class="far fa-user"></i><span>Checkout & Pay</span></span>
                 <!-- <span class="multisteps-form__progress-btn" title="Review"><i style="color:#B0B0B0;" class="far fa-user"></i><span>Review & Pay</span></span> -->
             </div>
         </div>
         <form class="multisteps-form__form w-75 order-1" action="#" id="wizard">
             <div class="form-area position-relative">
                 <!-- div 1 -->
-                <div class="multisteps-form__panel js-active" data-animation="slideHorz">
+                <div id="goal" class="multisteps-form__panel js-active" data-animation="slideHorz">
                     <div class="place">
                         <div class="inner pb-100 clearfix">
                             
@@ -134,7 +134,7 @@
                 <!-- div 2 -->
                
                 <!-- div 3 -->
-                <div class="multisteps-form__panel" data-animation="slideHorz">
+                <div id="meal" class="multisteps-form__panel" data-animation="slideHorz">
                     <div class="wizard-forms">
                         <div class="inner pb-100 clearfix">
                             <div class="wizard-title text-center">
@@ -171,7 +171,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="card" style="width: 100%; background-color: rgb(117 224 87 / 55%);" id="5thp" onclick="setPlan('Trial 90 Days', '1463', 90, '5thp')">
+                                    <div class="card" style="width: 100%;" id="5thp" onclick="setPlan('Trial 90 Days', '1463', 90, '5thp')">
                                         <div class="card-header">
                                             <h4>Trial 90 Days</h4>
                                             <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 15%</p>
@@ -229,7 +229,7 @@
                             <!-- <div class="row">&nbsp;</div> -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="card" style="width: 100%;" id="3rdp" onclick="setPlan('FIT 28 Days', '4732', 28, '3rdp', '1stp', '2ndp', '4thp')"> 
+                                    <div class="card" style="width: 100%;" id="3rdp" onclick="setPlan('FIT 28 Days', '4732', 28, '3rdp')"> 
                                         <div class="card-header">
                                             <h4>FIT 28 Days</h4>
                                             <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 35%</p>
@@ -261,9 +261,9 @@
                             <span class="wizard-sub-text">Choose Meal Type & Preference</span>
                             <div class="d-flex">
                                 <div class="col-md-4">
-                                    <div class="form-group custom-blocks" style="border-radius: 5px; padding: 5px; margin:10px; width: 80%; float: left; border-style: solid;" onclick="setGoal('Vegetarian', 'vegita')">
+                                    <div class="form-group custom-blocks" style="border-radius: 5px; padding: 5px; margin:10px; width: 80%; float: left; border-style: solid;" onclick="setMeal('Vegetarian', 'vegita')">
                                         <div class="row">													
-                                            <a id="vegita" style="font-size: 22px; text-align: center;" ><object data="icons/vegetables.png" height="50px" onclick="setGoal('Loose Weight', 'vegita')"></object></a>
+                                            <a id="vegita" style="font-size: 22px; text-align: center;" ><object data="icons/vegetables.png" height="50px" onclick="setMeal('Vegetarian', 'vegita')"></object></a>
                                         </div>
                                         <div>
                                             <center style="text-align: center;">Vegetarian</center>
@@ -271,9 +271,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group custom-blocks" style="border-radius: 5px; padding: 5px; width: 80%; margin:10px; float: left; border-style: solid;" onclick="setGoal('Non-Vegetarian', 'nonvegita')">
+                                    <div class="form-group custom-blocks" style="border-radius: 5px; padding: 5px; width: 80%; margin:10px; float: left; border-style: solid;" onclick="setMeal('Non-Vegetarian', 'nonvegita')">
                                         <div class="row">													
-                                            <a id="nonvegita" style="font-size: 22px; text-align: center;" ><object data="icons/roast-chicken.png" height="50px" onclick="setGoal('Non-Vegetarian', 'nonvegita')"></object></a>
+                                            <a id="nonvegita" style="font-size: 22px; text-align: center;" ><object data="icons/roast-chicken.png" height="50px" onclick="setMeal('Non-Vegetarian', 'nonvegita')"></object></a>
                                         </div>
                                         <div>
                                             <center style="text-align: center;">Non-Vegetarian</center>
@@ -292,14 +292,14 @@
                                           <ul>
                                                 <li>
                                                     <label class="block-option">
-                                                        <input type="checkbox" class="checked-checkbox" value="Monday" onclick="setDays('Monday')" checked name="options[]">
+                                                        <input type="checkbox" class="checked-checkbox" value="Monday" onclick="setLunch('Soup')" checked name="options[]">
                                                         <span class="checkbox-tick"></span>
                                                         <span class="day-label">Soup</span>
                                                     </label>
                                                 </li>
                                                 <li>
                                                     <label class="block-option">
-                                                        <input type="checkbox" class="checked-checkbox" value="Tuesday" onclick="setDays('Tuesday')" checked name="options[]">
+                                                        <input type="checkbox" class="checked-checkbox" value="Tuesday" onclick="setLunch('Salad')" checked name="options[]">
                                                         <span class="checkbox-tick"></span>
                                                         <span class="day-label">Salad</span>
                                                     </label>
@@ -317,14 +317,14 @@
                                           <ul>
                                                 <li>
                                                     <label class="block-option">
-                                                        <input type="checkbox" class="checked-checkbox" value="Monday" onclick="setDays('Monday')" checked name="options[]">
+                                                        <input type="checkbox" class="checked-checkbox" value="Monday" onclick="setDinner('Soup')" checked name="options[]">
                                                         <span class="checkbox-tick"></span>
                                                         <span class="day-label">Soup</span>
                                                     </label>
                                                 </li>
                                                 <li>
                                                     <label class="block-option">
-                                                        <input type="checkbox" class="checked-checkbox" value="Tuesday" onclick="setDays('Tuesday')" checked name="options[]">
+                                                        <input type="checkbox" class="checked-checkbox" value="Tuesday" onclick="setDinner('Salad')" checked name="options[]">
                                                         <span class="checkbox-tick"></span>
                                                         <span class="day-label">Salad</span>
                                                     </label>
@@ -337,7 +337,7 @@
                             <br>
                             <div class="wizard-form-input">
                                 <span class="wizard-sub-text">Add Ons</span>
-                                <select id="height" onchange="setBMIData()">
+                                <select id="addons" onchange="setAddOns()">
                                     <option value="">None</option>
                                     <option value="Soup Sticks">Soup Sticks</option>
                                     <option value="Croutons">Croutons</option>
@@ -375,12 +375,13 @@
                         <div class="vector-img-one">
                             <img src="assets/img/vb3.png" alt="">
                         </div>
-                        <div class="actions">
+                        <div class="form-step-control actions mt-60">
                             <ul>
-                                <li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span></li>
-                                <li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span></li>
+                                <li><button  id="back-meal">BACK</button></li>
+                                <li><button  id="next-meal">NEXT</button></li>
                             </ul>
                         </div>
+                         
                     </div>
                 </div>
                 <!-- div 4 -->
@@ -416,7 +417,8 @@
                                 </div>
                             
                                 <label>Height</label>
-                                <div class="input1 " style="">
+                                <!-- <div class="input1 " style=""> -->
+                                    <div class="input1 ">
                                     <select  class="input1 input3" id="height" onchange="setBMIData()">
                                         <option value="">Height</option>
                                         <option value="4 ft 0 inch">4'0"</option>
@@ -526,10 +528,10 @@
                         <div class="vector-img-one">
                             <img src="assets/img/vb2.png" alt="">
                         </div>
-                        <div class="actions">
+                        <div class="form-step-control actions mt-60">
                             <ul>
-                                <li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span></li>
-                                <li><span class="js-btn-next" title="NEXT">NEXT <i class="fa fa-arrow-right"></i></span></li>
+                                <li><button  id="back-personal">BACK</button></li>
+                                <li><button  id="next-personal">NEXT</button></li>
                             </ul>
                         </div>
                     </div>
@@ -551,12 +553,12 @@
                                     <td><span id="s_goal"></span></td>
                                 </tr>
                                 <tr>
-                                    <th>Preferences:</th>
-                                    <td><span id="s_prefs"></span></td>
+                                    <th>Gender</th>
+                                    <td><span id="s_gender"></span></td>
                                 </tr>
                                 <tr>
-                                    <th>Allergen:</th>
-                                    <td><span id="s_allergen"></span></td>
+                                    <th>Preferences:</th>
+                                    <td><span id="s_prefs"></span></td>
                                 </tr>
                                 <tr>
                                     <th>Selected Plan:</th>
@@ -571,6 +573,14 @@
                                     <td><span id="s_plan_addons"></span></td>
                                 </tr>
                                 <tr>
+                                    <th>Lunch:</th>
+                                    <td><span id="s_lunch"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Dinner:</th>
+                                    <td><span id="s_dinner"></span></td>
+                                </tr>
+                                <!-- <tr>
                                     <th>Full Meal:</th>
                                     <td><span id="s_plan_fm"></span></td>
                                 </tr>
@@ -585,34 +595,15 @@
                                 <tr>
                                     <th>Timeslot:</th>
                                     <td><span id="s_timeslot"></span></td>
-                                </tr>
+                                </tr> -->
+                                
                                 <tr>
                                     <th>Selected Days:</th>
                                     <td><span id="s_days"></span></td>
                                 </tr>
                             </table>
-                            <!-- <div class="form-group">
-                                <label for="s_plan_name">Selected Plan: </label>
-                                <span id="s_plan_name"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="s_plan_price">Plan Price: </label>
-                                <span id="s_plan_price"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="s_plan_addons">Addons: </label>
-                                <span id="s_plan_addons"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="s_plan_fm">Full Meal: </label>
-                                <span id="s_plan_fm"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="s_plan_days">Validity: </label>
-                                <span id="s_plan_days"></span>
-                            </div> -->
-                            <div class="form-group" style="margin-top: 20px; margin-bottom: 40px;">
-                                <!-- <label for="s_plan_days">Have A Coupon? </label> -->
+                            <!-- <div class="form-group" style="margin-top: 20px; margin-bottom: 40px;">
+                                <label for="s_plan_days">Have A Coupon? </label>
                                 <div class="row">
                                     <div class="col-lg-9">
                                         <input type="text" id="coupon" class="form-control" placeholder="Have A Coupon?">
@@ -624,8 +615,8 @@
                                 <div class="row" style="padding-top: 3%; padding-left: 30%;">
                                     <p id="coupon-error"></p>
                                 </div>
-                                <!-- <i class="icon-phone"></i> -->
-                            </div>
+                                <i class="icon-phone"></i>
+                            </div> -->
                             <div class="form-group" style="margin-bottom: 50px;">
                                 <div class="row" style="margin-left: 15%;">
                                     <div class="col">
@@ -649,10 +640,10 @@
                         <div class="vector-img-one position-relative">
                             <img src="assets/img/vb5.png" alt="">
                         </div>
-                        <div class="actions mt-60">
+                        <div class="form-step-control actions mt-60">
                             <ul>
-                                <li><span class="js-btn-prev" title="BACK"><i class="fa fa-arrow-left"></i> BACK </span></li>
-                                <li><button title="NEXT" id="pay">SUBMIT & PAY<i class="fa fa-arrow-right"></i></button></li>
+                                <li><button class="btn btn-primary" id="back-sub">BACK</button></li>
+                                <li><button class="btn btn-primary" id="subnpay">SUBMIT & PAY</button></li>
                             </ul>
                         </div>
                     </div>
