@@ -13,26 +13,77 @@ var Razorpay = require('razorpay');
 const { response } = require('express');
 
 let instance = new Razorpay({
-    key_id:"rzp_test_4wIWvYrxDrtp8s",
-    key_secret:"u5BhaEiebMWLRjLxrVnOXV1s",
+    key_id: "rzp_test_4wIWvYrxDrtp8s",
+    key_secret: "u5BhaEiebMWLRjLxrVnOXV1s",
 });
 
 // Use body-parser to get POST requests for API use
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
 
 var mysql = require('mysql');
 const { use } = require('express/lib/application');
-   
+
 var con = mysql.createConnection({
-  host: "soupx-db.ct4awx1ga5he.eu-north-1.rds.amazonaws.com",
-  port: 3306,
-  user: "admin",
-  password: "SoupXadmin",
-  database: "SoupX_db",
+    host: "soupx-db.ct4awx1ga5he.eu-north-1.rds.amazonaws.com",
+    port: 3306,
+    user: "admin",
+    password: "SoupXadmin",
+    database: "SoupX_db",
 });
+
+con.connect((error) => {
+    if (error) {
+        console.log("Error connecting to the database:", error);
+        return;
+    }
+    console.log("Database Connected");
+})
+
+const subscriptionsTable = `
+CREATE TABLE IF NOT EXISTS subscriptions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(255) NOT NULL,
+    sex VARCHAR(255) NOT NULL,
+    age INT NOT NULL,
+    weight FLOAT NOT NULL,
+    height VARCHAR(255) NOT NULL,
+    goal VARCHAR(255) NOT NULL,
+    days JSON NOT NULL,
+    add_ons VARCHAR(255) NOT NULL,
+    lunch JSON NOT NULL,
+    dinner JSON NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    pincode INT NOT NULL,
+    amt FLOAT NOT NULL,
+    razorpay_order_id VARCHAR(255) NOT NULL,
+    razorpay_payment_id VARCHAR(255) NOT NULL,
+    razorpay_signature VARCHAR(255) NOT NULL
+  )
+`;
+
+con.query(subscriptionsTable, (error, results) => {
+    if (error) {
+        console.error('Error executing query: ', error);
+        return;
+    }
+    console.log('Query results:', results);
+});
+
+// const query = "DROP TABLE IF EXISTS subscriptions";
+
+// con.query(query, (error, results) => {
+//     if (error) {
+//         console.error('Error executing query: ', error);
+//         return;
+//     }
+//     console.log('Query results:', results);
+// });
+
 // con.connect(function(err) {
 //   if (err) throw err;
 //   console.log("Connected!");
@@ -56,28 +107,28 @@ app.use("/sitemap.xml", express.static(__dirname + '/sitemap.xml'));
 
 //CREATE EXPLORE LEAD API
 app.post('/leads', async (req, res) => {
-    const phone  = req.body.phone;
+    const phone = req.body.phone;
     console.log(phone);
-    await con.query(`INSERT INTO explore_leads (phone, verification) VALUES ("${phone}", "No")`, function(err, result, fields) {
-        if (err) throw err 
+    await con.query(`INSERT INTO explore_leads (phone, verification) VALUES ("${phone}", "No")`, function (err, result, fields) {
+        if (err) throw err
         const options = {
             method: 'POST',
             url: `https://control.msg91.com/api/v5/otp?template_id=626695641042174181129b03&mobile=91${phone}`,
             headers: {
-              accept: 'application/json',
-              'content-type': 'application/json',
-              authkey: '372124AHzypLn4SL961e928fcP1'
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authkey: '372124AHzypLn4SL961e928fcP1'
             },
-            data: {Param1: 'value1', Param2: 'value2', Param3: 'value3'}
-          };
-          
-          axios
+            data: { Param1: 'value1', Param2: 'value2', Param3: 'value3' }
+        };
+
+        axios
             .request(options)
             .then(function (response) {
-            //   console.log(response.data);
+                //   console.log(response.data);
             })
             .catch(function (error) {
-              console.error(error);
+                console.error(error);
             });
         // res.send('User saved successfully!')
         // res.redirect("https://explore.soupx.in/")
@@ -86,58 +137,96 @@ app.post('/leads', async (req, res) => {
 });
 
 //VERIFY EXPLORE LEAD API
-app.post('/verify_lead',  (req, res)=>{
+app.post('/verify_lead', (req, res) => {
     const phone = req.body.phone;
     const otp = req.body.otp;
     const options = {
         method: 'GET',
         url: `https://control.msg91.com/api/v5/otp/verify?otp=${otp}&mobile=91${phone}`,
-        headers: {accept: 'application/json', authkey: '372124AHzypLn4SL961e928fcP1'}
-      };
+        headers: { accept: 'application/json', authkey: '372124AHzypLn4SL961e928fcP1' }
+    };
 
-       axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        if(response.data.type=="success"){
-            con.query(`UPDATE explore_leads SET verification="Yes" where phone = "${phone}" `);
+    axios
+        .request(options)
+        .then(function (response) {
+            console.log(response.data);
+            if (response.data.type == "success") {
+                con.query(`UPDATE explore_leads SET verification="Yes" where phone = "${phone}" `);
 
-            // axios.get('https://explore.soupx.in/').then(function(response) {
-            // //    res.redirect( response.request.res.responseUrl); 
-            //     console.log(response.request.res.responseUrl);
-            //     // console.log(ans.status);
-             
-            //    }).catch(function(no200){
-            //     console.error("404, 400, and other events");
-               
-            //   });
+                // axios.get('https://explore.soupx.in/').then(function(response) {
+                // //    res.redirect( response.request.res.responseUrl); 
+                //     console.log(response.request.res.responseUrl);
+                //     // console.log(ans.status);
+
+                //    }).catch(function(no200){
+                //     console.error("404, 400, and other events");
+
+                //   });
+            }
+            else {
+                // res.send(response.data);
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+
+
+})
+
+app.post('/api/addSubscription', async (req, res) => {
+    const data = {
+        name: req.body.name,
+        phone: req.body.phone,
+        sex: req.body.sex,
+        age: parseInt(req.body.age),
+        weight: parseFloat(req.body.weight),
+        height: req.body.height,
+        goal: req.body.goal,
+        days: JSON.stringify(req.body.days),
+        add_ons: req.body.add_ons,
+        lunch: req.body.lunch,
+        dinner: req.body.dinner,
+        address: req.body.address,
+        pincode: parseInt(req.body.pincode),
+        city: req.body.city,
+        amt: parseFloat(req.body.amt),
+        razorpay_order_id: req.body.order_id,
+        razorpay_payment_id: req.body.payment_id,
+        razorpay_signature: req.body.raz_sign
+    };
+
+    const query = `
+  INSERT INTO subscriptions
+  SET ?
+`;
+
+    con.query(query, data, (error, results) => {
+        if (error) {
+            console.error('Error inserting data: ', error);
+            res.json({ message: false })
+            return;
         }
-        else{
-            // res.send(response.data);
-        }
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  
-
+        console.log('Data inserted successfully!');
+        res.json({ message: true });
+    });
 })
 
 
 app.get('/explore_menu', async function (req, res) {
-     
+
     // res.render(path.join(__dirname+'/soupx/subscription.ejs'))
     await res.redirect("https://explore.soupx.in/");
-    
+
 });
 
 
 
 //DELETE EXPLORE LEAD
-app.delete('/delete_leads', (req, res)=>{
-    con.connect(function(err){
-        con.query(`DELETE FROM explore_leads`, function(err, result, fields){
-            if (err) throw err 
+app.delete('/delete_leads', (req, res) => {
+    con.connect(function (err) {
+        con.query(`DELETE FROM explore_leads`, function (err, result, fields) {
+            if (err) throw err
             res.send('Deleted Successfully!')
         })
     })
@@ -145,8 +234,8 @@ app.delete('/delete_leads', (req, res)=>{
 
 //GET EXPLORE LEADS
 app.get('/get_leads', (req, res) => {
-    con.connect(function(err) {
-        con.query(`SELECT * FROM explore_leads`, function(err, result, fields) {
+    con.connect(function (err) {
+        con.query(`SELECT * FROM explore_leads`, function (err, result, fields) {
             if (err) res.send(err);
             if (result) res.send(result);
 
@@ -155,91 +244,155 @@ app.get('/get_leads', (req, res) => {
 });
 
 //CREATE RAZORPAY ORDER
-app.post("/api/payment/order",(req,res)=>{
-    var params=req.body;
+app.post("/api/payment/order", (req, res) => {
+    var params = req.body;
     instance.orders.create(params).then((data) => {
-           res.send({"sub":data,"status":"success"});
+        res.send({ "sub": data, "status": "success" });
     }).catch((error) => {
-           res.send({"sub":error,"status":"failed"});
+        res.send({ "sub": error, "status": "failed" });
     })
+});
+
+function addSubscription(data) {
+    const subscriptionData = {
+        name: data.name,
+        phone: data.phone,
+        sex: data.sex,
+        age: parseInt(data.age),
+        weight: parseFloat(data.weight),
+        height: data.height,
+        goal: data.goal,
+        days: JSON.stringify(data.days),
+        add_ons: data.add_ons,
+        lunch: JSON.stringify(data.lunch),
+        dinner: JSON.stringify(data.dinner),
+        address: data.address,
+        pincode: parseInt(data.pincode),
+        city: data.city,
+        amt: parseFloat(data.amt),
+        razorpay_order_id: data.razorpay_order_id,
+        razorpay_payment_id: data.razorpay_payment_id,
+        razorpay_signature: data.razorpay_signature
+    };
+    console.log(subscriptionData);
+
+    const query = `
+  INSERT INTO subscriptions
+  SET ?
+`;
+
+    let promiese = new Promise((resolve, reject) => {
+        con.query(query, subscriptionData, (error, results) => {
+            if (error) {
+                console.error('Error inserting data: ', error);
+                reject(false);
+            }
+            else
+                console.log('Data inserted successfully!');
+            console.log(results);
+            resolve(true);
+        });
     });
 
+    return promiese;
+
+}
+
 //VERIFY PAYMENT
-app.post("/api/payment/verify",(req,res)=>{
-    var body=req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
+app.post("/api/payment/verify", async (req, res) => {
+    var body = req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
     var crypto = require("crypto");
     var expectedSignature = crypto.createHmac('sha256', 'u5BhaEiebMWLRjLxrVnOXV1s')
-                                    .update(body.toString())
-                                    .digest('hex');
-                                    console.log("sig"+req.body.razorpay_signature);
-                                    console.log("sig"+expectedSignature);
-    var response = {"status":"failure"}
-    if(expectedSignature === req.body.razorpay_signature)
-        response={"status":"success"}
-        res.send(response);
+        .update(body.toString())
+        .digest('hex');
+    console.log("sig" + req.body.razorpay_signature);
+    console.log("sig" + expectedSignature);
+    if (expectedSignature === req.body.razorpay_signature) {
 
-    });    
+        addSubscription(req.body).then((result) => {
+            res.json({
+                payment_status: "Success",
+                subscription_status: "Success",
+            })
+
+        }, (result) => {
+            res.json({
+                payment_status: "Success",
+                subscription_status: "Faliure",
+            })
+        })
+    }
+    else {
+        res.json({
+            payment_status: "faliure",
+            subscription_status: "faliure",
+        })
+    }
+
+
+
+});
 
 //REDIRECT TO HOMEPAGE
 app.get('/', function (req, res) {
-     
-    res.render(path.join(__dirname+'/soupx/index.ejs'))
-    
+
+    res.render(path.join(__dirname + '/soupx/index.ejs'))
+
 });
 
 //REDIRECT TO PAYMENT PAGE
 app.get('/payment', function (req, res) {
-     
-    res.render(path.join(__dirname+'/soupx/razorpay.ejs'))
-    
+
+    res.render(path.join(__dirname + '/soupx/razorpay.ejs'))
+
 });
 
 //REDIRECT TO SUBSCRIPTION PAGE
 app.get('/subscription', function (req, res) {
-     
-    res.render(path.join(__dirname+'/soupx/subscription.ejs'))
+
+    res.render(path.join(__dirname + '/soupx/subscription.ejs'))
     // response.redirect("https://subscription.soupx.in/")
-    
+
 });
 
 //REDIRECT TO EXPLORE PAGE
-app.get('/explore', function(request, response){
-    
-    response.render(path.join(__dirname+'/soupx/explore.ejs'))
-   
+app.get('/explore', function (request, response) {
+
+    response.render(path.join(__dirname + '/soupx/explore.ejs'))
+
 });
 
 //REDIRECT TO FAQ PAGE
-app.get('/faq', function(request, response){    
-  
-    response.render(path.join(__dirname+'/soupx/faq'))    
-   
+app.get('/faq', function (request, response) {
+
+    response.render(path.join(__dirname + '/soupx/faq'))
+
 });
 
 //REDIRECT TO ABOUT US PAGE
-app.get('/about-us', function(request, response){    
-    
-    response.render(path.join(__dirname+'/soupx/about'))     
-   
-}, function(err){});
+app.get('/about-us', function (request, response) {
+
+    response.render(path.join(__dirname + '/soupx/about'))
+
+}, function (err) { });
 
 //REDIRECT TO PRIVACY POLICY PAGE
-app.get('/privacy-policy', function(request, response){ 
+app.get('/privacy-policy', function (request, response) {
 
-    response.render(path.join(__dirname+'/soupx/privacy-policy'))  
+    response.render(path.join(__dirname + '/soupx/privacy-policy'))
 });
 
 //REDIRECT TO REFUND POLICY PAGE
-app.get('/refund-policy', function(request, response){ 
+app.get('/refund-policy', function (request, response) {
 
-    response.render(path.join(__dirname+'/soupx/refund-policy'))  
+    response.render(path.join(__dirname + '/soupx/refund-policy'))
 });
 
 //REDIRECT TO TnC PAGE
-app.get('/terms-and-conditions', function(request, response){ 
+app.get('/terms-and-conditions', function (request, response) {
 
-    response.render(path.join(__dirname+'/soupx/terms-and-conditions'))
-});  
+    response.render(path.join(__dirname + '/soupx/terms-and-conditions'))
+});
 
 // Start the server
 app.listen(port);
