@@ -2024,3 +2024,23 @@ label{
   }
 }
 /*---------------------------------------------------- */
+
+/* CSS for address lines */
+
+.spoon{
+  justify-content: center;
+ padding-top: 30px;
+ padding-bottom: 30px;
+  
+}
+.plate{
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  width: 25%;
+  margin: auto;
+}
+.bowl{
+  text-align: center;
+  padding-top: 170px;
+}

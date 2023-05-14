@@ -189,7 +189,7 @@ function setDinner(eat) {
 }
 
 function setGender(gender, id, _id) {
-    plan.gender = gender;
+    plan.sex = gender;
     $(`#${id}`).parent().css('background-color', 'rgb(117 224 87 / 55%)');
     $(`#${id}`).parent().css('color', 'white');
     $(`#${_id}`).parent().css('background-color', '');
@@ -208,6 +208,24 @@ function setBMIData() {
     $('#age').val(a);
     console.log(plan);
 }
+
+function setName(){
+    plan.name = $('#name').val();
+}
+
+function setPhone(){
+    plan.phone = $('#phone').val();
+}
+
+function setAddress() {
+    let a1 = $("#address_1").val();
+    let a2 = $("#address_2").val();
+    let landmark = $("#landmark").val();
+    plan.pincode = $("#pincode").val();
+    plan.city = $("#city").val();
+    plan.address = a1 + ", " + a2 + ", Landmark: " + landmark;
+}
+
 function setNotesAndNext() {
     plan.notes = $('#notes').val();
     $('#nextButton').trigger('click');
@@ -268,7 +286,7 @@ function setPlan(plan_name, plan_price, days, id) {
 }
 
 function setAddOns() {
-    plan.addons = $("#addons").val();
+    plan.add_ons = $("#addons").val();
 }
 
 
@@ -390,16 +408,21 @@ function payment(id) {
 //Loads preview of selected data on Checkout & Pay
 function loadPreview() {
     console.log(plan);
+    document.getElementById('s_name').innerHTML = plan.name;
+    document.getElementById("s_phone").innerHTML = plan.phone;
+    document.getElementById("s_address").innerHTML = plan.address;
+    document.getElementById("s_city").innerHTML = plan.city;
+    document.getElementById("s_pincode").innerHTML = plan.pincode;
     document.getElementById("s_goal").innerHTML = plan.goal;
     document.getElementById("s_prefs").innerHTML = plan.meal;
     document.getElementById("s_plan_name").innerHTML = plan.selected_plan.name;
     document.getElementById("s_plan_price").innerHTML = plan.selected_plan.price;
     document.getElementById("s_days").innerHTML = plan.days
-    document.getElementById("s_plan_addons").innerHTML = plan.addons;
-    document.getElementById("s_gender").innerHTML = plan.gender;
+    document.getElementById("s_plan_addons").innerHTML = plan.add_ons;
+    document.getElementById("s_gender").innerHTML = plan.sex;
     document.getElementById("s_lunch").innerHTML = plan.lunch;
     document.getElementById("s_dinner").innerHTML = plan.dinner;
-    document.getElementById("total_amount").innerHTML = "₹"+plan.selected_plan.price;
+    document.getElementById("total_amount").innerHTML = "₹" + plan.selected_plan.price;
 
 }
 
@@ -425,13 +448,13 @@ document.getElementById("back-meal").addEventListener("click", function (e) {
 
 document.getElementById("next-personal").addEventListener("click", function (e) {
     e.preventDefault();
-    if (plan.age != null && plan.gender != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
+    if (plan.name!=null && plan.phone!=null && plan.address!=null && plan.pincode!= null && plan.city!=null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
         setActiveStep(3);
         setActivePanel(3);
     }
     else {
         console.log("Please fill all the details");
-    }
+        }
 });
 
 document.getElementById("back-personal").addEventListener("click", function (e) {
@@ -505,7 +528,22 @@ function verification(order_id, payment_id, signature) {
     var params = {
         razorpay_order_id: order_id,
         razorpay_payment_id: payment_id,
-        razorpay_signature: signature
+        razorpay_signature: signature,
+        name: plan.name,
+        phone: plan.phone,
+        sex: plan.sex,
+        age: plan.age,
+        weight: plan.weight,
+        height: plan.height,
+        goal: plan.goal,
+        days: plan.days,
+        add_ons: plan.add_ons,
+        lunch: plan.lunch,
+        dinner:plan.dinner,
+        address: plan.address,
+        city: plan.city,
+        pincode: plan.pincode,
+        amt: plan.selected_plan.price
     };
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function (res) {
