@@ -7,6 +7,8 @@ var optionalItemIds = ['opt1', 'opt2', 'opt3'];
 var prefIds = ['veg', 'nonVeg', 'vegan', 'egg'];
 var allergenIds = ['noAllergen', 'nutFree', 'glutenFree'];
 var subPlan = ['1stp', '2ndp', '3rdp', '4thp', '5thp', '6thp'];
+var salad_cost = 57;
+var soup_cost = 78;
 var fullMealcost = 0
 var coupons = {
     'WELCOME': 300,
@@ -209,11 +211,11 @@ function setBMIData() {
     console.log(plan);
 }
 
-function setName(){
+function setName() {
     plan.name = $('#name').val();
 }
 
-function setPhone(){
+function setPhone() {
     plan.phone = $('#phone').val();
 }
 
@@ -286,13 +288,14 @@ function setPlan(plan_name, plan_price, days, id) {
 }
 
 function setAddOns() {
-    plan.add_ons = $("#addons").val();
+    plan.add_ons = document.getElementById("addons").selectedOptions[0].innerHTML;
+
 }
 
 
 //Currently not in use
 // function showPlanDetails() {
-//     let amt = parseFloat(plan.selected_plan.price);
+//     let amt = parseFloat(`plan.selected_plan.price`);
 //     if (plan.optionalItems.length > 0) {
 //         amt = amt + ((29 * parseInt(plan.selected_plan.days)) * plan.optionalItems.length);
 //     }
@@ -353,7 +356,7 @@ function setAddOns() {
 /* =================== Razorpay Checkout ==================== */
 
 function payment(id) {
-    var amt = parseFloat(plan.selected_plan.price);
+    var amt = parseFloat(plan.total);
     if (plan.optionalItems.length > 0) {
         amt = amt + ((29 * parseInt(plan.selected_plan.days)) * plan.optionalItems.length);
     }
@@ -405,8 +408,28 @@ function payment(id) {
     });
 }
 
+function handlePriceChange() {
+    let val = 0;
+    if (plan.lunch.indexOf('Salad') === -1) {
+        val += salad_cost;
+    }
+    if (plan.lunch.indexOf('Soup') === -1) {
+        val += soup_cost;
+    }
+    if (plan.dinner.indexOf('Soup') === -1) {
+        val += soup_cost;
+    }
+    if (plan.dinner.indexOf('Salad') === -1) {
+        val += salad_cost
+    }
+    return val * plan.selected_plan.days;
+}
+
 //Loads preview of selected data on Checkout & Pay
 function loadPreview() {
+    let cr = handlePriceChange();
+    plan.total = parseInt(plan.selected_plan.price);
+
     console.log(plan);
     document.getElementById('s_name').innerHTML = plan.name;
     document.getElementById("s_phone").innerHTML = plan.phone;
@@ -422,7 +445,22 @@ function loadPreview() {
     document.getElementById("s_gender").innerHTML = plan.sex;
     document.getElementById("s_lunch").innerHTML = plan.lunch;
     document.getElementById("s_dinner").innerHTML = plan.dinner;
-    document.getElementById("total_amount").innerHTML = "₹" + plan.selected_plan.price;
+
+    document.getElementById("d_plan_price").innerHTML = plan.total;
+    plan.total += parseInt(document.getElementById("addons").value);
+    document.getElementById("d_addons").innerHTML = (document.getElementById("addons").value);
+    if (cr > 0) {
+        document.getElementById("crd").classList.remove("hidden");
+        document.getElementById("d_costr").innerHTML = "-" + cr;
+        plan.total = plan.total - cr;
+    }
+    else {
+        document.getElementById("crd").classList.add("hidden");
+    }
+    document.getElementById("d_gst").innerHTML = (5 * plan.total) / 100;
+    plan.total += (5 * plan.total) / 100;
+    document.getElementById("d_total_amount").innerHTML = plan.total;
+
 
 }
 
@@ -448,13 +486,13 @@ document.getElementById("back-meal").addEventListener("click", function (e) {
 
 document.getElementById("next-personal").addEventListener("click", function (e) {
     e.preventDefault();
-    if (plan.name!=null && plan.phone!=null && plan.address!=null && plan.pincode!= null && plan.city!=null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
+    if (plan.name != null && plan.phone != null && plan.address != null && plan.pincode != null && plan.city != null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
         setActiveStep(3);
         setActivePanel(3);
     }
     else {
         console.log("Please fill all the details");
-        }
+    }
 });
 
 document.getElementById("back-personal").addEventListener("click", function (e) {
@@ -471,8 +509,10 @@ document.getElementById("back-sub").addEventListener("click", function (e) {
 
 //Event handler for submit & pay
 document.getElementById("subnpay").addEventListener("click", function (e) {
+    window.removeEventListener('beforeunload', unloadHandler);
+
     e.preventDefault();
-    const payment_amount = plan.selected_plan.price;
+    const payment_amount = plan.total;
     var url = '/api/payment/order';
     var params = {
         amount: payment_amount * 100,
@@ -539,11 +579,11 @@ function verification(order_id, payment_id, signature) {
         days: plan.days,
         add_ons: plan.add_ons,
         lunch: plan.lunch,
-        dinner:plan.dinner,
+        dinner: plan.dinner,
         address: plan.address,
         city: plan.city,
         pincode: plan.pincode,
-        amt: plan.selected_plan.price
+        amt: plan.total
     };
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function (res) {
@@ -556,6 +596,45 @@ function verification(order_id, payment_id, signature) {
     xmlHttp.setRequestHeader("Content-type", "application/json");
     xmlHttp.send(JSON.stringify(params));
 }
+
+function createLead() {
+    const leadData = { name: plan.name, phone: plan.phone };
+
+    fetch('http://localhost:3504/api/subLeads', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(leadData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Response:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+}
+
+function unloadHandler(event) {
+    // Custom message to display
+    const confirmationMessage = 'Are you sure you want to miss out on your training plan?';
+
+    if (plan.phone !== null && plan.phone !== '' && plan.phone != undefined) {
+        alert(confirmationMessage);
+        createLead();
+    }
+
+    // Modern browsers require the event.returnValue assignment
+    event.returnValue = confirmationMessage;
+
+    // Returning the message is optional for some browsers, but can be used to customize the confirmation dialog
+    return confirmationMessage;
+}
+
+window.addEventListener('beforeunload', unloadHandler);
+
 
 init();
 showPlanDetails();

@@ -340,14 +340,14 @@
                             <div class="wizard-form-input">
                                 <span class="wizard-sub-text">Add Ons</span>
                                 <select id="addons" onchange="setAddOns()">
-                                    <option value="">None</option>
-                                    <option value="Soup Sticks">Soup Sticks</option>
-                                    <option value="Croutons">Croutons</option>
-                                    <option value="Soup Sticks + Croutons">Soup Sticks + Croutons</option>
-                                    <option value="Olive Pate Garlic Bread">Olive Pate Garlic Bread</option>
-                                    <option value="Soup Sticks + Olive Pate Garlic Bread">Soup Sticks + Olive Pate Garlic Bread</option>
-                                    <option value="Olive Pate Garlic Bread + Croutons">Olive Pate Garlic Bread + Croutons</option>
-                                    <option value="Soup Sticks + Olive Pate Garlic Bread + Croutons">Soup Sticks + Olive Pate Garlic Bread + Croutons</option>
+                                    <option value="0">None</option>
+                                    <option value="59">Soup Sticks</option>
+                                    <option value="59">Croutons</option>
+                                    <option value="119">Soup Sticks + Croutons</option>
+                                    <option value="59">Olive Pate Garlic Bread</option>
+                                    <option value="119">Soup Sticks + Olive Pate Garlic Bread</option>
+                                    <option value="119">Olive Pate Garlic Bread + Croutons</option>
+                                    <option value="159">Soup Sticks + Olive Pate Garlic Bread + Croutons</option>
                                 </select>
                             </div>
 
@@ -671,7 +671,7 @@
                                 </div>
                                 <i class="icon-phone"></i>
                             </div> -->
-                            <div class="form-group" style="margin-bottom: 50px;">
+                            <!-- <div class="form-group" style="margin-bottom: 50px;">
                                 <div class="row" style="margin-left: 15%;">
                                     <div class="col">
                                         <h5 class="text-danger">Total Amount: </h5>
@@ -680,7 +680,33 @@
                                         <h5 id="total_amount">0</h5>
                                     </div>	
                                 </div>
-                            </div>
+                            </div> -->
+                            <h4>Breakdown: </h3>
+                            <table class="table">
+                                <tr>
+                                    <th>Plan Price: </th>
+                                    <td><span id="d_plan_price"></span></td>
+                                </tr>
+                                <tr class="hidden">
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <th>Add Ons: </th>
+                                    <td><span id="d_addons"></span></td>
+                                </tr>
+                                <tr id="crd" class="hidden">
+                                    <th>Cost reduction on not selecting soup/salad</th>
+                                    <td><span id="d_costr"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>GST: </th>
+                                    <td><span id="d_gst"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Total Amount: </th>
+                                    <td><span class="" id="d_total_amount"></span></td>
+                                </tr>
+                            </table>
                             <div class="wizard-v3-progress">
                                 <span>4 to 4 step</span>
                                 <h3>100% Completed</h3>

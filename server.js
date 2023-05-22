@@ -92,6 +92,21 @@ con.query(subscriptionsTable, (error, results) => {
 //   });
 // });
 
+const sub_leads = `
+    CREATE TABLE IF NOT EXISTS subLeads(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50),
+    phone VARCHAR(15)
+    )
+`;
+con.query(sub_leads, (error, results) => {
+    if (error) {
+        console.error('Error executing query: ', error);
+        return;
+    }
+    console.log('Query results:', results);
+})
+
 app.set('view engine', 'ejs');
 
 app.use("/soupx", express.static(__dirname + '/soupx'));
@@ -103,6 +118,30 @@ app.use("/", express.static(__dirname + '/soupx'));
 app.use("/assets", express.static(__dirname + '/soupx/assets'));
 app.use("/video", express.static(__dirname + '/soupx/video'));
 app.use("/sitemap.xml", express.static(__dirname + '/sitemap.xml'));
+
+//SUBSCRIPTION LEAD API
+app.post('/api/subLeads', async function (req, res) {
+    const lead = {
+        name: req.body.name,
+        phone: parseInt(req.body.phone)
+    };
+    console.log(lead);
+    const query = `
+  INSERT INTO subLeads
+  SET ?
+`;
+
+    con.query(query, lead, (error, results) => {
+        if (error) {
+            console.error('Error inserting data: ', error);
+            res.json({ message: false })
+            return;
+        }
+        console.log('Data inserted successfully!');
+        console.log(results);
+        res.json({ message: true });
+    });
+});
 
 
 //CREATE EXPLORE LEAD API
