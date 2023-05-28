@@ -507,6 +507,47 @@ document.getElementById("back-sub").addEventListener("click", function (e) {
     setActivePanel(2);
 });
 
+document.getElementById("paylater").addEventListener("click", function (e) {
+    e.preventDefault();
+    subData = {
+        razorpay_order_id: null,
+        razorpay_payment_id: null,
+        razorpay_signature: null,
+        name: plan.name,
+        phone: plan.phone,
+        sex: plan.sex,
+        age: plan.age,
+        weight: plan.weight,
+        height: plan.height,
+        goal: plan.goal,
+        days: plan.days,
+        add_ons: plan.add_ons,
+        lunch: plan.lunch,
+        dinner: plan.dinner,
+        address: plan.address,
+        city: plan.city,
+        pincode: plan.pincode,
+        amt: plan.total,
+        payLater: 'true'
+    }
+    fetch('http://localhost:3504/api/payLater', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(subData)
+    })
+        .then(response => response.json())
+        .then(data => {
+            alert(JSON.stringify(data));
+            console.log('Response:', data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    
+})
+
 //Event handler for submit & pay
 document.getElementById("subnpay").addEventListener("click", function (e) {
     window.removeEventListener('beforeunload', unloadHandler);
@@ -583,7 +624,8 @@ function verification(order_id, payment_id, signature) {
         address: plan.address,
         city: plan.city,
         pincode: plan.pincode,
-        amt: plan.total
+        amt: plan.total,
+        payLater: 'false'
     };
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function (res) {
@@ -634,6 +676,12 @@ function unloadHandler(event) {
 }
 
 window.addEventListener('beforeunload', unloadHandler);
+
+document.getElementById("link-pay-later").addEventListener('click', (e) => {
+    e.preventDefault();
+    const payLater = document.getElementById("paylater");
+    payLater.classList.remove("hidden");
+})
 
 
 init();

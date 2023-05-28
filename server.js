@@ -60,9 +60,10 @@ CREATE TABLE IF NOT EXISTS subscriptions (
     city VARCHAR(255) NOT NULL,
     pincode INT NOT NULL,
     amt FLOAT NOT NULL,
-    razorpay_order_id VARCHAR(255) NOT NULL,
-    razorpay_payment_id VARCHAR(255) NOT NULL,
-    razorpay_signature VARCHAR(255) NOT NULL
+    razorpay_order_id VARCHAR(255),
+    razorpay_payment_id VARCHAR(255),
+    razorpay_signature VARCHAR(255),
+    payLater BOOLEAN NOT NULL
   )
 `;
 
@@ -292,6 +293,46 @@ app.post("/api/payment/order", (req, res) => {
     })
 });
 
+app.post('/api/payLater', (req, res) => {
+    const data = req.body;
+    const subscriptionData = {
+        name: data.name,
+        phone: data.phone,
+        sex: data.sex,
+        age: parseInt(data.age),
+        weight: parseFloat(data.weight),
+        height: data.height,
+        goal: data.goal,
+        days: JSON.stringify(data.days),
+        add_ons: data.add_ons,
+        lunch: JSON.stringify(data.lunch),
+        dinner: JSON.stringify(data.dinner),
+        address: data.address,
+        pincode: parseInt(data.pincode),
+        city: data.city,
+        amt: parseFloat(data.amt),
+        payLater: 'true' === (data.payLater)
+    };
+    console.log(subscriptionData);
+
+    const query = `
+  INSERT INTO subscriptions
+  SET ?
+`;
+
+    con.query(query, subscriptionData, (error, results) => {
+        if (error) {
+            console.error('Error inserting data: ', error);
+            res.json({subscription: "Success"})
+        }
+        else{
+            console.log('Data inserted successfully!');
+            res.json({subscription:"Failure"});
+        }
+        console.log(results);
+    });
+})
+
 function addSubscription(data) {
     const subscriptionData = {
         name: data.name,
@@ -311,7 +352,8 @@ function addSubscription(data) {
         amt: parseFloat(data.amt),
         razorpay_order_id: data.razorpay_order_id,
         razorpay_payment_id: data.razorpay_payment_id,
-        razorpay_signature: data.razorpay_signature
+        razorpay_signature: data.razorpay_signature,
+        payLater: 'false' === (data.payLater)
     };
     console.log(subscriptionData);
 
