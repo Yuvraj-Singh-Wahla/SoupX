@@ -179,11 +179,49 @@
                                         <p>Your meal will be delivered to your address on your preferred days and time
                                             slot.</p>
                                     </div>
+                                    <span class="wizard-sub-text">Choose Meal Type & Preference</span>
+                                    <div class="d-flex">
+                                        <div class="col-md-4">
+                                            <div class="form-group custom-blocks"
+                                                style="border-radius: 5px; padding: 5px; margin:10px; width: 80%; float: left; border-style: solid; background-color: rgb(117 224 87 / 55%);"
+                                                onclick="setMeal('Vegetarian', 'vegita')">
+                                                <div class="row">
+                                                    <a id="vegita" style="font-size: 22px; text-align: center;"><object
+                                                            data="icons/vegetables.png" height="50px"
+                                                            onclick="setMeal('Vegetarian', 'vegita')"></object></a>
+                                                </div>
+                                                <div>
+                                                    <center style="text-align: center;">Vegetarian</center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group custom-blocks"
+                                                style="border-radius: 5px; padding: 5px; width: 80%; margin:10px; float: left; border-style: solid;"
+                                                onclick="setMeal('Non-Vegetarian', 'nonvegita')">
+                                                <div class="row">
+                                                    <a id="nonvegita"
+                                                        style="font-size: 22px; text-align: center;"><object
+                                                            data="icons/roast-chicken.png" height="50px"
+                                                            onclick="setMeal('Non-Vegetarian', 'nonvegita')"></object></a>
+                                                </div>
+                                                <div>
+                                                    <center style="text-align: center;">Non-Vegetarian</center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">&nbsp;</div>
+                                    <div class="row">&nbsp;</div>
                                     <div class="row">
+                                        <h3>Select Your Plan:</h3>
+                                    </div>
+                                    <div class="row">&nbsp;</div>
+                                    <div class="row" id="planSelector">
                                         <div class="col-md-6">
                                             <div class="card"
                                                 style="width: 100%; background-color: rgb(117 224 87 / 55%);" id="1stp"
-                                                onclick="setPlan('Trial 1 Day', '249', 1, '1stp', '2ndp', '3rdp', '4thp')">
+                                                onclick="setPlan('Trial 1 Day', 249, 1, '1stp', '279', '199')">
                                                 <div class="card-header">
                                                     <h4>Trial 1 Day</h4>
                                                     <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 15%</p> -->
@@ -191,11 +229,11 @@
                                                 <div class="card-body">
                                                     <div class="custom_row_plan">
                                                         <tiny>₹</tiny>
-                                                        <h3>249</h3>
+                                                        <h3 class="price-per-meal">249</h3>
                                                         <p>/meal</p>
                                                     </div><br><br>
                                                     <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp; 249
+                                                        <tiny>₹</tiny>&nbsp; <div class="plan-price">249</div>
                                                     </div><br>
                                                     <div class="custom_row_plan">
                                                         <p><i class="icon-hotel-room_service"></i>&nbsp;1 Meal &nbsp;<i
@@ -206,7 +244,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="card" style="width: 100%;" id="2ndp"
-                                                onclick="setPlan('Wellness 3 Days', '729', 3, '2ndp')">
+                                                onclick="setPlan('Wellness 3 Days', 687, 3, '2ndp', '229', '189')">
                                                 <div class="card-header">
                                                     <h4>Trial 3 Days</h4>
                                                     <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 25%</p> -->
@@ -214,11 +252,11 @@
                                                 <div class="card-body">
                                                     <div class="custom_row_plan">
                                                         <tiny>₹</tiny>
-                                                        <h3>243</h3>
+                                                        <h3 class="price-per-meal">229</h3>
                                                         <p>/meal</p>
                                                     </div><br><br>
                                                     <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp; 729</p>
+                                                        <tiny>₹</tiny>&nbsp; <div class="plan-price">687</div></p>
                                                     </div><br>
                                                     <div class="custom_row_plan">
                                                         <p><i class="icon-hotel-room_service"></i>&nbsp;3 Meals &nbsp;<i
@@ -231,7 +269,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="card" style="width: 100%;" id="5thp"
-                                                onclick="setPlan('Trial 7 Days', '1743', 7, '5thp')">
+                                                onclick="setPlan('Trial 7 Days', 1533, 7, '5thp', '219', '179')">
                                                 <div class="card-header">
                                                     <h4>Wellness 7 Days</h4>
                                                     <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 15%</p> -->
@@ -239,14 +277,14 @@
                                                 <div class="card-body">
                                                     <div class="custom_row_plan">
                                                         <tiny>₹</tiny>
-                                                        <h3>249</h3>
+                                                        <h3 class="price-per-meal">219</h3>
                                                         <p>/meal</p>
                                                     </div><br><br>
                                                     <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp; 1743
+                                                        <tiny>₹</tiny>&nbsp; <div class="plan-price">1,533</div>
                                                     </div><br>
                                                     <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;14 Meals
+                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;7 Meals
                                                             &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist
                                                         </p>
                                                     </div>
@@ -255,7 +293,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="card" style="width: 100%;" id="6thp"
-                                                onclick="setPlan('Wellness 14 Days', '3486', 14, '6thp')">
+                                                onclick="setPlan('Wellness 14 Days', 2786, 14, '6thp', '199', '169')">
                                                 <div class="card-header">
                                                     <h4>Wellness 14 Days</h4>
                                                     <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 25%</p> -->
@@ -263,14 +301,14 @@
                                                 <div class="card-body">
                                                     <div class="custom_row_plan">
                                                         <tiny>₹</tiny>
-                                                        <h3>249</h3>
+                                                        <h3 class="price-per-meal">199</h3>
                                                         <p>/meal</p>
                                                     </div><br><br>
                                                     <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp; 3486</p>
+                                                        <tiny>₹</tiny>&nbsp;<div class="plan-price"> 2,786</div></p>
                                                     </div><br>
                                                     <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;28 Meals
+                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;14 Meals
                                                             &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist
                                                         </p>
                                                     </div>
@@ -312,7 +350,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="card" style="width: 100%;" id="3rdp"
-                                                onclick="setPlan('FIT 21 Days', '10458', 21, '3rdp')">
+                                                onclick="setPlan('FIT 21 Days', 3759, 21, '3rdp', '179', '159')">
                                                 <div class="card-header">
                                                     <h4>FIT 21 Days</h4>
                                                     <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 35%</p> -->
@@ -320,14 +358,14 @@
                                                 <div class="card-body">
                                                     <div class="custom_row_plan">
                                                         <tiny>₹</tiny>
-                                                        <h3>249</h3>
+                                                        <h3 class="price-per-meal">179</h3>
                                                         <p>/meal</p>
                                                     </div><br><br>
                                                     <div class="custom_row_plan">
-                                                        <tiny>₹</tiny> &nbsp;4,732
+                                                        <tiny>₹</tiny> &nbsp;<div class="plan-price">3,759</div>
                                                     </div><br>
                                                     <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;28 Meals
+                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;21 Meals
                                                             &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist
                                                         </p>
                                                     </div>
@@ -335,8 +373,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="card" style="width: 100%;" id="3rdp"
-                                                onclick="setPlan('FIT 28 Days', '4732', 28, '3rdp')">
+                                            <div class="card" style="width: 100%;" id="4thp"
+                                                onclick="setPlan('FIT 28 Days', 4732, 28, '4thp', '169', '149')">
                                                 <div class="card-header">
                                                     <h4>FIT 28 Days</h4>
                                                     <!-- <p
@@ -346,11 +384,11 @@
                                                 <div class="card-body">
                                                     <div class="custom_row_plan">
                                                         <tiny>₹</tiny>
-                                                        <h3>169</h3>
+                                                        <h3 class="price-per-meal">169</h3>
                                                         <p>/meal</p>
                                                     </div><br><br>
                                                     <div class="custom_row_plan">
-                                                        <tiny>₹</tiny> &nbsp;4,732
+                                                        <tiny>₹</tiny> &nbsp;<div class="plan-price">4,732</div>
                                                     </div><br>
                                                     <div class="custom_row_plan">
                                                         <p><i class="icon-hotel-room_service"></i>&nbsp;28 Meals
@@ -363,40 +401,9 @@
                                     </div>
                                     <div class="row">&nbsp;</div>
                                     <div class="row">&nbsp;</div>
-                                    <span class="wizard-sub-text">Choose Meal Type & Preference</span>
-                                    <div class="d-flex">
-                                        <div class="col-md-4">
-                                            <div class="form-group custom-blocks"
-                                                style="border-radius: 5px; padding: 5px; margin:10px; width: 80%; float: left; border-style: solid;"
-                                                onclick="setMeal('Vegetarian', 'vegita')">
-                                                <div class="row">
-                                                    <a id="vegita" style="font-size: 22px; text-align: center;"><object
-                                                            data="icons/vegetables.png" height="50px"
-                                                            onclick="setMeal('Vegetarian', 'vegita')"></object></a>
-                                                </div>
-                                                <div>
-                                                    <center style="text-align: center;">Vegetarian</center>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group custom-blocks"
-                                                style="border-radius: 5px; padding: 5px; width: 80%; margin:10px; float: left; border-style: solid;"
-                                                onclick="setMeal('Non-Vegetarian', 'nonvegita')">
-                                                <div class="row">
-                                                    <a id="nonvegita"
-                                                        style="font-size: 22px; text-align: center;"><object
-                                                            data="icons/roast-chicken.png" height="50px"
-                                                            onclick="setMeal('Non-Vegetarian', 'nonvegita')"></object></a>
-                                                </div>
-                                                <div>
-                                                    <center style="text-align: center;">Non-Vegetarian</center>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <br>
-                                    <div class="row">
+                                    <div class="row" id="mealSelector">
                                         <div class="col-md-6">
                                             <div class="card" style="width: 50%;" id="lunch">
                                                 <div class="card-header">
@@ -407,18 +414,18 @@
                                                     <ul>
                                                         <li>
                                                             <label class="block-option">
-                                                                <input type="checkbox" class="checked-checkbox"
-                                                                    value="Monday" onclick="setLunch('Soup')" checked
-                                                                    name="options[]">
+                                                                <input id="soup-lunch" type="checkbox"
+                                                                    class="checked-checkbox" checked value="249"
+                                                                    name="soup-lunch">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Soup</span>
                                                             </label>
                                                         </li>
                                                         <li>
                                                             <label class="block-option">
-                                                                <input type="checkbox" class="checked-checkbox"
-                                                                    value="Tuesday" onclick="setLunch('Salad')" checked
-                                                                    name="options[]">
+                                                                <input id="salad-lunch" type="checkbox"
+                                                                    class="checked-checkbox" value="199"
+                                                                    name="salad-lunch">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Salad</span>
                                                             </label>
@@ -437,9 +444,9 @@
                                                     <ul>
                                                         <li>
                                                             <label class="block-option">
-                                                                <input type="checkbox" class="checked-checkbox"
-                                                                    value="Monday" onclick="setDinner('Soup')" checked
-                                                                    name="options[]">
+                                                                <input id="soup-dinner" type="checkbox"
+                                                                    class="checked-checkbox" value="249"
+                                                                    name="soup-dinner">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Soup</span>
                                                             </label>
@@ -447,8 +454,7 @@
                                                         <li>
                                                             <label class="block-option">
                                                                 <input type="checkbox" class="checked-checkbox"
-                                                                    value="Tuesday" onclick="setDinner('Salad')" checked
-                                                                    name="options[]">
+                                                                    id="salad-dinner" value="199" name="salad-dinner">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Salad</span>
                                                             </label>
@@ -472,6 +478,24 @@
                                             <option value="159">Soup Sticks + Olive Pate Garlic Bread + Croutons
                                             </option>
                                         </select>
+                                    </div>
+
+                                    <div class="price-display-container">
+                                        <h1>Plan Price Breakdown</h1>
+                                        <table class="table">
+                                            <tr>
+                                                <th>Plan Price:</th>
+                                                <td><span id="b_plan_price"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Discount:</th>
+                                                <td><span id="b_discount_price"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Discounted Price:</th>
+                                                <td><span id="b_discounted_price"></span></td>
+                                            </tr>
+                                        </table>
                                     </div>
 
 
@@ -597,8 +621,8 @@
                                         <div class="spoon d-flex ">
                                             <input type="text" id="name" placeholder="Name" class="plate"
                                                 onChange="setName()">
-                                            <input type="text" id="phone" placeholder="Mobile NO." class="plate"
-                                                onChange="setPhone()">
+                                            <input type="number" pattern="[1-9]{1}[0-9]{9}" maxlength="10" id="phone"
+                                                placeholder="Mobile NO." class="plate" onChange="setPhone()">
                                         </div>
                                     </div>
                                     <div class="wizard-form-input">
@@ -759,7 +783,7 @@
                                             <th>Preferences:</th>
                                             <td><span id="s_prefs"></span></td>
                                         </tr>
-                                        <tr>
+                                        <tr>fixed
                                             <th>Selected Plan:</th>
                                             <td><span id="s_plan_name"></span></td>
                                         </tr>
@@ -772,12 +796,8 @@
                                             <td><span id="s_plan_addons"></span></td>
                                         </tr>
                                         <tr>
-                                            <th>Lunch:</th>
-                                            <td><span id="s_lunch"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Dinner:</th>
-                                            <td><span id="s_dinner"></span></td>
+                                            <th>Selected Meals:</th>
+                                            <td><span id="s_meals"></span></td>
                                         </tr>
                                         <!-- <tr>
                                     <th>Full Meal:</th>
@@ -829,11 +849,8 @@
                                     <h4>Breakdown: </h3>
                                         <table class="table">
                                             <tr>
-                                                <th>Plan Price: </th>
+                                                <th>Discounted Plan Price: </th>
                                                 <td><span id="d_plan_price"></span></td>
-                                            </tr>
-                                            <tr class="hidden">
-                                                <th></th>
                                             </tr>
                                             <tr>
                                                 <th>Add Ons: </th>
@@ -870,18 +887,21 @@
                                         <div class="col-md-12">
                                             <ul class="d-flex justify-content-between align-items-center">
                                                 <li><button class="btn btn-primary" id="back-sub">BACK</button></li>
-                                                <li><button class="btn btn-primary" id="subnpay">SUBMIT & PAY</button></li>
-                                                <li><button class="btn btn-primary hidden" id="paylater">Pay Later</button></li>
+                                                <li><button class="btn btn-primary" id="subnpay">SUBMIT & PAY</button>
+                                                </li>
+                                                <li><button class="btn btn-primary hidden" id="paylater">Pay
+                                                        Later</button></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 mx-4 m-2 p-2 ">
-                                            <a href="#" style="float:right" class = "link-primary" id="link-pay-later">Can't pay now?</a>
+                                            <a href="#" style="float:right" class="link-primary"
+                                                id="link-pay-later">Can't pay now?</a>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
