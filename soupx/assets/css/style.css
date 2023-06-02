@@ -120,6 +120,7 @@ Color Code
 /*global area*/
 /*----------------------------------------------------*/
 body {
+  /* position: relative; */
   margin: 0;
   padding: 0;
   overflow-x: hidden;
@@ -167,7 +168,7 @@ a:hover, a:focus {
 }
 
 img {
-  max-width: 70%;
+  /* max-width: 70%; */
   height: auto;
 }
 
@@ -280,10 +281,10 @@ h6 {
   width: 25%;
 }
 
-.inner {
+/* .inner {
   width: 100%;
   height: auto;
-}
+} */
 
 /* ============================================================================ */
 /*   step
@@ -412,8 +413,8 @@ h6 {
   background: #b4d4e4 !important;
 }
 .actions li button {
-  background: #2c3ca6;
-  border: 0;
+  background: #000;
+  /* border: 10px solid black; */
   padding: 15px 40px;
   margin-left: 18px;
   font-size: 18px;
@@ -774,7 +775,7 @@ multistep css
 wizard section
 ========================================================================== */
 .wizard-title {
-  padding-bottom: 85px;
+  margin: 60px 0;
 }
 .wizard-title h3 {
   color: #474747;
@@ -836,7 +837,7 @@ wizard section
   border-radius: 100%;
   background: #111;
   position: absolute;
-  left: 30%;
+  left: 25%;
   top: 8px;
 }
 .wizard-v3-progress .progress:after {
@@ -846,7 +847,7 @@ wizard section
   border-radius: 100%;
   background: #111;
   position: absolute;
-  left: 45%;
+  left: 50%;
   top: 8px;
 }
 .wizard-v3-progress .progress .progress-bar {
@@ -2051,7 +2052,7 @@ label{
 }
 
 .hidden{
-  display: none;
+  display: none!important;
 }
 
 .price-display-container{
@@ -2067,4 +2068,114 @@ label{
 .table{
   padding: 10px 0;
   margin: 20px 0;
+}
+
+/* My CSS */
+
+.custom-container{
+  max-width: 1200px;
+}
+
+.custom-card{
+  border-radius: 5px;
+  align-items: center;
+  text-align: center;
+  margin: 1rem;
+  width: 300px;
+  padding: 1.5rem 3rem;
+  background-color: white;
+  border: 2px solid rgba(0,0,0,.125);
+}
+
+.custom-card img{
+  width: 45px;
+  height: auto;
+}
+
+.custom-card div{
+  margin: 5px auto;
+}
+
+/* Goal Selection CSS  */
+.gfc{
+  height: 72vh;
+  margin-top: 150px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.goal-container{
+  margin: auto;
+  max-width: 800px;
+}
+
+.goal-row{
+  width: 100%;
+}
+
+
+
+@media screen and (min-width:991.98px) and (max-width:1308px){
+  .goal-card{
+    padding: 1.5rem 0.5rem;
+  }
+}
+
+@media screen and (max-width:991.98px){
+  .gfc{
+    margin-top: 100px;
+  }
+}
+
+@media screen and (max-width: 776px){
+  .gfc{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .goal-card{
+    padding: 1.5rem 0.2rem;
+  }
+}
+
+/* Meal Plan CSS  */
+
+.plan-container{
+  margin: 0px 50px;
+}
+
+.preference-selector{
+  display: flex;
+  max-width: 700px;
+}
+
+.pref-card{
+  padding: 0.5rem 3rem;
+}
+
+.plan-selector-container{
+  margin:1rem 0;
+}
+
+.plan-selector-container h3{
+  margin-bottom: 1rem;
+}
+
+.plan-selector{
+  margin: 0;
+}
+
+.plan-row{
+  display: flex;
+}
+
+.plan-card{
+  margin: 5px 10px;
+  width: calc(100%/2);
+}
+
+/* Meal CSS  */
+
+.meal-card{
+  width: 50%;
 }

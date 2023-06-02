@@ -10,6 +10,83 @@ var subPlan = ['1stp', '2ndp', '3rdp', '4thp', '5thp', '6thp'];
 var salad_cost = 57;
 var soup_cost = 78;
 var fullMealcost = 0;
+var vegPlan = [
+    {
+        name: 'Trial 1 Day',
+        days: 1,
+        soup_cost: 249,
+        salad_cost: 199
+    },
+    {
+        name: 'Trial 3 Days',
+        days: 3,
+        soup_cost: 229,
+        salad_cost: 189
+    },
+    {
+        name: 'Wellness 7 Days',
+        days: 7,
+        soup_cost: 219,
+        salad_cost: 179
+    },
+    {
+        name: 'Wellness 14 Days',
+        days: 14,
+        soup_cost: 199,
+        salad_cost: 169
+    },
+    {
+        name: 'Fit 21 Days',
+        days: 21,
+        soup_cost: 179,
+        salad_cost: 159
+    },
+    {
+        name: 'Fit 28 Days',
+        days: 28,
+        soup_cost: 169,
+        salad_cost: 149
+    }
+];
+
+var nonVegPlan = [
+    {
+        name: 'Trial 1 Day',
+        days: 1,
+        soup_cost: 269,
+        salad_cost: 219
+    },
+    {
+        name: 'Trial 3 Days',
+        days: 3,
+        soup_cost: 249,
+        salad_cost: 199
+    },
+    {
+        name: 'Wellness 7 Days',
+        days: 7,
+        soup_cost: 239,
+        salad_cost: 189
+    },
+    {
+        name: 'Wellness 14 Days',
+        days: 14,
+        soup_cost: 219,
+        salad_cost: 179
+    },
+    {
+        name: 'Fit 21 Days',
+        days: 21,
+        soup_cost: 199,
+        salad_cost: 169
+    },
+    {
+        name: 'Fit 28 Days',
+        days: 28,
+        soup_cost: 179,
+        salad_cost: 159
+    }
+];
 var coupons = {
     'WELCOME': 300,
     'ANYTIMEFITNESS': 500,
@@ -22,10 +99,10 @@ var coupons = {
     'AISHWARYA': 500
 };
 
-var vegPlan = ['249', '687', '1,533', '2,786', '3,759', '4,732'];
-var nonVegPlan = ['269', '747', '1,673', '3,066', '4,179', '5,012'];
-var vegMeal = [249, 229, 219, 199, 179, 169];
-var nonVegMeal = [269,249,239,219,199,179];
+// var vegPlan = ['249', '687', '1,533', '2,786', '3,759', '4,732'];
+// var nonVegPlan = ['269', '747', '1,673', '3,066', '4,179', '5,012'];
+// var vegMeal = [249, 229, 219, 199, 179, 169];
+// var nonVegMeal = [269, 249, 239, 219, 199, 179];
 
 var discount = {
     1: 0,
@@ -123,6 +200,16 @@ function setFullMeal(t, id, id_) {
     $(`#${id_}`).parent().parent().css('background-color', 'white');
     console.log(plan);
 }
+
+$(".goal-card").click(function () {
+    plan.goal = $(this).data('goal');
+    $("#s_goal").prop("innerHTML", plan.goal);
+    $(".goal-card").css('background-color', 'white');
+    $(this).css('background-color', 'rgba(117, 224, 87, 0.55)');
+    setActiveStep(1);
+    setActivePanel(1);
+})
+
 function setGoal(goal, id) {
     plan.goal = goal;
     $(`#${id}`).parent().parent().css('background-color', 'rgb(117 224 87 / 55%)');
@@ -209,14 +296,21 @@ function setAllergens(allergen, id) {
 
 //Meals per day selector
 $("#mealSelector").click(async (e) => {
-    if ($(e.target).prop("checked") === true) {
-        plan.price += plan.selected_plan.days * parseInt($(e.target).val());
+    const target = $(e.target);
+    if (target.prop("checked") === true) {
+        if (target.data("meal") === "soup")
+            plan.price += plan.selected_plan.days * plan.selected_plan.soup_cost;
+        if (target.data("meal") === "salad")
+            plan.price += plan.selected_plan.days * plan.selected_plan.salad_cost;
         plan.meals.push($(e.target).prop("name"));
         console.log(plan.price);
         console.log("Checked");
     }
     if ($(e.target).prop("checked") === false) {
-        plan.price -= plan.selected_plan.days * parseInt($(e.target).val());
+        if (target.data("meal") === "soup")
+            plan.price -= plan.selected_plan.days * plan.selected_plan.soup_cost;
+        if (target.data("meal") === "salad")
+            plan.price -= plan.selected_plan.days * plan.selected_plan.salad_cost;
         plan.meals.splice(plan.meals.indexOf($(e.target).prop("name")), 1);
         console.log(plan.price);
         console.log("Unchecked");
@@ -288,15 +382,34 @@ function setNotes() {
     console.log(plan);
 }
 
-function updatePlan(mealPrice,planPrice){
-    $(".price-per-meal").each(function (i){
+function updatePlan(mealPrice, planPrice) {
+    $(".price-per-meal").each(function (i) {
         $(this).text(mealPrice[i]);
     });
 
-    $(".plan-price").each(function (i){
+    $(".plan-price").each(function (i) {
         $(this).text(planPrice[i]);
     });
 }
+
+function prefCard() {
+    var selectedPref = $(this).data('pref');
+    plan.meal = selectedPref;
+    $(".pref-card").css('background-color', 'white');
+    $(this).css('background-color', 'rgba(117, 224, 87, 0.55)');
+    if (selectedPref === "Vegetarian") {
+        $(".vegPlan").removeClass("hidden");
+        $(".nonVegPlan").addClass("hidden");
+        $("#vegClick").click();
+    }
+    if (selectedPref === "Non-Vegetarian") {
+        $(".vegPlan").addClass("hidden");
+        $(".nonVegPlan").removeClass("hidden");
+        $("#nonVegClick").click();
+    }
+}
+
+$(".pref-card").click(prefCard);
 
 function setMeal(meal, id) {
     plan.meal = meal;
@@ -304,12 +417,12 @@ function setMeal(meal, id) {
     if (id == 'vegita') {
         setPlan('Trial 1 Day', 249, 1, '1stp', 249, 199);
         $(`#nonvegita`).parent().parent().css('background-color', '');
-        updatePlan(vegMeal,vegPlan);
+        updatePlan(vegMeal, vegPlan);
     }
-    if (id == 'nonvegita') {    
+    if (id == 'nonvegita') {
         setPlan('Trial 1 Day', 269, 1, '1stp', 269, 219);
-        $(`#vegita`).parent().parent().css('background-color', '');
-        updatePlan(nonVegMeal,nonVegPlan);
+        $(`#vegita`).parent().parent().css('background-color', 'white');
+        updatePlan(nonVegMeal, nonVegPlan);
     }
 }
 
@@ -341,6 +454,38 @@ function setSchedule() {
 }
 
 //satak
+
+$(".plan-card").click(function () {
+    console.log($(this));
+    $(".plan-card").css('background-color', 'white');
+    $(this).css('background-color', 'rgba(117, 224, 87, 0.55)');
+    if (plan.meal === "Vegetarian") {
+        console.log('Vegetarian');
+        console.log(vegPlan[$(this).data('i')]);
+        plan.selected_plan = vegPlan[$(this).data('i')];
+        plan.selected_plan.price = plan.selected_plan.soup_cost * plan.selected_plan.days;
+        plan.price = plan.selected_plan.price;
+
+    }
+    if (plan.meal === "Non-Vegetarian") {
+        console.log('Non-Vegetarian');
+        console.log($(this).data('i'));
+        console.log(nonVegPlan[$(this).data('i')]);
+        plan.selected_plan = nonVegPlan[$(this).data('i')];
+        plan.selected_plan.price = plan.selected_plan.soup_cost * plan.selected_plan.days;
+        plan.price = plan.selected_plan.price
+    }
+
+    //Set meal selection to lunch only
+    plan.meals = ["soup-lunch"];
+    plan.discount_price = parseInt(plan.price * (discount[plan.meals.length]));
+    plan.discounted_price = plan.price - plan.discount_price;
+    $("#soup-lunch").prop("checked", true);
+    $("#salad-lunch").prop("checked", false);
+    $("#soup-dinner").prop("checked", false);
+    $("#salad-dinner").prop("checked", false);
+});
+
 function setPlan(plan_name, plan_price, days, id, soup_cost, salad_cost) {
     plan.selected_plan = { name: plan_name, price: plan_price, days: days, soup_cost: soup_cost, salad_cost: salad_cost };
     $(`#${id}`).css('background-color', 'rgb(117 224 87 / 55%)');
@@ -499,7 +644,7 @@ function loadPreview() {
     document.getElementById("s_address").innerHTML = plan.address;
     document.getElementById("s_city").innerHTML = plan.city;
     document.getElementById("s_pincode").innerHTML = plan.pincode;
-    document.getElementById("s_goal").innerHTML = plan.goal;
+    // document.getElementById("s_goal").innerHTML = plan.goal;
     document.getElementById("s_prefs").innerHTML = plan.meal;
     document.getElementById("s_plan_name").innerHTML = plan.selected_plan.name;
     document.getElementById("s_plan_price").innerHTML = plan.selected_plan.price;
@@ -736,6 +881,17 @@ document.getElementById("link-pay-later").addEventListener('click', (e) => {
     const payLater = document.getElementById("paylater");
     payLater.classList.remove("hidden");
 })
+
+$(window).on("load", function () {
+    $(".pref-card").each(function () {
+        if ($(this).data("pref") === "Vegetarian") {
+            $(this).click();
+        }
+    });
+
+    $("#vegClick").click();
+
+});
 
 
 init();

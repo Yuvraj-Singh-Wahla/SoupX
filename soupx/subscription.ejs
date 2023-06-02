@@ -1,6 +1,86 @@
 <% include partials/header %>
     <% include partials/all_menu %>
 
+    <% 
+    var vegPlan = [
+    {
+        name: 'Trial 1 Day',
+        days: 1,
+        soup_cost: 249,
+        salad_cost: 199
+    },
+    {
+        name:'Trial 3 Days',
+        days: 3,
+        soup_cost: 229,
+        salad_cost:189
+    },
+    {
+        name: 'Wellness 7 Days',
+        days: 7,
+        soup_cost: 219,
+        salad_cost: 179
+    },
+    {
+        name: 'Wellness 14 Days',
+        days: 14,
+        soup_cost: 199,
+        salad_cost: 169
+    },
+    {
+        name: 'Fit 21 Days',
+        days: 21,
+        soup_cost: 179,
+        salad_cost: 159
+    },
+    {
+        name: 'Fit 28 Days',
+        days: 28,
+        soup_cost: 169,
+        salad_cost: 149
+    }
+];
+
+var nonVegPlan = [
+    {
+        name: 'Trial 1 Day',
+        days: 1,
+        soup_cost: 269,
+        salad_cost: 219
+    },
+    {
+        name:'Trial 3 Days',
+        days: 3,
+        soup_cost: 249,
+        salad_cost:199
+    },
+    {
+        name: 'Wellness 7 Days',
+        days: 7,
+        soup_cost: 239,
+        salad_cost: 189
+    },
+    {
+        name: 'Wellness 14 Days',
+        days: 14,
+        soup_cost: 219,
+        salad_cost: 179
+    },
+    {
+        name: 'Fit 21 Days',
+        days: 21,
+        soup_cost: 199,
+        salad_cost: 169
+    },
+    {
+        name: 'Fit 28 Days',
+        days: 28,
+        soup_cost: 179,
+        salad_cost: 159
+    }
+];
+    %>
+
         <head>
             <meta charset="utf-8">
             <title>Begin Your Subscription</title>
@@ -40,369 +120,157 @@
                     <div class="form-area position-relative">
                         <!-- div 1 -->
                         <div id="goal" class="multisteps-form__panel js-active" data-animation="slideHorz">
-                            <div class="place">
-                                <div class="inner pb-100 clearfix">
 
-                                    <div class="wizard-photo-area">
+                            <div class="gfc">
+                                <div class="wizard-title mt-60 text-center">
+                                    <h3>Please Select Your Goal</h3>
+                                    <!-- <p>To help our nutritionists curate a customised plan for you.</p> -->
+                                </div>
 
-                                    </div>
-                                    <div class="wizard-form-field mb-85">
-                                        <div class="wizard-title text-center">
-                                            <h3>Please Select Your Goal</h3>
-                                            <!-- <p>To help our nutritionists curate a customised plan for you.</p> -->
-                                        </div>
-
-                                        <!-- <span class="wizard-sub-text" style="margin-bottom: 20px; text-align: center;"><h3>Please select your goal</h3></span> -->
-                                        <div class="d-flex ">
-                                            <div class="d-flex; don">
-                                                <div class="form-group custom-blocks"
-                                                    style="border-radius: 5px; padding: 15px ;; margin:10px; width: 90%; float: left; border-style: solid;"
-                                                    onclick="setGoal('Loose Weight', 'looseW')">
-                                                    <div class="row">
-                                                        <a id="looseW"
-                                                            style="font-size: 22px; text-align: center;"><object
-                                                                data="icons/weight-loss.png" height="50px"
-                                                                onclick="setGoal('Loose Weight', 'looseW')"></object></a>
-                                                    </div>
-                                                    <div>
-                                                        <center style="text-align: center;">Lose Weight</center>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex; don">
-                                                <div class="form-group custom-blocks"
-                                                    style="border-radius: 5px; padding: 15px ;margin:10px; width: 90%; float: left; border-style: solid;"
-                                                    onclick="setGoal('Healthy Eating', 'healthyEat')">
-                                                    <div class="row">
-                                                        <a id="healthyEat"
-                                                            style="font-size: 22px; text-align: center;"><object
-                                                                data="icons/salad.png" height="50px"
-                                                                onclick="setGoal('Healthy Eating', 'healthyEat')"></object></a>
-                                                    </div>
-                                                    <div>
-                                                        <center style="text-align: center;">Healthy Eating</center>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex; don">
-                                                <div class="form-group custom-blocks"
-                                                    style="border-radius: 5px; padding: 15px ;; margin:10px; width: 90%; float: left; border-style: solid;"
-                                                    onclick="setGoal('Muscle Gain', 'muscleG')">
-                                                    <div class="row">
-                                                        <a id="muscleG"
-                                                            style="font-size: 22px; text-align: center;"><object
-                                                                data="icons/muscles.png" height="50px"
-                                                                onclick="setGoal('Muscle Gain', 'muscleG')"></object></a>
-                                                    </div>
-                                                    <div>
-                                                        <center style="text-align: center;">Muscle Gain</center>
-                                                    </div>
-                                                </div>
+                                <div id="goalSelector" class="goal-container">
+                                    <div class="d-flex goal-row">
+                                        <div class="goal-card custom-card" data-goal="Loose Weight">
+                                            <img src="icons/weight-loss.png" alt="">
+                                            <div>
+                                                Loose Weight
                                             </div>
                                         </div>
-                                        <div class="d-flex">
-                                            <div class="d-flex; don">
-                                                <div class="form-group custom-blocks"
-                                                    style="border-radius: 5px; padding: 15px ; width: 90%; margin:10px; float: left; border-style: solid;"
-                                                    onclick="setGoal('Detox', 'detox')">
-                                                    <div class="row">
-                                                        <a id="detox"
-                                                            style="font-size: 22px; text-align: center;"><object
-                                                                data="icons/detox.png" height="50px"
-                                                                onclick="setGoal('Detox', 'detox')"></object></a>
-                                                    </div>
-                                                    <div>
-                                                        <center style="text-align: center;">Detox</center>
-                                                    </div>
-                                                </div>
+                                        <div class="goal-card custom-card" data-goal="Healthy Eating">
+                                            <img src="icons/salad.png" alt="">
+                                            <div>
+                                                Healthy Eating
                                             </div>
-                                            <div class="d-flex; don">
-                                                <div class="form-group custom-blocks"
-                                                    style="border-radius: 5px; padding: 15px ; width: 90%; margin:10px; float: left; border-style: solid;"
-                                                    onclick="setGoal('Light Dinner', 'lightD')">
-                                                    <div class="row">
-                                                        <a id="lightD"
-                                                            style="font-size: 22px; text-align: center;"><object
-                                                                data="icons/bowl-of-soup.png" height="50px"
-                                                                onclick="setGoal('Light Dinner', 'lightD')"></object></a>
-                                                    </div>
-                                                    <div>
-                                                        <center style="text-align: center;">Light Dinner</center>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="d-flex; don">
-                                                <div class="form-group custom-blocks"
-                                                    style="border-radius: 5px; padding: 30px ;; margin:10px; width: 90%; float: left; border-style: solid;"
-                                                    onclick="setGoal('Not Sure', 'notS')">
-                                                    <div class="row">
-
-                                                        <a id="notS"
-                                                            style="font-size: 15px; text-align: center; font-size: 20px; font-weight: 800;"
-                                                            onclick="setGoal('Not Sure', 'notS')">Not sure?</a>
-                                                    </div>
-                                                    <!-- <div class="row">&nbsp;</div> -->
-                                                    <div>
-                                                        <center style="text-align: center; font-size: 15.6px;">Let our
-                                                            nutritionist decide.</center>
-                                                    </div>
-                                                </div>
+                                        </div>
+                                        <div class="goal-card custom-card" data-goal="Muscle Gain">
+                                            <img src="icons/muscles.png" alt="">
+                                            <div>
+                                                Muscle Gain
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="wizard-v3-progress">
-                                        <span>1 to 4 Step</span>
-                                        <h3>25% Completed</h3>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width: 0%">
+                                    <div class="d-flex goal-row">
+                                        <div class="goal-card custom-card" data-goal="Detox">
+                                            <img src="icons/detox.png" alt="">
+                                            <div>
+                                                Detox
                                             </div>
+                                        </div>
+                                        <div class="goal-card custom-card" data-goal="Light Dinner">
+                                            <img src="icons/bowl-of-soup.png" alt="">
+                                            <div>
+                                                Light Dinner
+                                            </div>
+                                        </div>
+                                        <div class="goal-card custom-card" data-goal="Not Sure">
+                                            <h4>Not Sure?</h4>
+                                            <div>Let our nutritionist decide</div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /.inner -->
-                                <div class="vector-img-one">
-                                    <img src="assets/img/vb1.png" alt="">
+                            </div>
+                            <div class="wizard-v3-progress">
+                                <span>1 to 4 Step</span>
+                                <h3>25% Completed</h3>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 25%">
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
+                        <!-- /.inner -->
+                        <!-- <div class="vector-img-one">
+                            <img src="assets/img/vb1.png" alt="">
+                        </div> -->
+
+                        <!-- div 1 -->
+
                         <!-- div 2 -->
-
-                        <!-- div 3 -->
                         <div id="meal" class="multisteps-form__panel" data-animation="slideHorz">
-                            <div class="wizard-forms">
-                                <div class="inner pb-100 clearfix">
+                            <div class="custom-container">
+                                <div class="plan-container">
                                     <div class="wizard-title text-center">
-                                        <h3>Select your Plan Preference and Schedule</h3>
-                                        <p>Your meal will be delivered to your address on your preferred days and time
-                                            slot.</p>
+                                        <h3>Select Your Plan Preference</h3>
+                                        <!-- <p>Your meal will be delivered to your address on your preferred days and time
+                                                    slot.</p> -->
                                     </div>
-                                    <span class="wizard-sub-text">Choose Meal Type & Preference</span>
-                                    <div class="d-flex">
-                                        <div class="col-md-4">
-                                            <div class="form-group custom-blocks"
-                                                style="border-radius: 5px; padding: 5px; margin:10px; width: 80%; float: left; border-style: solid; background-color: rgb(117 224 87 / 55%);"
-                                                onclick="setMeal('Vegetarian', 'vegita')">
-                                                <div class="row">
-                                                    <a id="vegita" style="font-size: 22px; text-align: center;"><object
-                                                            data="icons/vegetables.png" height="50px"
-                                                            onclick="setMeal('Vegetarian', 'vegita')"></object></a>
-                                                </div>
-                                                <div>
-                                                    <center style="text-align: center;">Vegetarian</center>
-                                                </div>
+                                    <div class="preference-selector-container">
+                                        <h3>Choose Preference</h3>
+                                        <div id="mealType" class="preference-selector">
+                                            <div class="pref-card custom-card" data-pref="Vegetarian">
+                                                <img src="icons/vegetables.png" alt="">
+                                                <div>Vegetarian</div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group custom-blocks"
-                                                style="border-radius: 5px; padding: 5px; width: 80%; margin:10px; float: left; border-style: solid;"
-                                                onclick="setMeal('Non-Vegetarian', 'nonvegita')">
-                                                <div class="row">
-                                                    <a id="nonvegita"
-                                                        style="font-size: 22px; text-align: center;"><object
-                                                            data="icons/roast-chicken.png" height="50px"
-                                                            onclick="setMeal('Non-Vegetarian', 'nonvegita')"></object></a>
-                                                </div>
-                                                <div>
-                                                    <center style="text-align: center;">Non-Vegetarian</center>
-                                                </div>
+                                            <div class="pref-card custom-card" data-pref="Non-Vegetarian"                                        ">
+                                                <img src="icons/roast-chicken.png" alt="">
+                                                <div>Non-Vegetarian</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">&nbsp;</div>
-                                    <div class="row">&nbsp;</div>
-                                    <div class="row">
-                                        <h3>Select Your Plan:</h3>
-                                    </div>
-                                    <div class="row">&nbsp;</div>
-                                    <div class="row" id="planSelector">
-                                        <div class="col-md-6">
-                                            <div class="card"
-                                                style="width: 100%; background-color: rgb(117 224 87 / 55%);" id="1stp"
-                                                onclick="setPlan('Trial 1 Day', 249, 1, '1stp', '279', '199')">
-                                                <div class="card-header">
-                                                    <h4>Trial 1 Day</h4>
-                                                    <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 15%</p> -->
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>
-                                                        <h3 class="price-per-meal">249</h3>
-                                                        <p>/meal</p>
-                                                    </div><br><br>
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp; <div class="plan-price">249</div>
-                                                    </div><br>
-                                                    <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;1 Meal &nbsp;<i
-                                                                class="icon_chat"></i>&nbsp;Personal Nutritionist</p>
+                                    <div class="plan-selector-container">
+                                        <h3>Select Your Plan</h3>
+                                        <div class="plan-selector">
+                                            <%for(var i=0; i < 6; i++) {
+                                                if(i%2 == 0) { %>
+                                                <div class="plan-row">
+                                                    <% } %>
+                                                    <div class="card plan-card vegPlan" data-i = <%= i %> <% if (i===0) { %> id =  <%= "vegClick" %> <% } %>>
+                                                        <div class="card-header">
+                                                            <h4><%= vegPlan[i].name %></h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="custom_row_plan">
+                                                                <tiny>₹</tiny>
+                                                                <h3 class="price-per-meal"><%= vegPlan[i].soup_cost %></h3>
+                                                                <p>/meal</p>
+                                                            </div><br><br>
+                                                            <div class="custom_row_plan">
+                                                                <tiny>₹</tiny>&nbsp; <div class="plan-price"><%= vegPlan[i].soup_cost * vegPlan[i].days %></div>
+                                                            </div><br>
+                                                            <div class="custom_row_plan">
+                                                                <p><i class="icon-hotel-room_service"></i>&nbsp;<%= vegPlan[i].days %> Meal
+                                                                    &nbsp;<i class="icon_chat"></i>&nbsp;Personal
+                                                                    Nutritionist</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    <% if(i%2 == 1) { %>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card" style="width: 100%;" id="2ndp"
-                                                onclick="setPlan('Wellness 3 Days', 687, 3, '2ndp', '229', '189')">
-                                                <div class="card-header">
-                                                    <h4>Trial 3 Days</h4>
-                                                    <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 25%</p> -->
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>
-                                                        <h3 class="price-per-meal">229</h3>
-                                                        <p>/meal</p>
-                                                    </div><br><br>
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp; <div class="plan-price">687</div></p>
-                                                    </div><br>
-                                                    <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;3 Meals &nbsp;<i
-                                                                class="icon_chat"></i>&nbsp;Personal Nutritionist</p>
+                                                <% } %>
+                                                <% } %>
+                                                <%for(var i=0; i < 6; i++) {
+                                                    if(i%2 == 0) { %>
+                                                    <div class="plan-row ">
+                                                        <% } %>
+                                                        <div class="card plan-card hidden nonVegPlan"  data-i = <%= i %> <% if (i===0) { %> id =  <%= "nonVegClick" %> <% } %>>
+                                                            <div class="card-header">
+                                                                <h4><%= nonVegPlan[i].name %></h4>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="custom_row_plan">
+                                                                    <tiny>₹</tiny>
+                                                                    <h3 class="price-per-meal"><%= nonVegPlan[i].soup_cost %></h3>
+                                                                    <p>/meal</p>
+                                                                </div><br><br>
+                                                                <div class="custom_row_plan">
+                                                                    <tiny>₹</tiny>&nbsp; <div class="plan-price"><%= nonVegPlan[i].soup_cost * nonVegPlan[i].days %></div>
+                                                                </div><br>
+                                                                <div class="custom_row_plan">
+                                                                    <p><i class="icon-hotel-room_service"></i>&nbsp;<%= nonVegPlan[i].days %> Meal
+                                                                        &nbsp;<i class="icon_chat"></i>&nbsp;Personal
+                                                                        Nutritionist</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <% if(i%2 == 1) { %>
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <% } %>
+                                                    <% } %>                                        
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card" style="width: 100%;" id="5thp"
-                                                onclick="setPlan('Trial 7 Days', 1533, 7, '5thp', '219', '179')">
-                                                <div class="card-header">
-                                                    <h4>Wellness 7 Days</h4>
-                                                    <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 15%</p> -->
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>
-                                                        <h3 class="price-per-meal">219</h3>
-                                                        <p>/meal</p>
-                                                    </div><br><br>
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp; <div class="plan-price">1,533</div>
-                                                    </div><br>
-                                                    <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;7 Meals
-                                                            &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card" style="width: 100%;" id="6thp"
-                                                onclick="setPlan('Wellness 14 Days', 2786, 14, '6thp', '199', '169')">
-                                                <div class="card-header">
-                                                    <h4>Wellness 14 Days</h4>
-                                                    <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 25%</p> -->
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>
-                                                        <h3 class="price-per-meal">199</h3>
-                                                        <p>/meal</p>
-                                                    </div><br><br>
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>&nbsp;<div class="plan-price"> 2,786</div></p>
-                                                    </div><br>
-                                                    <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;14 Meals
-                                                            &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- <div class="row">&nbsp;</div> -->
-                                    <!-- <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 100%; background-color: rgb(117 224 87 / 55%);" id="1stp" onclick="setPlan('Trial 7 Days', '1463', 7, '1stp', '2ndp', '3rdp', '4thp')">
-                                        <div class="card-header">
-                                            <h4>Trial 7 Days</h4>
-                                            <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 15%</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="custom_row_plan"><tiny>₹</tiny> <h3>209</h3><p>/meal</p></div><br><br>
-                                            <div class="custom_row_plan"><tiny>₹</tiny>&nbsp; 1,463 </div><br>
-                                            <div class="custom_row_plan"><p><i class="icon-hotel-room_service"></i>&nbsp;7 Meals &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist</p></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="card" style="width: 100%;" id="2ndp" onclick="setPlan('Wellness 14 Days', '2646', 14, '2ndp', '3rdp', '1stp', '4thp')"> 
-                                        <div class="card-header">
-                                            <h4>Wellness 14 Days</h4>
-                                            <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 25%</p>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="custom_row_plan"><tiny>₹</tiny> <h3>189</h3><p>/meal</p></div><br><br>
-                                            <div class="custom_row_plan"><tiny>₹</tiny>&nbsp; 2,646</p></div><br>
-                                            <div class="custom_row_plan"><p><i class="icon-hotel-room_service"></i>&nbsp;14 Meals &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist</p></div>
-                                        </div>											
-                                    </div>
-                                </div>
-                            </div> -->
-                                    <!-- <div class="row">&nbsp;</div> -->
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="card" style="width: 100%;" id="3rdp"
-                                                onclick="setPlan('FIT 21 Days', 3759, 21, '3rdp', '179', '159')">
-                                                <div class="card-header">
-                                                    <h4>FIT 21 Days</h4>
-                                                    <!-- <p style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">Save 35%</p> -->
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>
-                                                        <h3 class="price-per-meal">179</h3>
-                                                        <p>/meal</p>
-                                                    </div><br><br>
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny> &nbsp;<div class="plan-price">3,759</div>
-                                                    </div><br>
-                                                    <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;21 Meals
-                                                            &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card" style="width: 100%;" id="4thp"
-                                                onclick="setPlan('FIT 28 Days', 4732, 28, '4thp', '169', '149')">
-                                                <div class="card-header">
-                                                    <h4>FIT 28 Days</h4>
-                                                    <!-- <p
-                                                        style="background-color: #0d4f09; color: white; float: right; position: absolute; padding: 1% 3%; margin-left: 70%;top: 4%;">
-                                                        Save 35%</p> -->
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny>
-                                                        <h3 class="price-per-meal">169</h3>
-                                                        <p>/meal</p>
-                                                    </div><br><br>
-                                                    <div class="custom_row_plan">
-                                                        <tiny>₹</tiny> &nbsp;<div class="plan-price">4,732</div>
-                                                    </div><br>
-                                                    <div class="custom_row_plan">
-                                                        <p><i class="icon-hotel-room_service"></i>&nbsp;28 Meals
-                                                            &nbsp;<i class="icon_chat"></i>&nbsp;Personal Nutritionist
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">&nbsp;</div>
-                                    <div class="row">&nbsp;</div>
-
                                     <br>
+
+                                    
+
                                     <div class="row" id="mealSelector">
                                         <div class="col-md-6">
                                             <div class="card" style="width: 50%;" id="lunch">
@@ -416,16 +284,15 @@
                                                             <label class="block-option">
                                                                 <input id="soup-lunch" type="checkbox"
                                                                     class="checked-checkbox" checked value="249"
-                                                                    name="soup-lunch">
+                                                                    name="soup-lunch" data-meal = "soup">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Soup</span>
                                                             </label>
                                                         </li>
                                                         <li>
                                                             <label class="block-option">
-                                                                <input id="salad-lunch" type="checkbox"
-                                                                    class="checked-checkbox" value="199"
-                                                                    name="salad-lunch">
+                                                                <input id="salad-lunch" type="checkbox" data-meal = "salad"
+                                                                    class="checked-checkbox" value="199" name="salad-lunch">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Salad</span>
                                                             </label>
@@ -444,16 +311,15 @@
                                                     <ul>
                                                         <li>
                                                             <label class="block-option">
-                                                                <input id="soup-dinner" type="checkbox"
-                                                                    class="checked-checkbox" value="249"
-                                                                    name="soup-dinner">
+                                                                <input id="soup-dinner" type="checkbox" data-meal = "soup"
+                                                                    class="checked-checkbox" value="249" name="soup-dinner">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Soup</span>
                                                             </label>
                                                         </li>
                                                         <li>
                                                             <label class="block-option">
-                                                                <input type="checkbox" class="checked-checkbox"
+                                                                <input type="checkbox" class="checked-checkbox" data-meal = "salad"
                                                                     id="salad-dinner" value="199" name="salad-dinner">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Salad</span>
@@ -467,7 +333,7 @@
                                     <br>
                                     <div class="wizard-form-input">
                                         <span class="wizard-sub-text">Add Ons</span>
-                                        <select id="addons" onchange="setAddOns()">
+                                        <select id="addons" style="background-color: white;" onchange="setAddOns()">
                                             <option value="0">None</option>
                                             <option value="59">Soup Sticks</option>
                                             <option value="59">Croutons</option>
@@ -479,7 +345,7 @@
                                             </option>
                                         </select>
                                     </div>
-
+    
                                     <div class="price-display-container">
                                         <h1>Plan Price Breakdown</h1>
                                         <table class="table">
@@ -492,22 +358,22 @@
                                                 <td><span id="b_discount_price"></span></td>
                                             </tr>
                                             <tr>
-                                                <th>Discounted Price:</th>
+                                                <th>Final Plan Price:</th>
                                                 <td><span id="b_discounted_price"></span></td>
                                             </tr>
                                         </table>
                                     </div>
-
-
-
-
+    
+    
+    
+    
                                     <!--<div class="wizard-document-upload pb-200">
-                                <span class="wizard-sub-text">Upload the documents</span>
-                                <div class="custom-file position-relative">
-                                    <input type="file" class="custom-file-input form-control d-none" id="customFile">
-                                    <label class="custom-file-label" for="customFile">jpg or .pdf should  be more than 500KB or 300PI</label>
-                                </div>
-                            </div>-->
+                                        <span class="wizard-sub-text">Upload the documents</span>
+                                        <div class="custom-file position-relative">
+                                            <input type="file" class="custom-file-input form-control d-none" id="customFile">
+                                            <label class="custom-file-label" for="customFile">jpg or .pdf should  be more than 500KB or 300PI</label>
+                                        </div>
+                                    </div>-->
                                     <div class="wizard-form-input mb-60 mt-60">
                                         <!-- <div class="line line2"></div> -->
                                     </div>
@@ -515,7 +381,7 @@
                                         <span>2 to 4 Step</span>
                                         <h3>50% Completed</h3>
                                         <div class="progress">
-                                            <div class="progress-bar" style="width: 59%">
+                                            <div class="progress-bar" style="width: 50%">
                                             </div>
                                         </div>
                                     </div>
@@ -530,276 +396,276 @@
                                         <li><button id="next-meal">NEXT</button></li>
                                     </ul>
                                 </div>
-
-                            </div>
-                        </div>
-                        <!-- div 4 -->
-                        <div class="multisteps-form__panel" data-animation="slideHorz">
-                            <div class="wizard-forms section-padding">
-                                <div class="inner pb-100 clearfix">
-                                    <div class="wizard-title text-center">
-                                        <h3>YOUR BMI CALCULATOR</h3>
-                                        <p>To help our nutritionists curate a customised plan for you.</p>
-                                    </div>
-                                    <div class="row no-gutters pb-1 d-flex ">
-                                        <div class="col-6 pr-2 ">
-                                            <div class="form-group custom-gender "
-                                                onclick="setGender('Male', 'male', 'female')">
-                                                <a id="male" style="font-size: 22px; margin-left: 20%;"><img
-                                                        src="icons/young-man.png"
-                                                        style="max-width: 60% !important;"></a>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 pl-2">
-
-                                            <div class="form-group custom-gender" style="float: left;"
-                                                onclick="setGender('Female', 'female', 'male')">
-                                                <a id="female" style="font-size: 22px; margin-left: 21%;"><img
-                                                        src="icons/woman.png" style="max-width: 60% !important;"></a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="d-flex akash">
-                                        <label>Age</label>
-                                        <div class="input1">
-                                            <input class="input1" type="number" id="age" name="age"
-                                                onkeyup="setBMIData()">
-                                        </div>
-                                        <label>Weight (kg)</label>
-                                        <div class="input1">
-                                            <input class="input1" type="number" step="0.1" name="weight" id="weight"
-                                                onkeyup="setBMIData()">
-                                        </div>
-
-                                        <label>Height</label>
-                                        <!-- <div class="input1 " style=""> -->
-                                        <div class="input1 ">
-                                            <select class="input1 input3" id="height" onchange="setBMIData()">
-                                                <option value="">Height</option>
-                                                <option value="4 ft 0 inch">4'0"</option>
-                                                <option value="4 ft 1 inch">4'1"</option>
-                                                <option value="4 ft 2 inch">4'2"</option>
-                                                <option value="4 ft 3 inch">4'3"</option>
-                                                <option value="4 ft 4 inch">4'4"</option>
-                                                <option value="4 ft 6 inch">4'6"</option>
-                                                <option value="4 ft 7 inch">4'7"</option>
-                                                <option value="4 ft 8 inch">4'8"</option>
-                                                <option value="4 ft 9 inch">4'9"</option>
-                                                <option value="4 ft 10 inch">4'10"</option>
-                                                <option value="4 ft 11 inch">4'11"</option>
-                                                <option value="5 ft 0 inch">5'0"</option>
-                                                <option value="5 ft 1 inch">5'1"</option>
-                                                <option value="5 ft 2 inch">5'2"</option>
-                                                <option value="5 ft 3 inch">5'3"</option>
-                                                <option value="5 ft 4 inch">5'4"</option>
-                                                <option value="5 ft 5 inch">5'5"</option>
-                                                <option value="5 ft 6 inch">5'6"</option>
-                                                <option value="5 ft 7 inch">5'7"</option>
-                                                <option value="5 ft 8 inch">5'8"</option>
-                                                <option value="5 ft 9 inch">5'9"</option>
-                                                <option value="5 ft 10 inch">5'10"</option>
-                                                <option value="5 ft 11 inch">5'11"</option>
-                                                <option value="6 ft 0 inch">6'0"</option>
-                                                <option value="6 ft 1 inch">6'1"</option>
-                                                <option value="6 ft 2 inch">6'2"</option>
-                                                <option value="6 ft 3 inch">6'3"</option>
-                                                <option value="6 ft 4 inch">6'4"</option>
-                                                <option value="6 ft 5 inch">6'5"</option>
-                                                <option value="6 ft 6 inch">6'6"</option>
-                                                <option value="6 ft 7 inch">6'7"</option>
-                                                <option value="6 ft 8 inch">6'8"</option>
-                                                <option value="6 ft 9 inch">6'9"</option>
-                                                <option value="6 ft 10 inch">6'10"</option>
-                                                <option value="6 ft 11 inch">6'11"</option>
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                    <div>
-                                        <h1 class="bowl">Personal Details</h1>
-                                        <div class="spoon d-flex ">
-                                            <input type="text" id="name" placeholder="Name" class="plate"
-                                                onChange="setName()">
-                                            <input type="number" pattern="[1-9]{1}[0-9]{9}" maxlength="10" id="phone"
-                                                placeholder="Mobile NO." class="plate" onChange="setPhone()">
-                                        </div>
-                                    </div>
-                                    <div class="wizard-form-input">
-                                        <label>Address Line 1</label>
-                                        <input class="form-control" type="text" id="address_1" name="address_1"
-                                            onChange="setAddress()">
-                                    </div>
-                                    <div class="wizard-form-input">
-                                        <label>Address Line 2</label>
-                                        <input class="form-control" type="text" id="address_2" name="address_2"
-                                            onChange="setAddress()">
-                                    </div>
-                                    <div class="wizard-form-input">
-                                        <label>Landmark</label>
-                                        <input class="form-control" type="text" id="landmark" name="landmark"
-                                            onChange="setAddress()">
-                                    </div>
-                                    <div class="wizard-form-input">
-                                        <label>Pin Code</label>
-                                        <input class="form-control" type="text" id="pincode" name="pincode"
-                                            onChange="setAddress()">
-                                    </div>
-                                    <div>
-                                        <label>City</label>
-                                        <select name="city" class="form-control required" id="city"
-                                            onchange="setAddress()">
-                                            <option value="">Select</option>
-                                            <option value="Noida">Noida</option>
-                                            <option value="Delhi">Delhi</option>
-                                            <option value="Gurgaon">Gurgaon</option>
-                                        </select>
-                                    </div>
-                                    <div class="wizard-checkbox-option ">
-                                        <h5 class="job">SELECT DAYS</h5>
-                                        <ul class="input4 d-flex">
-                                            <li>
-                                                <label class="block-option d-flex">
-                                                    <input type="checkbox" class="checked-checkbox" value="Monday"
-                                                        onclick="setDays('Monday')" checked name="options[]">
-                                                    <span class="checkbox-tick"></span>
-                                                    <span class="day-label">Monday</span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="block-option">
-                                                    <input type="checkbox" class="checked-checkbox" value="Tuesday"
-                                                        onclick="setDays('Tuesday')" checked name="options[]">
-                                                    <span class="checkbox-tick"></span>
-                                                    <span class="day-label">Tuesday</span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="block-option">
-                                                    <input type="checkbox" class="checked-checkbox" value="Wednesday"
-                                                        onclick="setDays('Wednesday')" checked name="options[]">
-                                                    <span class="checkbox-tick"></span>
-                                                    <span class="day-label">Wednesday</span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="block-option">
-                                                    <input type="checkbox" class="checked-checkbox" value="Thursday"
-                                                        onclick="setDays('Thursday')" checked name="options[]">
-                                                    <span class="checkbox-tick"></span>
-                                                    <span class="day-label">Thursday</span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="block-option">
-                                                    <input type="checkbox" class="checked-checkbox" value="Friday"
-                                                        onclick="setDays('Friday')" checked name="options[]">
-                                                    <span class="checkbox-tick"></span>
-                                                    <span class="day-label">Friday</span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="block-option">
-                                                    <input type="checkbox" class="checked-checkbox" value="Saturday"
-                                                        onclick="setDays('Saturday')" checked name="options[]">
-                                                    <span class="checkbox-tick"></span>
-                                                    <span class="day-label">Saturday</span>
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label class="block-option">
-                                                    <input type="checkbox" class="checked-checkbox" value="Sunday"
-                                                        onclick="setDays('Sunday')" checked name="options[]">
-                                                    <span class="checkbox-tick"></span>
-                                                    <span class="day-label">Sunday</span>
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="wizard-v3-progress">
-                                        <span>3 to 4 Step</span>
-                                        <h3>75% Completed</h3>
-                                        <div class="progress">
-                                            <div class="progress-bar" style="width: 38%">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.inner -->
-                                <div class="vector-img-one">
-                                    <img src="assets/img/vb2.png" alt="">
-                                </div>
-                                <div class="form-step-control actions mt-60">
-                                    <ul>
-                                        <li><button id="back-personal">BACK</button></li>
-                                        <li><button id="next-personal">NEXT</button></li>
-                                    </ul>
-                                </div>
                             </div>
 
                         </div>
+                    </div>
+            </div>
+            
+            <!-- div 4 -->
+            <div class="multisteps-form__panel" data-animation="slideHorz">
+                <div class="wizard-forms section-padding">
+                    <div class="inner pb-100 clearfix">
+                        <div class="wizard-title text-center">
+                            <h3>Add Your Personal Details</h3>
+                            <!-- <p>To help our nutritionists curate a customised plan for you.</p> -->
+                        </div>
+                        <div class="row no-gutters pb-1 d-flex ">
+                            <div class="col-6 pr-2 ">
+                                <div class="form-group custom-gender " onclick="setGender('Male', 'male', 'female')">
+                                    <a id="male" style="font-size: 22px; margin-left: 20%;"><img
+                                            src="icons/young-man.png" style="max-width: 60% !important;"></a>
+                                </div>
+                            </div>
+                            <div class="col-6 pl-2">
+
+                                <div class="form-group custom-gender" style="float: left;"
+                                    onclick="setGender('Female', 'female', 'male')">
+                                    <a id="female" style="font-size: 22px; margin-left: 21%;"><img src="icons/woman.png"
+                                            style="max-width: 60% !important;"></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="d-flex akash">
+                            <label>Age (Yrs)</label>
+                            <div class="input1">
+                                <input class="input1" type="text" id="age" name="age"
+                                    onkeypress="return onlyNumberKey(event)" maxlength="2" required
+                                    onkeyup="setBMIData()">
+                            </div>
+                            <label>Weight (kg)</label>
+                            <div class="input1">
+                                <input class="input1" type="text" step="0.1" name="weight" id="weight"
+                                    onkeypress="return onlyNumberKey(event)" maxlength="3" required
+                                    onkeyup="setBMIData()">
+                           <!-- div 3 -->
+             </div>
+
+                            <label>Height (ft)</label>
+                            <!-- <div class="input1 " style=""> -->
+                            <div class="input1 ">
+                                <select class="input1 input3" style="background-color: white;" id="height"
+                                    onchange="setBMIData()">
+                                    <option value="">Height</option>
+                                    <option value="4 ft 0 inch">4'0"</option>
+                                    <option value="4 ft 1 inch">4'1"</option>
+                                    <option value="4 ft 2 inch">4'2"</option>
+                                    <option value="4 ft 3 inch">4'3"</option>
+                                    <option value="4 ft 4 inch">4'4"</option>
+                                    <option value="4 ft 6 inch">4'6"</option>
+                                    <option value="4 ft 7 inch">4'7"</option>
+                                    <option value="4 ft 8 inch">4'8"</option>
+                                    <option value="4 ft 9 inch">4'9"</option>
+                                    <option value="4 ft 10 inch">4'10"</option>
+                                    <option value="4 ft 11 inch">4'11"</option>
+                                    <option value="5 ft 0 inch">5'0"</option>
+                                    <option value="5 ft 1 inch">5'1"</option>
+                                    <option value="5 ft 2 inch">5'2"</option>
+                                    <option value="5 ft 3 inch">5'3"</option>
+                                    <option value="5 ft 4 inch">5'4"</option>
+                                    <option value="5 ft 5 inch">5'5"</option>
+                                    <option value="5 ft 6 inch">5'6"</option>
+                                    <option value="5 ft 7 inch">5'7"</option>
+                                    <option value="5 ft 8 inch">5'8"</option>
+                                    <option value="5 ft 9 inch">5'9"</option>
+                                    <option value="5 ft 10 inch">5'10"</option>
+                                    <option value="5 ft 11 inch">5'11"</option>
+                                    <option value="6 ft 0 inch">6'0"</option>
+                                    <option value="6 ft 1 inch">6'1"</option>
+                                    <option value="6 ft 2 inch">6'2"</option>
+                                    <option value="6 ft 3 inch">6'3"</option>
+                                    <option value="6 ft 4 inch">6'4"</option>
+                                    <option value="6 ft 5 inch">6'5"</option>
+                                    <option value="6 ft 6 inch">6'6"</option>
+                                    <option value="6 ft 7 inch">6'7"</option>
+                                    <option value="6 ft 8 inch">6'8"</option>
+                                    <option value="6 ft 9 inch">6'9"</option>
+                                    <option value="6 ft 10 inch">6'10"</option>
+                                    <option value="6 ft 11 inch">6'11"</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div>
+                            <h1 class="bowl">Personal Details</h1>
+                            <div class="spoon d-flex ">
+                                <input type="text" id="name" placeholder="Name" class="plate" onChange="setName()">
+                                <input type="text" class="plate" id="phone" name="phone" placeholder="Contact No."
+                                    onkeypress="return onlyNumberKey(event)" maxlength="10" required />
+
+                            </div>
+                        </div>
+                        <div class="wizard-form-input">
+                            <label>Address Line 1</label>
+                            <input class="form-control" type="text" id="address_1" name="address_1"
+                                onChange="setAddress()">
+                        </div>
+
+                        <div class="wizard-form-input">
+                            <label>Landmark</label>
+                            <input class="form-control" type="text" id="landmark" name="landmark"
+                                onChange="setAddress()">
+                        </div>
+                        <div class="wizard-form-input">
+                            <label>Pin Code</label>
+                            <input class="form-control" type="text" id="pincode" name="pincode" onChange="setAddress()">
+                        </div>
+                        <div>
+                            <label>City</label>
+                            <select name="city" class="form-control required" id="city" onchange="setAddress()">
+                                <option value="">Select</option>
+                                <option value="Noida">Noida</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Gurgaon">Gurgaon</option>
+                            </select>
+                        </div>
+                        <div class="wizard-checkbox-option ">
+                            <h5 class="job">SELECT DAYS</h5>
+                            <ul class="input4 d-flex">
+                                <li>
+                                    <label class="block-option d-flex">
+                                        <input type="checkbox" class="checked-checkbox" value="Monday"
+                                            onclick="setDays('Monday')" checked name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Monday</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="block-option">
+                                        <input type="checkbox" class="checked-checkbox" value="Tuesday"
+                                            onclick="setDays('Tuesday')" checked name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Tuesday</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="block-option">
+                                        <input type="checkbox" class="checked-checkbox" value="Wednesday"
+                                            onclick="setDays('Wednesday')" checked name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Wednesday</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="block-option">
+                                        <input type="checkbox" class="checked-checkbox" value="Thursday"
+                                            onclick="setDays('Thursday')" checked name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Thursday</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="block-option">
+                                        <input type="checkbox" class="checked-checkbox" value="Friday"
+                                            onclick="setDays('Friday')" checked name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Friday</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="block-option">
+                                        <input type="checkbox" class="checked-checkbox" value="Saturday"
+                                            onclick="setDays('Saturday')" checked name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Saturday</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="block-option">
+                                        <input type="checkbox" class="checked-checkbox" value="Sunday"
+                                            onclick="setDays('Sunday')" checked name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Sunday</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="wizard-v3-progress">
+                            <span>3 to 4 Step</span>
+                            <h3>75% Completed</h3>
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 75%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.inner -->
+                    <div class="vector-img-one">
+                        <img src="assets/img/vb2.png" alt="">
+                    </div>
+                    <div class="form-step-control actions mt-60">
+                        <ul>
+                            <li><button id="back-personal">BACK</button></li>
+                            <li><button id="next-personal">NEXT</button></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
 
 
-                        <!-- div 5 -->
-                        <div class="multisteps-form__panel" data-animation="slideHorz">
-                            <div class="wizard-forms">
-                                <div class="inner pb-100">
-                                    <div class="wizard-title text-center">
-                                        <h3>Review and Pay</h3>
-                                        <p>Once the payment is complete, our nutritionist will call you within 24hrs to
-                                            curate a plan for you.</p>
-                                    </div>
-                                    <table class="table">
-                                        <tr>
-                                            <th>Name:</th>
-                                            <td><span id="s_name"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phone:</th>
-                                            <td><span id="s_phone"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Address</th>
-                                            <td><span id="s_address"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>City:</th>
-                                            <td><span id="s_city"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>PIN Code:</th>
-                                            <td><span id="s_pincode"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Goal:</th>
-                                            <td><span id="s_goal"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Gender</th>
-                                            <td><span id="s_gender"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Preferences:</th>
-                                            <td><span id="s_prefs"></span></td>
-                                        </tr>
-                                        <tr>fixed
-                                            <th>Selected Plan:</th>
-                                            <td><span id="s_plan_name"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Plan Price:</th>
-                                            <td><span id="s_plan_price"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Addons:</th>
-                                            <td><span id="s_plan_addons"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Selected Meals:</th>
-                                            <td><span id="s_meals"></span></td>
-                                        </tr>
-                                        <!-- <tr>
+            <!-- div 5 -->
+            <div class="multisteps-form__panel" data-animation="slideHorz">
+                <div class="wizard-forms">
+                    <div class="inner pb-100">
+                        <div class="wizard-title text-center">
+                            <h3>Review and Pay</h3>
+                            <!-- Once the payment is complete,  -->
+                            <p>Our nutritionist will call you within 24hrs to
+                                curate a plan for you.</p>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <th>Name:</th>
+                                <td><span id="s_name"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Phone:</th>
+                                <td><span id="s_phone"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Address</th>
+                                <td><span id="s_address"></span></td>
+                            </tr>
+                            <tr>
+                                <th>City:</th>
+                                <td><span id="s_city"></span></td>
+                            </tr>
+                            <tr>
+                                <th>PIN Code:</th>
+                                <td><span id="s_pincode"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Goal:</th>
+                                <td><span id="s_goal"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td><span id="s_gender"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Preferences:</th>
+                                <td><span id="s_prefs"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Selected Plan:</th>
+                                <td><span id="s_plan_name"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Plan Price:</th>
+                                <td><span id="s_plan_price"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Addons:</th>
+                                <td><span id="s_plan_addons"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Selected Meals:</th>
+                                <td><span id="s_meals"></span></td>
+                            </tr>
+                            <!-- <tr>
                                     <th>Full Meal:</th>
                                     <td><span id="s_plan_fm"></span></td>
                                 </tr>
@@ -816,12 +682,12 @@
                                     <td><span id="s_timeslot"></span></td>
                                 </tr> -->
 
-                                        <tr>
-                                            <th>Selected Days:</th>
-                                            <td><span id="s_days"></span></td>
-                                        </tr>
-                                    </table>
-                                    <!-- <div class="form-group" style="margin-top: 20px; margin-bottom: 40px;">
+                            <tr>
+                                <th>Selected Days:</th>
+                                <td><span id="s_days"></span></td>
+                            </tr>
+                        </table>
+                        <!-- <div class="form-group" style="margin-top: 20px; margin-bottom: 40px;">
                                 <label for="s_plan_days">Have A Coupon? </label>
                                 <div class="row">
                                     <div class="col-lg-9">
@@ -836,7 +702,7 @@
                                 </div>
                                 <i class="icon-phone"></i>
                             </div> -->
-                                    <!-- <div class="form-group" style="margin-bottom: 50px;">
+                        <!-- <div class="form-group" style="margin-bottom: 50px;">
                                 <div class="row" style="margin-left: 15%;">
                                     <div class="col">
                                         <h5 class="text-danger">Total Amount: </h5>
@@ -846,66 +712,66 @@
                                     </div>	
                                 </div>
                             </div> -->
-                                    <h4>Breakdown: </h3>
-                                        <table class="table">
-                                            <tr>
-                                                <th>Discounted Plan Price: </th>
-                                                <td><span id="d_plan_price"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Add Ons: </th>
-                                                <td><span id="d_addons"></span></td>
-                                            </tr>
-                                            <tr id="crd" class="hidden">
-                                                <th>Cost reduction on not selecting soup/salad</th>
-                                                <td><span id="d_costr"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>GST: </th>
-                                                <td><span id="d_gst"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Total Amount: </th>
-                                                <td><span class="" id="d_total_amount"></span></td>
-                                            </tr>
-                                        </table>
-                                        <div class="wizard-v3-progress">
-                                            <span>4 to 4 step</span>
-                                            <h3>100% Completed</h3>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 100%">
-                                                </div>
-                                            </div>
-                                        </div>
-                                </div>
-                                <!-- /.inner -->
-                                <div class="vector-img-one position-relative">
-                                    <img src="assets/img/vb5.png" alt="">
-                                </div>
-                                <div class="form-step-control actions mt-60">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <ul class="d-flex justify-content-between align-items-center">
-                                                <li><button class="btn btn-primary" id="back-sub">BACK</button></li>
-                                                <li><button class="btn btn-primary" id="subnpay">SUBMIT & PAY</button>
-                                                </li>
-                                                <li><button class="btn btn-primary hidden" id="paylater">Pay
-                                                        Later</button></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 mx-4 m-2 p-2 ">
-                                            <a href="#" style="float:right" class="link-primary"
-                                                id="link-pay-later">Can't pay now?</a>
-                                        </div>
+                        <h4>Breakdown: </h3>
+                            <table class="table">
+                                <tr>
+                                    <th>Discounted Plan Price: </th>
+                                    <td><span id="d_plan_price"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Add Ons: </th>
+                                    <td><span id="d_addons"></span></td>
+                                </tr>
+                                <tr id="crd" class="hidden">
+                                    <th>Cost reduction on not selecting soup/salad</th>
+                                    <td><span id="d_costr"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>GST: </th>
+                                    <td><span id="d_gst"></span></td>
+                                </tr>
+                                <tr>
+                                    <th>Total Amount: </th>
+                                    <td><span class="" id="d_total_amount"></span></td>
+                                </tr>
+                            </table>
+                            <div class="wizard-v3-progress">
+                                <span>4 to 4 step</span>
+                                <h3>100% Completed</h3>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 100%">
                                     </div>
                                 </div>
-
+                            </div>
+                    </div>
+                    <!-- /.inner -->
+                    <div class="vector-img-one position-relative">
+                        <img src="assets/img/vb5.png" alt="">
+                    </div>
+                    <div class="form-step-control actions mt-60">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="d-flex justify-content-between align-items-center">
+                                    <li><button class="btn btn-primary" id="back-sub">BACK</button></li>
+                                    <li><button class="btn btn-primary" id="subnpay">SUBMIT & PAY</button>
+                                    </li>
+                                    <li><button class="btn btn-primary hidden" id="paylater">Pay
+                                            Later</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mx-4 m-2 p-2 ">
+                                <a href="#" style="float:right" class="link-primary" id="link-pay-later">Can't pay
+                                    now?</a>
                             </div>
                         </div>
                     </div>
-                </form>
+
+                </div>
+            </div>
+            </div>
+            </form>
             </div>
             <script src="assets/js/jquery-3.3.1.min.js"></script>
             <script src="assets/js/popper.min.js"></script>
