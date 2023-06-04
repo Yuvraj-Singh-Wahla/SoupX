@@ -208,6 +208,9 @@ $(".goal-card").click(function () {
     $("#s_goal").prop("innerHTML", plan.goal);
     $(".goal-card").css('background-color', 'white');
     $(this).css('background-color', 'rgba(117, 224, 87, 0.55)');
+    $("#progressBar").css("width","50%");
+    $("#span").text("2 to 4 Steps");
+    $("#h3").text("50% Completed");
     setActiveStep(1);
     setActivePanel(1);
 })
@@ -323,6 +326,8 @@ $("#mealSelector").click(async (e) => {
     plan.discounted_price = plan.price - plan.discount_price;
     priceDisplay();
 });
+
+$(document).ready(priceDisplay());
 
 function priceDisplay() {
     if (plan.price === 0) {
@@ -735,6 +740,9 @@ function payment(id) {
 
 document.getElementById("next-meal").addEventListener("click", function (e) {
     e.preventDefault();
+    $("#progressBar").css("width","75%");
+    $("#span").text("3 to 4 Steps");
+    $("#h3").text("75% Completed");
     if (plan.meals.length !== 0) {
         setActiveStep(2);
         setActivePanel(2);
@@ -746,12 +754,18 @@ document.getElementById("next-meal").addEventListener("click", function (e) {
 
 document.getElementById("back-meal").addEventListener("click", function (e) {
     e.preventDefault();
+    $("#progressBar").css("width","50%");
+    $("#span").text("2 to 4 Steps");
+    $("#h3").text("50% Completed");
     setActiveStep(0);
     setActivePanel(0);
 });
 
 document.getElementById("next-personal").addEventListener("click", function (e) {
     e.preventDefault();
+    $("#progressBar").css("width","100%");
+    $("#span").text("4 to 4 Steps");
+    $("#h3").text("100% Completed");
     if (plan.days.length !== 0 && plan.name != null && plan.phone != null && plan.address != null && plan.pincode != null && plan.city != null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
         setActiveStep(3);
         setActivePanel(3);
@@ -959,6 +973,7 @@ $(window).on("load", function () {
     $("#vegClick").click();
 
 });
+
 
 init();
 showPlanDetails();
