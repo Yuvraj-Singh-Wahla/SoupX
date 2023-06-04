@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS subscriptions (
     goal VARCHAR(255) NOT NULL,
     days JSON NOT NULL,
     add_ons VARCHAR(255) NOT NULL,
-    lunch JSON NOT NULL,
-    dinner JSON NOT NULL,
+    meals JSON NOT NULL,
+    preference VARCHAR(25) NOT NULL,
     address VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
     pincode INT NOT NULL,
@@ -225,8 +225,8 @@ app.post('/api/addSubscription', async (req, res) => {
         goal: req.body.goal,
         days: JSON.stringify(req.body.days),
         add_ons: req.body.add_ons,
-        lunch: req.body.lunch,
-        dinner: req.body.dinner,
+        meals: req.body.meals,
+        preference: req.body.preference,
         address: req.body.address,
         pincode: parseInt(req.body.pincode),
         city: req.body.city,
@@ -305,8 +305,8 @@ app.post('/api/payLater', (req, res) => {
         goal: data.goal,
         days: JSON.stringify(data.days),
         add_ons: data.add_ons,
-        lunch: JSON.stringify(data.lunch),
-        dinner: JSON.stringify(data.dinner),
+        meals:JSON.stringify(data.meals),
+        preference: data.preference,
         address: data.address,
         pincode: parseInt(data.pincode),
         city: data.city,
@@ -323,11 +323,11 @@ app.post('/api/payLater', (req, res) => {
     con.query(query, subscriptionData, (error, results) => {
         if (error) {
             console.error('Error inserting data: ', error);
-            res.json({subscription: "Success"})
+            res.json({subscription: "Failure"})
         }
         else{
             console.log('Data inserted successfully!');
-            res.json({subscription:"Failure"});
+            res.json({subscription:"Success"});
         }
         console.log(results);
     });
@@ -344,8 +344,8 @@ function addSubscription(data) {
         goal: data.goal,
         days: JSON.stringify(data.days),
         add_ons: data.add_ons,
-        lunch: JSON.stringify(data.lunch),
-        dinner: JSON.stringify(data.dinner),
+        meals: JSON.stringify(data.meals),
+        preference: data.preference,
         address: data.address,
         pincode: parseInt(data.pincode),
         city: data.city,

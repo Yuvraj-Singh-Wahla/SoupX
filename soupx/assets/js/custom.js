@@ -1,5 +1,5 @@
 var plan = {};
-var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+plan.days = [];
 // plan.lunch = ['Soup', 'Salad'];
 // plan.dinner = ['Soup', 'Salad'];
 var goalIds = ['looseW', 'healthyEat', 'muscleG', 'detox', 'lightD', 'notS',];
@@ -110,7 +110,8 @@ var discount = {
     3: 0.15,
     4: 0.20
 }
-plan.add_ons = 0;
+plan.add_ons = "None";
+plan.addons = 0;
 plan.price = 249;
 plan.discount_price = 0;
 plan.discounted_price = plan.price;
@@ -120,7 +121,7 @@ plan.fullMeal = 'No';
 plan.preference = [];
 plan.optionalItems = [];
 plan.selected_plan = { name: 'Trial 1 Day', price: 249, days: 1, soup_cost: 249, salad_cost: 199 };
-setSchedule();
+// setSchedule();
 function init() {
     $('#apply_coupon').on('click', function (e) {
         e.preventDefault();
@@ -316,13 +317,14 @@ $("#mealSelector").click(async (e) => {
         console.log(plan.price);
         console.log("Unchecked");
     }
+    $("#s_meals").text(plan.meals);
 
     plan.discount_price = parseInt(plan.price * (discount[plan.meals.length]));
     plan.discounted_price = plan.price - plan.discount_price;
-})
+    priceDisplay();
+});
 
-//Plan Price Breakdown updater
-setInterval(() => {
+function priceDisplay() {
     if (plan.price === 0) {
         $(".price-display-container").hide();
     }
@@ -332,11 +334,25 @@ setInterval(() => {
     $("#b_plan_price").prop("innerHTML", "₹ " + plan.price);
     $("#b_discount_price").prop("innerHTML", "₹ " + plan.discount_price);
     $("#b_discounted_price").prop("innerHTML", "₹ " + plan.discounted_price);
-}, 500)
 
-$(".messup").click(function() {
+    plan.total = plan.discounted_price;
+    $("#d_plan_price").text("₹ " + plan.total);
+    plan.total += plan.addons * plan.selected_plan.days;
+    $("#d_addons").text("₹ " + ($("#addons").val() * plan.selected_plan.days));
+    $("#d_ppadd").text("₹ " + (plan.discounted_price + parseInt($("#addons").val()) * parseInt(plan.selected_plan.days)))
+    $("#d_gst").text("₹ " + (0.05 * plan.total).toFixed(2));
+    plan.total += (0.05 * plan.total);
+    $("#d_total_amount").text("₹ " + plan.total);
+}
+
+//Plan Price Breakdown updater
+// setInterval(() => {
+//     priceDisplay();
+// }, 500)
+
+$(".messup").click(function () {
     plan.sex = $(this).data("gender");
-    $(".messup").each(function() {
+    $(".messup").each(function () {
         $(this).css("background-color", "white");
     })
     $(this).css("background-color", "rgb(117 224 87 / 55%)");
@@ -380,7 +396,7 @@ function setAddress() {
     let landmark = $("#landmark").val();
     plan.pincode = $("#pincode").val();
     plan.city = $("#city").val();
-    plan.address = a+" Landmark: " + landmark;
+    plan.address = a + " Landmark: " + landmark;
     $("#s_address").text(plan.address);
     $("#s_city").text(plan.city);
     $("#s_pincode").text(plan.pincode);
@@ -423,6 +439,7 @@ function prefCard() {
         $(".nonVegPlan").removeClass("hidden");
         $("#nonVegClick").click();
     }
+    $("#s_prefs").text(plan.meal);
 }
 
 $(".pref-card").click(prefCard);
@@ -442,33 +459,53 @@ function setMeal(meal, id) {
     }
 }
 
-function selectAllDays(){
-    $(".checked-checkbox").each(function() {
-        if($("#allDays").prop("checked") === true)
-        $(this).prop('checked', true);
-        if($("#allDays").prop("checked") === false)
-        $(this).prop('checked', false);
-
-    })
+function selectAllDays() {
+    $(".checked-checkbox").each(function () {
+        if ($("#allDays").prop("checked") === true) {
+            $(this).prop('checked', true);
+            plan.days = ['Monday', 'Tuesday', 'Wednesda', 'Thursday', 'Friday', 'Saturday'];
+        }
+        if ($("#allDays").prop("checked") === false) {
+            $(this).prop('checked', false);
+            plan.days = [];
+        }
+    });
 }
 
-function setDays(day) {
-    // days.push(day);
-    if (days.length == 0) {
-        days.push(day);
-        // $(`#${id}`).css('background-color', '#c5c50c');
-    } else {
-        if (days.includes(day)) {
-            let index = days.indexOf(day);
-            days.splice(index, 1);
-            // $(`#${id}`).css('background-color', 'rgb(199, 193, 193)');
-        } else {
-            days.push(day);
-            // $(`#${id}`).css('background-color', '#c5c50c');
+$(".daySelector").click(function () {
+    const day = $(this).val();
+    if (day === "all") {
+        selectAllDays();
+    }
+    if (day !== 'all') {
+        if ($(this).prop('checked') === true) {
+            plan.days.push(day);
+        }
+        else {
+            plan.days.splice(plan.days.indexOf(day), 1);
         }
     }
-    console.log(days);
-}
+    console.log(plan.days);
+    $("#s_days").text(plan.days);
+})
+
+// function setDays(day) {
+//     // days.push(day);
+//     if (days.length == 0) {
+//         days.push(day);
+//         // $(`#${id}`).css('background-color', '#c5c50c');
+//     } else {
+//         if (days.includes(day)) {
+//             let index = days.indexOf(day);
+//             days.splice(index, 1);
+//             // $(`#${id}`).css('background-color', 'rgb(199, 193, 193)');
+//         } else {
+//             days.push(day);
+//             // $(`#${id}`).css('background-color', '#c5c50c');
+//         }
+//     }
+//     console.log(days);
+// }
 function setSchedule() {
     if (days.length == 0) {
         alert('Please select atleast one day');
@@ -510,6 +547,11 @@ $(".plan-card").click(function () {
     $("#salad-lunch").prop("checked", false);
     $("#soup-dinner").prop("checked", false);
     $("#salad-dinner").prop("checked", false);
+
+    $("#s_plan_name").text(plan.selected_plan.name);
+    $("#s_plan_price").text(plan.selected_plan.price);
+
+    priceDisplay();
 });
 
 function setPlan(plan_name, plan_price, days, id, soup_cost, salad_cost) {
@@ -540,7 +582,9 @@ function setPlan(plan_name, plan_price, days, id, soup_cost, salad_cost) {
 
 function setAddOns() {
     plan.add_ons = $("#addons option:selected").text();
-
+    plan.addons = $("#addons").val();
+    $("#s_plan_addons").text(plan.add_ons);
+    priceDisplay();
 }
 
 
@@ -662,14 +706,6 @@ function payment(id) {
 
 //Loads preview of selected data on Checkout & Pay
 
-function loadReview(){
-    $("#s_prefs").text(plan.meal);
-    $("#s_plan_name").text(plan.selected_plan.name);
-    $("#s_plan_price").text(plan.selected_plan.price);
-    $("#s_plan_addons").text(plan.add_ons);
-    $("#s_meals").text(plan.meals);
-}
-
 // function loadPreview() {
 //     plan.total = plan.discounted_price;
 
@@ -755,8 +791,8 @@ document.getElementById("paylater").addEventListener("click", function (e) {
         goal: plan.goal,
         days: plan.days,
         add_ons: plan.add_ons,
-        lunch: plan.lunch,
-        dinner: plan.dinner,
+        meals: plan.meals,
+        preference: plan.meal,
         address: plan.address,
         city: plan.city,
         pincode: plan.pincode,
@@ -852,8 +888,8 @@ function verification(order_id, payment_id, signature) {
         goal: plan.goal,
         days: plan.days,
         add_ons: plan.add_ons,
-        lunch: plan.lunch,
-        dinner: plan.dinner,
+        meals: plan.meals,
+        preference: plan.meal,
         address: plan.address,
         city: plan.city,
         pincode: plan.pincode,
