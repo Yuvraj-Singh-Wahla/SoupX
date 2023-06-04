@@ -460,7 +460,7 @@ function setMeal(meal, id) {
 }
 
 function selectAllDays() {
-    $(".checked-checkbox").each(function () {
+    $(".daySelector").each(function () {
         if ($("#allDays").prop("checked") === true) {
             $(this).prop('checked', true);
             plan.days = ['Monday', 'Tuesday', 'Wednesda', 'Thursday', 'Friday', 'Saturday'];
@@ -735,15 +735,12 @@ function payment(id) {
 
 document.getElementById("next-meal").addEventListener("click", function (e) {
     e.preventDefault();
-    if (plan.meal != null && plan.selected_plan.days != 0) {
+    if (plan.meals.length !== 0) {
         setActiveStep(2);
         setActivePanel(2);
     }
-    else if (plan.meal == null) {
-        console.log("Please select a meal type");
-    }
     else {
-        console.log("Please select the number of days for the Custom Plan");
+        alert("Please select atleast one day of the week");
     }
 });
 
@@ -755,12 +752,12 @@ document.getElementById("back-meal").addEventListener("click", function (e) {
 
 document.getElementById("next-personal").addEventListener("click", function (e) {
     e.preventDefault();
-    if (plan.name != null && plan.phone != null && plan.address != null && plan.pincode != null && plan.city != null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
+    if (plan.days.length !== 0 && plan.name != null && plan.phone != null && plan.address != null && plan.pincode != null && plan.city != null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
         setActiveStep(3);
         setActivePanel(3);
     }
     else {
-        console.log("Please fill all the details");
+        alert("Please fill all the details");
     }
 });
 
