@@ -217,7 +217,8 @@ const setActivePanel = activePanelNum => {
         }
     });
     if (activePanelNum==3){
-        loadPreview();
+        // loadPreview();
+        loadReview();
     }
 };
 

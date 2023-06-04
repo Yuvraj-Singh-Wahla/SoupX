@@ -110,10 +110,11 @@ var discount = {
     3: 0.15,
     4: 0.20
 }
+plan.add_ons = 0;
 plan.price = 249;
 plan.discount_price = 0;
 plan.discounted_price = plan.price;
-plan.meals = ['soup-lunch']
+plan.meals = ['Soup-Lunch']
 plan.meal = 'Vegetarian';
 plan.fullMeal = 'No';
 plan.preference = [];
@@ -333,12 +334,22 @@ setInterval(() => {
     $("#b_discounted_price").prop("innerHTML", "₹ " + plan.discounted_price);
 }, 500)
 
+$(".messup").click(function() {
+    plan.sex = $(this).data("gender");
+    $(".messup").each(function() {
+        $(this).css("background-color", "white");
+    })
+    $(this).css("background-color", "rgb(117 224 87 / 55%)");
+    $("#s_gender").text(plan.sex);
+})
+
 function setGender(gender, id, _id) {
     plan.sex = gender;
     $(`#${id}`).parent().css('background-color', 'rgb(117 224 87 / 55%)');
     $(`#${id}`).parent().css('color', 'white');
     $(`#${_id}`).parent().css('background-color', '');
     $(`#${_id}`).parent().css('color', '');
+    $("#s_gender").text(plan.sex);
     console.log(plan);
 }
 function setBMIData() {
@@ -356,19 +367,24 @@ function setBMIData() {
 
 function setName() {
     plan.name = $('#name').val();
+    $("#s_name").text(plan.name);
 }
 
 function setPhone() {
     plan.phone = $('#phone').val();
+    $("#s_phone").text(plan.phone);
 }
 
 function setAddress() {
-    let a1 = $("#address_1").val();
-    let a2 = $("#address_2").val();
+    let a = $("#address_1").val();
     let landmark = $("#landmark").val();
     plan.pincode = $("#pincode").val();
     plan.city = $("#city").val();
-    plan.address = a1 + ", " + a2 + ", Landmark: " + landmark;
+    plan.address = a+" Landmark: " + landmark;
+    $("#s_address").text(plan.address);
+    $("#s_city").text(plan.city);
+    $("#s_pincode").text(plan.pincode);
+
 }
 
 function setNotesAndNext() {
@@ -426,6 +442,16 @@ function setMeal(meal, id) {
     }
 }
 
+function selectAllDays(){
+    $(".checked-checkbox").each(function() {
+        if($("#allDays").prop("checked") === true)
+        $(this).prop('checked', true);
+        if($("#allDays").prop("checked") === false)
+        $(this).prop('checked', false);
+
+    })
+}
+
 function setDays(day) {
     // days.push(day);
     if (days.length == 0) {
@@ -477,7 +503,7 @@ $(".plan-card").click(function () {
     }
 
     //Set meal selection to lunch only
-    plan.meals = ["soup-lunch"];
+    plan.meals = ["Soup-Lunch"];
     plan.discount_price = parseInt(plan.price * (discount[plan.meals.length]));
     plan.discounted_price = plan.price - plan.discount_price;
     $("#soup-lunch").prop("checked", true);
@@ -498,7 +524,7 @@ function setPlan(plan_name, plan_price, days, id, soup_cost, salad_cost) {
     console.log(plan);
     // setMeal("Vegetarian", "vegita");
     plan.price = plan_price;
-    plan.meals = ["soup-lunch"];
+    plan.meals = ["Soup-lunch"];
     plan.discount_price = parseInt(plan.price * (discount[plan.meals.length]));
     plan.discounted_price = plan.price - plan.discount_price;
     $("#soup-lunch").val(soup_cost);
@@ -513,7 +539,7 @@ function setPlan(plan_name, plan_price, days, id, soup_cost, salad_cost) {
 }
 
 function setAddOns() {
-    plan.add_ons = document.getElementById("addons").selectedOptions[0].innerHTML;
+    plan.add_ons = $("#addons option:selected").text();
 
 }
 
@@ -635,33 +661,41 @@ function payment(id) {
 
 
 //Loads preview of selected data on Checkout & Pay
-function loadPreview() {
-    plan.total = parseInt(plan.discounted_price);
 
-    console.log(plan);
-    document.getElementById('s_name').innerHTML = plan.name;
-    document.getElementById("s_phone").innerHTML = plan.phone;
-    document.getElementById("s_address").innerHTML = plan.address;
-    document.getElementById("s_city").innerHTML = plan.city;
-    document.getElementById("s_pincode").innerHTML = plan.pincode;
-    // document.getElementById("s_goal").innerHTML = plan.goal;
-    document.getElementById("s_prefs").innerHTML = plan.meal;
-    document.getElementById("s_plan_name").innerHTML = plan.selected_plan.name;
-    document.getElementById("s_plan_price").innerHTML = plan.selected_plan.price;
-    document.getElementById("s_days").innerHTML = plan.days
-    document.getElementById("s_plan_addons").innerHTML = plan.add_ons;
-    document.getElementById("s_gender").innerHTML = plan.sex;
-    $("#s_meals").prop("innerHTML", plan.meals);
-    document.getElementById("d_plan_price").innerHTML = plan.total;
-    plan.total += parseInt(document.getElementById("addons").value);
-    document.getElementById("d_addons").innerHTML = (document.getElementById("addons").value);
-
-    document.getElementById("d_gst").innerHTML = (5 * plan.total) / 100;
-    plan.total += (5 * plan.total) / 100;
-    document.getElementById("d_total_amount").innerHTML = plan.total;
-
-
+function loadReview(){
+    $("#s_prefs").text(plan.meal);
+    $("#s_plan_name").text(plan.selected_plan.name);
+    $("#s_plan_price").text(plan.selected_plan.price);
+    $("#s_plan_addons").text(plan.add_ons);
+    $("#s_meals").text(plan.meals);
 }
+
+// function loadPreview() {
+//     plan.total = plan.discounted_price;
+
+//     $("#s_name").text(plan.name);
+//     $("#s_phone").text(plan.phone);
+//     $("#s_address").text(plan.address);
+//     $("#s_city").text(plan.city);
+//     $("#s_pincode").text(plan.pincode);
+//     $("#s_prefs").text(plan.meals);
+//     $("#s_plan_name").text(plan.selected_plan.name);
+//     $("#s_plan_price").text(plan.selected_plan.price);
+//     document.getElementById("s_days").innerHTML = plan.days
+//     $("d_addons").text($("#addons option:selected").text());
+//     // document.getElementById("s_plan_addons").innerHTML = plan.add_ons;
+//     document.getElementById("s_gender").innerHTML = plan.sex;
+//     $("#s_meals").prop("innerHTML", plan.meals);
+//     document.getElementById("d_plan_price").innerHTML = plan.total;
+//     plan.total += plan.add_ons;
+//     $("addons").text($("#addons").val());
+
+//     document.getElementById("d_gst").innerHTML = (5 * plan.total) / 100;
+//     plan.total += (5 * plan.total) / 100;
+//     document.getElementById("d_total_amount").innerHTML = plan.total;
+
+
+// }
 
 document.getElementById("next-meal").addEventListener("click", function (e) {
     e.preventDefault();
@@ -892,7 +926,6 @@ $(window).on("load", function () {
     $("#vegClick").click();
 
 });
-
 
 init();
 showPlanDetails();

@@ -105,13 +105,13 @@ var nonVegPlan = [
             <div class="wrapper wizard d-flex clearfix multisteps-form position-relative">
                 <div style="background-color:#000000;" class="steps order-2 position-relative w-25">
                     <div style="background-color:#000000;" class="multisteps-form__progress">
-                        <span class="multisteps-form__progress-btn js-active" title="Application data"><i
+                        <span class="multisteps-form__progress-btn js-active" ><i
                                 class="far fa-user"></i><span>Goal</span></span>
-                        <span class="multisteps-form__progress-btn" title="Tax residency"><i style="color:#B0B0B0;"
+                        <span class="multisteps-form__progress-btn" ><i style="color:#B0B0B0;"
                                 class="far fa-user"></i><span>Meal Plan</span></span>
-                        <span class="multisteps-form__progress-btn" title="Indentity documents"><i
+                        <span class="multisteps-form__progress-btn" ><i
                                 style="color:#B0B0B0;" class="far fa-user"></i><span>Personal Details</span></span>
-                        <span id="snp" class="multisteps-form__progress-btn" title="Investability"><i
+                        <span id="snp" class="multisteps-form__progress-btn" ><i
                                 style="color:#B0B0B0;" class="far fa-user"></i><span>Checkout & Pay</span></span>
                         <!-- <span class="multisteps-form__progress-btn" title="Review"><i style="color:#B0B0B0;" class="far fa-user"></i><span>Review & Pay</span></span> -->
                     </div>
@@ -284,7 +284,7 @@ var nonVegPlan = [
                                                             <label class="block-option">
                                                                 <input id="soup-lunch" type="checkbox"
                                                                     class="checked-checkbox" checked value="249"
-                                                                    name="soup-lunch" data-meal = "soup">
+                                                                    name="Soup-Lunch" data-meal = "soup">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Soup</span>
                                                             </label>
@@ -292,7 +292,7 @@ var nonVegPlan = [
                                                         <li>
                                                             <label class="block-option">
                                                                 <input id="salad-lunch" type="checkbox" data-meal = "salad"
-                                                                    class="checked-checkbox" value="199" name="salad-lunch">
+                                                                    class="checked-checkbox" value="199" name="Salad-Lunch">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Salad</span>
                                                             </label>
@@ -312,7 +312,7 @@ var nonVegPlan = [
                                                         <li>
                                                             <label class="block-option">
                                                                 <input id="soup-dinner" type="checkbox" data-meal = "soup"
-                                                                    class="checked-checkbox" value="249" name="soup-dinner">
+                                                                    class="checked-checkbox" value="249" name="Soup-Dinner">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Soup</span>
                                                             </label>
@@ -320,7 +320,7 @@ var nonVegPlan = [
                                                         <li>
                                                             <label class="block-option">
                                                                 <input type="checkbox" class="checked-checkbox" data-meal = "salad"
-                                                                    id="salad-dinner" value="199" name="salad-dinner">
+                                                                    id="salad-dinner" value="199" name="Salad-Dinner">
                                                                 <span class="checkbox-tick"></span>
                                                                 <span class="day-label">Salad</span>
                                                             </label>
@@ -333,7 +333,7 @@ var nonVegPlan = [
                                     <br>
                                     <div class="wizard-form-input">
                                         <span class="wizard-sub-text">Add Ons</span>
-                                        <select id="addons" style="background-color: white;" onchange="setAddOns()">
+                                        <select id="addons" class=" input-border" style="background-color: white;" onchange="setAddOns()">
                                             <option value="0">None</option>
                                             <option value="59">Soup Sticks</option>
                                             <option value="59">Croutons</option>
@@ -400,54 +400,59 @@ var nonVegPlan = [
 
                         </div>
                     </div>
-            </div>
+
+           
             
             <!-- div 4 -->
-            <div class="multisteps-form__panel" data-animation="slideHorz">
+            <div class="multisteps-form__panel " data-animation="slideHorz">
                 <div class="wizard-forms section-padding">
                     <div class="inner pb-100 clearfix">
                         <div class="wizard-title text-center">
                             <h3>Add Your Personal Details</h3>
                             <!-- <p>To help our nutritionists curate a customised plan for you.</p> -->
                         </div>
-                        <div class="row no-gutters pb-1 d-flex ">
-                            <div class="col-6 pr-2 ">
-                                <div class="form-group custom-gender " onclick="setGender('Male', 'male', 'female')">
-                                    <a id="male" style="font-size: 22px; margin-left: 20%;"><img
-                                            src="icons/young-man.png" style="max-width: 60% !important;"></a>
-                                </div>
+                        <!-- <div class="d-flex" style="align-items: center; justify-content: center;">
+                            <h3>Select Your Gender</h3>
+                        </div> -->
+                        <div class="gender-container">
+                            <div class="custom-card messup" data-gender="Male">
+                                <img src="icons/young-man.png" alt="">
                             </div>
-                            <div class="col-6 pl-2">
-
-                                <div class="form-group custom-gender" style="float: left;"
-                                    onclick="setGender('Female', 'female', 'male')">
-                                    <a id="female" style="font-size: 22px; margin-left: 21%;"><img src="icons/woman.png"
-                                            style="max-width: 60% !important;"></a>
-                                </div>
-
+                            <div class="custom-card messup" data-gender="Female">
+                                <img src="icons/woman.png" alt="">
+                            </div>
+                        </div>
+                        <div>
+                            <!-- <h1 class="bowl">Personal Details</h1> -->
+                            <div class="spoon d-flex ">
+                                <label for="name">
+                                    Name
+                                </label>
+                                <input type="text" id="name" placeholder="" class=" input1" onChange="setName()">
+                                <label for="phone">
+                                    Ph No.
+                                </label>
+                                <input type="text" class=" input1" id="phone" name="phone" placeholder=""
+                                    onkeypress="return onlyNumberKey(event)" maxlength="10" required
+                                    onkeyup = "setPhone()" />
+                                    
                             </div>
                         </div>
                         <div class="d-flex akash">
-                            <label>Age (Yrs)</label>
-                            <div class="input1">
+                            <label class="bgmi-label">Age (Yrs)</label>
                                 <input class="input1" type="text" id="age" name="age"
                                     onkeypress="return onlyNumberKey(event)" maxlength="2" required
                                     onkeyup="setBMIData()">
-                            </div>
-                            <label>Weight (kg)</label>
-                            <div class="input1">
+                            <label class="bgmi-label">Weight (kg)</label>
                                 <input class="input1" type="text" step="0.1" name="weight" id="weight"
                                     onkeypress="return onlyNumberKey(event)" maxlength="3" required
                                     onkeyup="setBMIData()">
-                           <!-- div 3 -->
-             </div>
 
-                            <label>Height (ft)</label>
+                            <label class="bgmi-label">Height (ft)</label>
                             <!-- <div class="input1 " style=""> -->
-                            <div class="input1 ">
-                                <select class="input1 input3" style="background-color: white;" id="height"
+                                <select class="input1" style="text-align: center; background-color: white;" id="height"
                                     onchange="setBMIData()">
-                                    <option value="">Height</option>
+                                    <option value=""></option>
                                     <option value="4 ft 0 inch">4'0"</option>
                                     <option value="4 ft 1 inch">4'1"</option>
                                     <option value="4 ft 2 inch">4'2"</option>
@@ -484,49 +489,42 @@ var nonVegPlan = [
                                     <option value="6 ft 10 inch">6'10"</option>
                                     <option value="6 ft 11 inch">6'11"</option>
                                 </select>
-                            </div>
 
+                        </div>
+                       
+                        <div>
+                            <label>Address</label>
+                            <input class="form-control input-border" type="text" id="address_1" name="address_1"
+                                onChange="setAddress()">
+                        </div>
+
+                        <div>
+                            <label>Landmark</label>
+                            <input class="form-control input-border" type="text" id="landmark" name="landmark"
+                                onChange="setAddress()">
                         </div>
                         <div>
-                            <h1 class="bowl">Personal Details</h1>
-                            <div class="spoon d-flex ">
-                                <input type="text" id="name" placeholder="Name" class="plate" onChange="setName()">
-                                <input type="text" class="plate" id="phone" name="phone" placeholder="Contact No."
-                                    onkeypress="return onlyNumberKey(event)" maxlength="10" required />
-
-                            </div>
-                        </div>
-                        <div class="wizard-form-input">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" id="address_1" name="address_1"
-                                onChange="setAddress()">
-                        </div>
-
-                        <div class="wizard-form-input">
-                            <label>Landmark</label>
-                            <input class="form-control" type="text" id="landmark" name="landmark"
-                                onChange="setAddress()">
-                        </div>
-                        <div class="wizard-form-input">
                             <label>Pin Code</label>
-                            <input class="form-control" type="text" id="pincode" name="pincode" onChange="setAddress()">
+                            <input class="form-control input-border" type="text" id="pincode" name="pincode" onChange="setAddress()">
                         </div>
                         <div>
                             <label>City</label>
-                            <select name="city" class="form-control required" id="city" onchange="setAddress()">
-                                <option value="">Select</option>
+                            <select name="city" class="form-control required input-border" id="city" onchange="setAddress()">
+                                <option value=""></option>
                                 <option value="Noida">Noida</option>
                                 <option value="Delhi">Delhi</option>
-                                <option value="Gurgaon">Gurgaon</option>
+                                <!-- <option value="Gurgaon">Gurgaon</option> -->
                             </select>
                         </div>
                         <div class="wizard-checkbox-option ">
-                            <h5 class="job">SELECT DAYS</h5>
+                            <div class="d-flex" style="justify-content: center;">
+                                <h5 style="font-size: 2rem; margin: 40px 0;">SELECT DAYS</h5>
+                            </div>
                             <ul class="input4 d-flex">
                                 <li>
                                     <label class="block-option d-flex">
-                                        <input type="checkbox" class="checked-checkbox" value="Monday"
-                                            onclick="setDays('Monday')" checked name="options[]">
+                                        <input type="checkbox"  class="checked-checkbox" value="Monday"
+                                            onclick="setDays('Monday')"  name="options[]">
                                         <span class="checkbox-tick"></span>
                                         <span class="day-label">Monday</span>
                                     </label>
@@ -534,7 +532,7 @@ var nonVegPlan = [
                                 <li>
                                     <label class="block-option">
                                         <input type="checkbox" class="checked-checkbox" value="Tuesday"
-                                            onclick="setDays('Tuesday')" checked name="options[]">
+                                            onclick="setDays('Tuesday')"  name="options[]">
                                         <span class="checkbox-tick"></span>
                                         <span class="day-label">Tuesday</span>
                                     </label>
@@ -542,7 +540,7 @@ var nonVegPlan = [
                                 <li>
                                     <label class="block-option">
                                         <input type="checkbox" class="checked-checkbox" value="Wednesday"
-                                            onclick="setDays('Wednesday')" checked name="options[]">
+                                            onclick="setDays('Wednesday')"  name="options[]">
                                         <span class="checkbox-tick"></span>
                                         <span class="day-label">Wednesday</span>
                                     </label>
@@ -550,7 +548,7 @@ var nonVegPlan = [
                                 <li>
                                     <label class="block-option">
                                         <input type="checkbox" class="checked-checkbox" value="Thursday"
-                                            onclick="setDays('Thursday')" checked name="options[]">
+                                            onclick="setDays('Thursday')"  name="options[]">
                                         <span class="checkbox-tick"></span>
                                         <span class="day-label">Thursday</span>
                                     </label>
@@ -558,7 +556,7 @@ var nonVegPlan = [
                                 <li>
                                     <label class="block-option">
                                         <input type="checkbox" class="checked-checkbox" value="Friday"
-                                            onclick="setDays('Friday')" checked name="options[]">
+                                            onclick="setDays('Friday')"  name="options[]">
                                         <span class="checkbox-tick"></span>
                                         <span class="day-label">Friday</span>
                                     </label>
@@ -566,7 +564,7 @@ var nonVegPlan = [
                                 <li>
                                     <label class="block-option">
                                         <input type="checkbox" class="checked-checkbox" value="Saturday"
-                                            onclick="setDays('Saturday')" checked name="options[]">
+                                            onclick="setDays('Saturday')"  name="options[]">
                                         <span class="checkbox-tick"></span>
                                         <span class="day-label">Saturday</span>
                                     </label>
@@ -574,9 +572,17 @@ var nonVegPlan = [
                                 <li>
                                     <label class="block-option">
                                         <input type="checkbox" class="checked-checkbox" value="Sunday"
-                                            onclick="setDays('Sunday')" checked name="options[]">
+                                            onclick="setDays('Sunday')"  name="options[]">
                                         <span class="checkbox-tick"></span>
                                         <span class="day-label">Sunday</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="block-option">
+                                        <input id="allDays" type="checkbox" class="checked-checkbox" value="Wednesday"
+                                            onclick="selectAllDays()"  name="options[]">
+                                        <span class="checkbox-tick"></span>
+                                        <span class="day-label">Select All</span>
                                     </label>
                                 </li>
                             </ul>
@@ -773,6 +779,7 @@ var nonVegPlan = [
             </div>
             </form>
             </div>
+        </div>
             <script src="assets/js/jquery-3.3.1.min.js"></script>
             <script src="assets/js/popper.min.js"></script>
             <script src="assets/js/bootstrap.min.js"></script>
