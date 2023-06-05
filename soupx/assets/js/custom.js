@@ -167,25 +167,33 @@ function init() {
     $('#customDays').html(customPlanDays);
 }
 
-function openModal({payment_status,subscription_status}) {
+function openModal({ payment_status, subscription_status }) {
     document.getElementById("myModal").style.display = "block";
-    if(subscription_status){
+    if (subscription_status === true && payment_status === true) {
         $("#modal-title").text("Your subscription has been added successfully!");
-        $("#modal-content").text("Our nutritionist will contact you soon");
+        $("#modal-content").text("Our nutritionist will call you within 24hrs to curate a plan for you.");
     }
-    else if(payment_status === false) {
+    else if (subscription_status === true) {
+        $("#modal-title").text("Your subscription has been recorded!");
+        $("#modal-content").text("Our team will call you within 24hrs to curate a plan for you.");
+    }
+    else if (payment_status === false) {
         $("#modal-title").text("Payment Failed");
         $("#modal-content").text("Please try again");
     }
     else {
-        $("#modal-title").text("There seemes to be some problems");
+        $("#modal-title").text("Your payment was successfull with payment_id: " + plan.payment_id);
+        $("#modal-content").text("Relax our team will contact you soon!");
     }
-  }
-  
-  // Close the modal
-  function closeModal() {
+}
+
+// Close the modal
+function closeModal() {
     document.getElementById("myModal").style.display = "none";
-  }
+    setTimeout(function () {
+        location.reload();
+    }, 500);
+}
 
 function buildCustomPlan() {
     let days = parseInt($('#customDays').val());
@@ -344,7 +352,7 @@ $("#mealSelector").click(async (e) => {
 
     plan.discount_price = parseInt(plan.price * (discount[plan.meals.length]));
     plan.discounted_price = plan.price - plan.discount_price;
-    priceDisplay();
+    priceDisplay(); $("")
 });
 
 $(document).ready(priceDisplay());
@@ -379,10 +387,10 @@ $(".messup").click(function () {
     plan.sex = $(this).data("gender");
     $(".messup").each(function () {
         $(this).css("background-color", "white");
-        $(this).css("transform","scale(1)");
+        $(this).css("transform", "scale(1)");
     })
     $(this).css("background-color", "rgb(117 224 87 / 55%)");
-    $(this).css("transform","scale(1.05)");
+    $(this).css("transform", "scale(1.05)");
     $("#s_gender").text(plan.sex);
 })
 
@@ -776,9 +784,9 @@ document.getElementById("next-meal").addEventListener("click", function (e) {
 
 document.getElementById("back-meal").addEventListener("click", function (e) {
     e.preventDefault();
-    $("#progressBar").css("width", "50%");
-    $("#span").text("2 to 4 Steps");
-    $("#h3").text("50% Completed");
+    $("#progressBar").css("width", "25%");
+    $("#span").text("1 to 4 Steps");
+    $("#h3").text("25% Completed");
     setActiveStep(0);
     setActivePanel(0);
 });
@@ -799,12 +807,18 @@ document.getElementById("next-personal").addEventListener("click", function (e) 
 
 document.getElementById("back-personal").addEventListener("click", function (e) {
     e.preventDefault();
+    $("#progressBar").css("width", "50%");
+    $("#span").text("2 to 4 Steps");
+    $("#h3").text("50% Completed");
     setActiveStep(1);
     setActivePanel(1);
 });
 
 document.getElementById("back-sub").addEventListener("click", function (e) {
     e.preventDefault();
+    $("#progressBar").css("width", "75%");
+    $("#span").text("3 to 4 Steps");
+    $("#h3").text("75% Completed");
     setActiveStep(2);
     setActivePanel(2);
 });
@@ -841,7 +855,7 @@ document.getElementById("paylater").addEventListener("click", function (e) {
     })
         .then(response => response.json())
         .then(data => {
-            alert(JSON.stringify(data));
+            openModal(data);
             console.log('Response:', data);
         })
         .catch(error => {
@@ -885,10 +899,10 @@ function razorpayPayment(order_id) {
     console.log("Payment in progress");
     let payment_id, signature;
     var options = {
-        "key": "rzp_test_4wIWvYrxDrtp8s",  //Enter your razorpay key
+        "key": "rzp_live_FIYb4A7mXDzqC1",  //Enter your razorpay key
         "currency": "INR",
-        "name": "Razor Tutorial",
-        "description": "Razor Test Transaction",
+        "name": "SoupX",
+        "description": "SoupX subscription transaction",
         "image": "https://previews.123rf.com/images/subhanbaghirov/subhanbaghirov1605/subhanbaghirov160500087/56875269-vector-light-bulb-icon-with-concept-of-idea-brainstorming-idea-illustration-.jpg",
         "order_id": order_id,
         "handler": function (response) {
@@ -908,6 +922,7 @@ function razorpayPayment(order_id) {
 //Verifying successful payment
 function verification(order_id, payment_id, signature) {
     // console.log(order_id, payment_id, signature);
+    plan.payment_id = payment_id;
     var url = '/api/payment/verify';
     var params = {
         razorpay_order_id: order_id,

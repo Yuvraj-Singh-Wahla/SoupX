@@ -1774,7 +1774,22 @@ wizard 5
   }
 }
 
+@media screen and (max-width: 500px) {
+  .pref-card{
+    margin: 3px !important;
+    padding: 5px !important;
+  }
+
+  .plan-container{
+    margin: 0px 10px !important;
+  }
+  
+}
+
 @media screen and (max-width: 991.98px) {
+  #progressStatus{
+    display: none !important;
+  }
 
   .back-next{
     justify-content: center;
@@ -1937,6 +1952,7 @@ wizard 5
 }
 
 @media screen and (max-width: 767.98px) {
+  
   .wizard-forms {
     -webkit-transform: scale(0.9);
     -ms-transform: scale(0.9);
@@ -1998,6 +2014,11 @@ wizard 5
     color: #fff;
     width: 90px;
   }
+
+  .back-next{
+    justify-content: center;
+  }
+
 }
 
 @media screen and (max-width: 575.98px) {
@@ -2150,6 +2171,9 @@ label {
 }
 
 @media screen and (max-width: 990px) {
+  #progressStatus{
+    display: none !important;
+  }
   .custom-gender {
     width: 100%;
   }

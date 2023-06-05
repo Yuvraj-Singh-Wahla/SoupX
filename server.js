@@ -9,12 +9,12 @@ var cors = require('cors');
 var path = require('path');
 var port = 3504;
 
-var Razorpay = require('razorpay');
+const Razorpay = require('razorpay');
 const { response } = require('express');
 
-let instance = new Razorpay({
-    key_id: "rzp_test_4wIWvYrxDrtp8s",
-    key_secret: "u5BhaEiebMWLRjLxrVnOXV1s",
+var instance = new Razorpay({
+    key_id: "rzp_live_FIYb4A7mXDzqC1",
+    key_secret: "GWpBQZuDJRYed3kYleljZh9q",
 });
 
 // Use body-parser to get POST requests for API use
@@ -287,6 +287,7 @@ app.get('/get_leads', (req, res) => {
 app.post("/api/payment/order", (req, res) => {
     var params = req.body;
     instance.orders.create(params).then((data) => {
+        console.log(data);
         res.send({ "sub": data, "status": "success" });
     }).catch((error) => {
         res.send({ "sub": error, "status": "failed" });
@@ -323,11 +324,11 @@ app.post('/api/payLater', (req, res) => {
     con.query(query, subscriptionData, (error, results) => {
         if (error) {
             console.error('Error inserting data: ', error);
-            res.json({subscription: false})
+            res.json({subscription_status: false})
         }
         else{
             console.log('Data inserted successfully!');
-            res.json({subscription:true});
+            res.json({subscription_status:true});
         }
         console.log(results);
     });
@@ -379,11 +380,25 @@ function addSubscription(data) {
 
 }
 
+app.post('/api/razorpay/test/order_id',(req,res) => {
+    var rzp = {};
+    var options = {
+        amount: req.body.amount,  // amount in the smallest currency unit
+        currency: "INR",
+        receipt: "order_rcptid_11"
+      };
+      instance.orders.create(options, function(err, order) {
+        console.log(order);
+        rzp.order = order.id;
+        res.json({order_id: order.id});
+      });
+})
+
 //VERIFY PAYMENT
 app.post("/api/payment/verify", async (req, res) => {
     var body = req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
     var crypto = require("crypto");
-    var expectedSignature = crypto.createHmac('sha256', 'u5BhaEiebMWLRjLxrVnOXV1s')
+    var expectedSignature = crypto.createHmac('sha256', 'GWpBQZuDJRYed3kYleljZh9q')
         .update(body.toString())
         .digest('hex');
     console.log("sig" + req.body.razorpay_signature);
