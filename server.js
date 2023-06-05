@@ -323,11 +323,11 @@ app.post('/api/payLater', (req, res) => {
     con.query(query, subscriptionData, (error, results) => {
         if (error) {
             console.error('Error inserting data: ', error);
-            res.json({subscription: "Failure"})
+            res.json({subscription: false})
         }
         else{
             console.log('Data inserted successfully!');
-            res.json({subscription:"Success"});
+            res.json({subscription:true});
         }
         console.log(results);
     });
@@ -392,21 +392,21 @@ app.post("/api/payment/verify", async (req, res) => {
 
         addSubscription(req.body).then((result) => {
             res.json({
-                payment_status: "Success",
-                subscription_status: "Success",
+                payment_status: true,
+                subscription_status: true,
             })
 
         }, (result) => {
             res.json({
-                payment_status: "Success",
-                subscription_status: "Faliure",
+                payment_status: true,
+                subscription_status: false,
             })
         })
     }
     else {
         res.json({
-            payment_status: "faliure",
-            subscription_status: "faliure",
+            payment_status: false,
+            subscription_status: false,
         })
     }
 

@@ -102,6 +102,17 @@ var nonVegPlan = [
         </head>
 
         <body>
+            <div id="myModal" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <!-- <span class="close" onclick="closeModal()">&times;</span>-->
+                  <h2 id="modal-title">Your Modal Title</h2>
+                  <p id="modal-content">Your modal content goes here.</p>
+                  <div class="d-flex" style="justify-content: flex-end;">
+                    <button onclick="closeModal()" class="modal-btn"><strong>Close</strong></button>
+                  </div>
+                </div>
+            </div>
             <div class="wrapper wizard d-flex clearfix multisteps-form position-relative">
                 <div style="background-color:#000000;" class="steps order-2 position-relative w-25">
                     <div style="background-color:#000000;" class="multisteps-form__progress">
@@ -116,7 +127,7 @@ var nonVegPlan = [
                                
                                 </div>
                         <!-- <span class="multisteps-form__progress-btn" title="Review"><i style="color:#B0B0B0;" class="far fa-user"></i><span>Review & Pay</span></span> -->
-                        <div class="wizard-v3-progress" style="margin-left: 25px; position: sticky; top:85%;">
+                        <div class="wizard-v3-progress" style="margin-left: 5px; position: sticky; top:85%;">
                             <span id="span">1 to 4 Step</span>
                             <h3 id="h3">25% Completed</h3>
                             <div class="progress">
@@ -365,6 +376,11 @@ var nonVegPlan = [
                                             </tr>
                                         </table>
                                     </div>
+
+                                    <div class="back-next">
+                                            <button id="back-meal">BACK</button>
+                                            <button id="next-meal">NEXT</button>
+                                    </div>
     
     
     
@@ -376,21 +392,16 @@ var nonVegPlan = [
                                             <label class="custom-file-label" for="customFile">jpg or .pdf should  be more than 500KB or 300PI</label>
                                         </div>
                                     </div>-->
-                                    <div class="wizard-form-input mb-60 mt-60">
+                                    <!-- <div class="wizard-form-input mb-60 mt-60"> -->
                                         <!-- <div class="line line2"></div> -->
-                                    </div>
+                                    <!-- </div> -->
                                    
                                 </div>
                                 <!-- ./inner -->
-                                <div class="vector-img-one">
+                                <!-- <div class="vector-img-one">
                                     <img src="assets/img/vb3.png" alt="">
-                                </div>
-                                <div class="form-step-control actions mt-60">
-                                    <ul>
-                                        <li><button id="back-meal">BACK</button></li>
-                                        <li><button id="next-meal">NEXT</button></li>
-                                    </ul>
-                                </div>
+                                </div> -->
+                               
                             </div>
 
                         </div>
@@ -427,20 +438,18 @@ var nonVegPlan = [
                                 <label for="phone">
                                     Ph No.
                                 </label>
-                                <input type="text" class=" input1" id="phone" name="phone" placeholder=""
-                                    onkeypress="return onlyNumberKey(event)" maxlength="10" required
+
+                                <input type="text" pattern="\d{0,10}" maxlength="10" class=" input1" id="phone" name="phone" placeholder=""
                                     onkeyup = "setPhone()" />
                                     
                             </div>
                         </div>
                         <div class="d-flex akash">
                             <label class="bgmi-label">Age (Yrs)</label>
-                                <input class="input1" type="text" id="age" name="age"
-                                    onkeypress="return onlyNumberKey(event)" maxlength="2" required
+                                <input class="input1" type="text" pattern="\d{0,10}" maxlength="10" id="age" name="age"
                                     onkeyup="setBMIData()">
                             <label class="bgmi-label">Weight (kg)</label>
-                                <input class="input1" type="text" step="0.1" name="weight" id="weight"
-                                    onkeypress="return onlyNumberKey(event)" maxlength="3" required
+                                <input class="input1" type="text" pattern="\d{0,10}" maxlength="10" step="0.1" name="weight" id="weight"
                                     onkeyup="setBMIData()">
 
                             <label class="bgmi-label">Height (ft)</label>
@@ -589,11 +598,9 @@ var nonVegPlan = [
                     <div class="vector-img-one">
                         <img src="assets/img/vb2.png" alt="">
                     </div>
-                    <div class="form-step-control actions mt-60">
-                        <ul>
-                            <li><button id="back-personal">BACK</button></li>
-                            <li><button id="next-personal">NEXT</button></li>
-                        </ul>
+                    <div class="back-next">
+                        <button id="back-personal">BACK</button>
+                            <button id="next-personal">NEXT</button>
                     </div>
                 </div>
 
@@ -735,21 +742,18 @@ var nonVegPlan = [
                     <div class="vector-img-one position-relative">
                         <img src="assets/img/vb5.png" alt="">
                     </div>
-                    <div class="form-step-control actions mt-60">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ul class="d-flex justify-content-between align-items-center">
-                                    <li><button class="btn btn-primary" id="back-sub">BACK</button></li>
-                                    <li><button class="btn btn-primary" id="subnpay">SUBMIT & PAY</button>
-                                    </li>
-                                    <li><button class="btn btn-primary hidden" id="paylater">Pay
-                                            Later</button></li>
-                                </ul>
+                    <div class="back-next">
+                        
+                               
+                                   <button class="" id="back-sub">BACK</button>
+                                    <button class="" id="subnpay">SUBMIT & PAY</button>
+                                    
+                                   <button class="hidden" id="paylater">Pay
+                                            Later</button>
+                                            
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 mx-4 m-2 p-2 ">
-                                <a href="#" style="float:right" class="link-primary" id="link-pay-later">Can't pay
+                            <div class="back-next">
+                                <a href="#" class="link-primary" id="link-pay-later">Can't pay
                                     now?</a>
                             </div>
                         </div>

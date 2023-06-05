@@ -1480,6 +1480,10 @@ wizard 4
   align-items: center;
 }
 
+.input4 li{
+  width: 200px;
+}
+
 .job {
   margin-left: 27rem;
   padding-top: 119px;
@@ -1771,6 +1775,11 @@ wizard 5
 }
 
 @media screen and (max-width: 991.98px) {
+
+  .back-next{
+    justify-content: center;
+  }
+
   .pb-200 {
     padding-bottom: 80px;
   }
@@ -1923,16 +1932,8 @@ wizard 5
   .wizard-day-option li {
     width: 100%;
   }
+  
 
-  .actions {
-    right: inherit;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    position: absolute;
-    bottom: 30px;
-  }
 }
 
 @media screen and (max-width: 767.98px) {
@@ -2223,10 +2224,9 @@ label {
 }
 
 .price-display-container {
+  display: block;
   max-width: 450px;
-  float: left;
   background-color: whitesmoke;
-  /* position: sticky; */
   bottom: 0;
   margin: 30px 0;
   padding: 30px 0;
@@ -2383,4 +2383,83 @@ label {
   .input1{
     display: block;
   }
+}
+
+.back-next button{
+  background-color: #000;
+  color: white;
+  border: 2px solid white;
+  margin: 5px;
+  padding: 10px 34px;
+  border-radius: 10px;
+
+}
+
+.back-next button:hover{
+  transform: scale(0.95);
+}
+
+.back-next{
+  margin: 40px 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+input:invalid {
+  border: red solid 2px;
+}
+
+.modal {
+  display: none; /* Hide the modal by default */
+  position: fixed; /* Position it on top of the content */
+  z-index: 1; /* Ensure it appears above other elements */
+  left: 0;
+  top: 0;
+  width: 100%; /* Cover the entire screen */
+  height: 100%;
+  overflow: auto; /* Enable scrolling within the modal */
+  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+  
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* Center the modal vertically and horizontally */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 700px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modal-title{
+  padding: 20px;
+}
+
+#modal-content{
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.modal-btn{
+  padding: 8px 25px;
+  margin: 20px;
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+  border-radius: 8px;
 }

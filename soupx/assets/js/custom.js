@@ -167,6 +167,26 @@ function init() {
     $('#customDays').html(customPlanDays);
 }
 
+function openModal({payment_status,subscription_status}) {
+    document.getElementById("myModal").style.display = "block";
+    if(subscription_status){
+        $("#modal-title").text("Your subscription has been added successfully!");
+        $("#modal-content").text("Our nutritionist will contact you soon");
+    }
+    else if(payment_status === false) {
+        $("#modal-title").text("Payment Failed");
+        $("#modal-content").text("Please try again");
+    }
+    else {
+        $("#modal-title").text("There seemes to be some problems");
+    }
+  }
+  
+  // Close the modal
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+  }
+
 function buildCustomPlan() {
     let days = parseInt($('#customDays').val());
     let cost = (days <= 6) ? 239 : (days > 6 && days <= 13) ? 209 : (days > 13 && days <= 21) ? 189 : (days > 21 && days <= 28) ? 169 : 0;
@@ -208,7 +228,7 @@ $(".goal-card").click(function () {
     $("#s_goal").prop("innerHTML", plan.goal);
     $(".goal-card").css('background-color', 'white');
     $(this).css('background-color', 'rgba(117, 224, 87, 0.55)');
-    $("#progressBar").css("width","50%");
+    $("#progressBar").css("width", "50%");
     $("#span").text("2 to 4 Steps");
     $("#h3").text("50% Completed");
     setActiveStep(1);
@@ -359,8 +379,10 @@ $(".messup").click(function () {
     plan.sex = $(this).data("gender");
     $(".messup").each(function () {
         $(this).css("background-color", "white");
+        $(this).css("transform","scale(1)");
     })
     $(this).css("background-color", "rgb(117 224 87 / 55%)");
+    $(this).css("transform","scale(1.05)");
     $("#s_gender").text(plan.sex);
 })
 
@@ -740,10 +762,10 @@ function payment(id) {
 
 document.getElementById("next-meal").addEventListener("click", function (e) {
     e.preventDefault();
-    $("#progressBar").css("width","75%");
-    $("#span").text("3 to 4 Steps");
-    $("#h3").text("75% Completed");
     if (plan.meals.length !== 0) {
+        $("#progressBar").css("width", "75%");
+        $("#span").text("3 to 4 Steps");
+        $("#h3").text("75% Completed");
         setActiveStep(2);
         setActivePanel(2);
     }
@@ -754,7 +776,7 @@ document.getElementById("next-meal").addEventListener("click", function (e) {
 
 document.getElementById("back-meal").addEventListener("click", function (e) {
     e.preventDefault();
-    $("#progressBar").css("width","50%");
+    $("#progressBar").css("width", "50%");
     $("#span").text("2 to 4 Steps");
     $("#h3").text("50% Completed");
     setActiveStep(0);
@@ -763,10 +785,10 @@ document.getElementById("back-meal").addEventListener("click", function (e) {
 
 document.getElementById("next-personal").addEventListener("click", function (e) {
     e.preventDefault();
-    $("#progressBar").css("width","100%");
-    $("#span").text("4 to 4 Steps");
-    $("#h3").text("100% Completed");
     if (plan.days.length !== 0 && plan.name != null && plan.phone != null && plan.address != null && plan.pincode != null && plan.city != null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
+        $("#progressBar").css("width", "100%");
+        $("#span").text("4 to 4 Steps");
+        $("#h3").text("100% Completed");
         setActiveStep(3);
         setActivePanel(3);
     }
@@ -836,11 +858,12 @@ document.getElementById("subnpay").addEventListener("click", function (e) {
     const payment_amount = plan.total;
     var url = '/api/payment/order';
     var params = {
-        amount: payment_amount * 100,
+        amount: parseInt(plan.total * 100),
         currency: "INR",
         receipt: "su001",
         payment_capture: '1'
     };
+    console.log(params);
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function (res) {
@@ -911,7 +934,7 @@ function verification(order_id, payment_id, signature) {
     xmlHttp.onreadystatechange = function (res) {
         if (xmlHttp.readyState === 4) {
             console.log(xmlHttp.responseText);
-            alert(xmlHttp.responseText);
+            openModal(JSON.parse(xmlHttp.responseText));
         }
     }
     xmlHttp.open("POST", url, true); // false for synchronous request
