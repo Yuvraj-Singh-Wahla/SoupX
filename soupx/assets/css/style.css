@@ -2302,9 +2302,26 @@ label {
 
 .goal-row {
   width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
+.goal-card{
+  width: calc(100%/3.5);
+}
 
+@media screen and (min-width:991.98px) and (max-width:1033px) {
+  .goal-card{
+    width: calc(100%/3.6);
+  }
+}
+
+@media screen and (max-width:769px) {
+  .goal-card{
+    width: 40%;
+    margin: 16px 5px !important;
+  }
+}
 
 @media screen and (min-width:991.98px) and (max-width:1308px) {
   .goal-card {
@@ -2406,6 +2423,19 @@ label {
 @media screen and (max-width:576px){
   .input1{
     display: block;
+  }
+
+  .plan-row{
+    display: block;
+  }
+
+  .plan-card{
+    width: 100%;
+    margin-left: 0px;
+  }
+
+  .custom-card{
+    padding: 30px 20px;
   }
 }
 

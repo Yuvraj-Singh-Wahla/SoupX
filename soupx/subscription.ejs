@@ -167,8 +167,6 @@ var nonVegPlan = [
                                                 Muscle Gain
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="d-flex goal-row">
                                         <div class="goal-card custom-card" data-goal="Detox">
                                             <img src="icons/detox.png" alt="">
                                             <div>
@@ -426,6 +424,75 @@ var nonVegPlan = [
                             </div>
                             <div class="custom-card messup" data-gender="Female">
                                 <img src="icons/woman.png" alt="">
+                            </div>
+                        </div>
+                        <div class="alt-container">
+                            <div class="alt hidden">
+                                <label for="name">
+                                    Name
+                                </label>
+                                <input type="text" id="name" placeholder="" class="form-control input-border" onChange="setName()">
+                            </div>
+                            <div class="alt hidden">
+                                <label for="phone">
+                                    Ph No.
+                                </label>
+    
+                                <input type="text" pattern="\d{0,10}" maxlength="10" class="form-control input-border" id="phone" name="phone" placeholder=""
+                                    onkeyup = "setPhone()" />
+                            </div>
+                            <div class="alt hidden">
+                                <label class="">Age (Yrs)</label>
+                                    <input class="form-control input-border" type="text" pattern="\d{0,10}" maxlength="10" id="age" name="age"
+                                        onkeyup="setBMIData()">
+                            </div>
+                            <div class="alt hidden">
+                                <label class="">Weight (kg)</label>
+                                <input class="form-control input-border" type="text" pattern="\d{0,10}" maxlength="10" step="0.1" name="weight" id="weight"
+                                    onkeyup="setBMIData()">
+                            </div>
+                            <div class="alt hidden">
+                                <label class="">Height (ft)</label>
+                                <!-- <div class="input1 " style=""> -->
+                                    <select class="form-control input-border" style="text-align: center; background-color: white;" id="height"
+                                        onchange="setBMIData()">
+                                        <option value=""></option>
+                                        <option value="4 ft 0 inch">4'0"</option>
+                                        <option value="4 ft 1 inch">4'1"</option>
+                                        <option value="4 ft 2 inch">4'2"</option>
+                                        <option value="4 ft 3 inch">4'3"</option>
+                                        <option value="4 ft 4 inch">4'4"</option>
+                                        <option value="4 ft 6 inch">4'6"</option>
+                                        <option value="4 ft 7 inch">4'7"</option>
+                                        <option value="4 ft 8 inch">4'8"</option>
+                                        <option value="4 ft 9 inch">4'9"</option>
+                                        <option value="4 ft 10 inch">4'10"</option>
+                                        <option value="4 ft 11 inch">4'11"</option>
+                                        <option value="5 ft 0 inch">5'0"</option>
+                                        <option value="5 ft 1 inch">5'1"</option>
+                                        <option value="5 ft 2 inch">5'2"</option>
+                                        <option value="5 ft 3 inch">5'3"</option>
+                                        <option value="5 ft 4 inch">5'4"</option>
+                                        <option value="5 ft 5 inch">5'5"</option>
+                                        <option value="5 ft 6 inch">5'6"</option>
+                                        <option value="5 ft 7 inch">5'7"</option>
+                                        <option value="5 ft 8 inch">5'8"</option>
+                                        <option value="5 ft 9 inch">5'9"</option>
+                                        <option value="5 ft 10 inch">5'10"</option>
+                                        <option value="5 ft 11 inch">5'11"</option>
+                                        <option value="6 ft 0 inch">6'0"</option>
+                                        <option value="6 ft 1 inch">6'1"</option>
+                                        <option value="6 ft 2 inch">6'2"</option>
+                                        <option value="6 ft 3 inch">6'3"</option>
+                                        <option value="6 ft 4 inch">6'4"</option>
+                                        <option value="6 ft 5 inch">6'5"</option>
+                                        <option value="6 ft 6 inch">6'6"</option>
+                                        <option value="6 ft 7 inch">6'7"</option>
+                                        <option value="6 ft 8 inch">6'8"</option>
+                                        <option value="6 ft 9 inch">6'9"</option>
+                                        <option value="6 ft 10 inch">6'10"</option>
+                                        <option value="6 ft 11 inch">6'11"</option>
+                                    </select>
                             </div>
                         </div>
                         <div>

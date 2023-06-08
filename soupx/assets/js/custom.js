@@ -770,6 +770,12 @@ function payment(id) {
 
 document.getElementById("next-meal").addEventListener("click", function (e) {
     e.preventDefault();
+    // Scroll the page to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optionally, add smooth scrolling behavior
+    });
+
     if (plan.meals.length !== 0) {
         $("#progressBar").css("width", "75%");
         $("#span").text("3 to 4 Steps");
@@ -784,6 +790,12 @@ document.getElementById("next-meal").addEventListener("click", function (e) {
 
 document.getElementById("back-meal").addEventListener("click", function (e) {
     e.preventDefault();
+    // Scroll the page to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optionally, add smooth scrolling behavior
+    });
+
     $("#progressBar").css("width", "25%");
     $("#span").text("1 to 4 Steps");
     $("#h3").text("25% Completed");
@@ -793,6 +805,12 @@ document.getElementById("back-meal").addEventListener("click", function (e) {
 
 document.getElementById("next-personal").addEventListener("click", function (e) {
     e.preventDefault();
+    // Scroll the page to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optionally, add smooth scrolling behavior
+    });
+
     if (plan.days.length !== 0 && plan.name != null && plan.phone != null && plan.address != null && plan.pincode != null && plan.city != null && plan.age != null && plan.sex != null && plan.weight != null && plan.height != null && days.length != 0 && plan.weight != '' && plan.height != '' && plan.age != '') {
         $("#progressBar").css("width", "100%");
         $("#span").text("4 to 4 Steps");
@@ -807,6 +825,12 @@ document.getElementById("next-personal").addEventListener("click", function (e) 
 
 document.getElementById("back-personal").addEventListener("click", function (e) {
     e.preventDefault();
+    // Scroll the page to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optionally, add smooth scrolling behavior
+    });
+
     $("#progressBar").css("width", "50%");
     $("#span").text("2 to 4 Steps");
     $("#h3").text("50% Completed");
@@ -816,6 +840,12 @@ document.getElementById("back-personal").addEventListener("click", function (e) 
 
 document.getElementById("back-sub").addEventListener("click", function (e) {
     e.preventDefault();
+    // Scroll the page to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Optionally, add smooth scrolling behavior
+    });
+
     $("#progressBar").css("width", "75%");
     $("#span").text("3 to 4 Steps");
     $("#h3").text("75% Completed");
@@ -846,7 +876,7 @@ document.getElementById("paylater").addEventListener("click", function (e) {
         amt: plan.total,
         payLater: 'true'
     }
-    fetch('http://localhost:3504/api/payLater', {
+    fetch('api/payLater', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -960,7 +990,7 @@ function verification(order_id, payment_id, signature) {
 function createLead() {
     const leadData = { name: plan.name, phone: plan.phone };
 
-    fetch('http://localhost:3504/api/subLeads', {
+    fetch('/api/subLeads', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -1011,6 +1041,36 @@ $(window).on("load", function () {
     $("#vegClick").click();
 
 });
+
+// Define a media query
+const mediaQuery = window.matchMedia('(max-width: 600px)');
+
+// Define a function to be called when the media query matches
+const handleMediaQueryChange = (mediaQuery) => {
+    if (mediaQuery.matches) {
+        $(".akash").addClass("hidden");
+        $(".spoon").addClass("hidden");
+        $(".alt").removeClass("hidden");
+
+        // $(".alt").children("input").each(function () {
+        //     $(this).val("hweoijweoifjwe");
+        // })
+
+        console.log('Media query matched!');
+    } else {
+        $(".akash").removeClass("hidden");
+        $(".spoon").removeClass("hidden");
+        $(".alt").addClass("hidden");
+        console.log('Media query not matched!');
+    }
+};
+
+// Add an event listener to the media query
+mediaQuery.addEventListener("change", handleMediaQueryChange);
+
+// Call the function initially to check the current state of the media query
+handleMediaQueryChange(mediaQuery);
+
 
 
 init();

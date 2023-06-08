@@ -7,7 +7,7 @@ const axios = require('axios');
 
 var cors = require('cors');
 var path = require('path');
-var port = 3505;
+var port = 3504;
 
 const Razorpay = require('razorpay');
 const { response } = require('express');
