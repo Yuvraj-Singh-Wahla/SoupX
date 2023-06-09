@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modernize Free</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/soupxlogo-transparent.png" />
+  <link rel="stylesheet" href="/soupx/admin/assets/css/styles.min.css" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <div
+      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center w-100">
+        <div class="row justify-content-center w-100">
+          <div class="col-md-8 col-lg-6 col-xxl-3">
+            <div class="card mb-0">
+              <div class="card-body">
+                <a href="https://soupx.in/" class="text-nowrap logo-img text-center d-block py-3 w-100">
+                  <img src="/soupx/admin/assets/images/logos/soupxlogo-transparent.png" width="180" alt="">
+                </a>
+
+                <form action="leads" id="loginForm">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Username *</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="emailHelp" required>
+                  </div>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label">Password *</label>
+                    <input type="password" class="form-control" id="password" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In </button>
+                  <!-- <a href="leads" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign In</a> -->
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const form = document.getElementById('loginForm');
+  
+    // Add event listener for form submission
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting
+  
+      // Get the input values
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+  
+      // Perform validation
+      if (validateUsername(username) && validatePassword(password)) {
+        // Valid credentials, proceed with login
+        // You can perform additional actions here, such as making an AJAX request to a server for authentication
+        form.submit();
+        form.reset(); // Clear the form fields
+      } else {
+        // Invalid credentials, show an error message
+        alert('Invalid username or password.');
+      }
+    });
+  
+    // Function to validate the username
+    function validateUsername(username) {
+      // Perform any specific validation rules for the username
+      // Return true if the username is valid, false otherwise
+      return username == "admin"; // Example: Username must be at least 3 characters long
+    }
+  
+    // Function to validate the password
+    function validatePassword(password) {
+      // Perform any specific validation rules for the password
+      // Return true if the password is valid, false otherwise
+      return password == "admin@SoupX"; // Example: Password must be at least 6 characters long
+    }
+  </script>
+  
+
+</body>
+
+</html>

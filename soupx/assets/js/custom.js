@@ -416,13 +416,34 @@ function setBMIData() {
     console.log(plan);
 }
 
+function setBMIData1() {
+    let w = $('#weight1').val();
+    let a = $('#age1').val();
+    if (w < 0) w = w * -1;
+    if (a < 0) a = a * -1;
+    plan.height = $('#height1').val();
+    plan.weight = w;
+    $('#weigh1').val(w);
+    plan.age = a;
+    $('#age1').val(a);
+    console.log(plan);
+}
+
 function setName() {
     plan.name = $('#name').val();
+    $("#s_name").text(plan.name);
+}
+function setName1() {
+    plan.name = $('#name1').val();
     $("#s_name").text(plan.name);
 }
 
 function setPhone() {
     plan.phone = $('#phone').val();
+    $("#s_phone").text(plan.phone);
+}
+function setPhone1() {
+    plan.phone = $('#phone1').val();
     $("#s_phone").text(plan.phone);
 }
 

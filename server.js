@@ -120,6 +120,24 @@ app.use("/assets", express.static(__dirname + '/soupx/assets'));
 app.use("/video", express.static(__dirname + '/soupx/video'));
 app.use("/sitemap.xml", express.static(__dirname + '/sitemap.xml'));
 
+app.get('/admin', function (req, res) {
+     
+    res.render(path.join(__dirname+'/soupx/admin/html/login.ejs'))
+
+});
+//REDIRECT TO ADMIN EXPLORE LEADS
+app.get('/admin/leads', function (req, res) {
+     
+    res.render(path.join(__dirname+'/soupx/admin/html/index.ejs'))
+
+});
+//REDIRECT TO ADMIN SUBSCRIPTION CUSTOMER DATA
+app.get('/admin/subscription', function (req, res) {
+     
+    res.render(path.join(__dirname+'/soupx/admin/html/subscription.ejs'))
+
+});
+
 //SUBSCRIPTION LEAD API
 app.post('/api/subLeads', async function (req, res) {
     const lead = {
