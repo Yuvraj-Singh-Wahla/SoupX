@@ -2464,6 +2464,19 @@ input:invalid {
   border: red solid 2px;
 }
 
+@media screen and (max-width:463px){
+  
+}
+
+
+#mobile div {
+  width: 100%;
+}
+
+#mobile button{
+  width: 100%;
+}
+
 .modal {
   display: none; /* Hide the modal by default */
   position: fixed; /* Position it on top of the content */

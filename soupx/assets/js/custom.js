@@ -859,7 +859,7 @@ document.getElementById("back-personal").addEventListener("click", function (e) 
     setActivePanel(1);
 });
 
-document.getElementById("back-sub").addEventListener("click", function (e) {
+function backSub(e) {
     e.preventDefault();
     // Scroll the page to the top
     window.scrollTo({
@@ -872,9 +872,12 @@ document.getElementById("back-sub").addEventListener("click", function (e) {
     $("#h3").text("75% Completed");
     setActiveStep(2);
     setActivePanel(2);
-});
+}
 
-document.getElementById("paylater").addEventListener("click", function (e) {
+document.getElementById("back-sub").addEventListener("click", backSub);
+document.getElementById("back-subM").addEventListener("click", backSub);
+
+function laterPay(e) {
     e.preventDefault();
     subData = {
         razorpay_order_id: null,
@@ -913,10 +916,13 @@ document.getElementById("paylater").addEventListener("click", function (e) {
             console.error('Error:', error);
         });
 
-})
+}
+
+document.getElementById("paylater").addEventListener("click",laterPay )
+document.getElementById("paylaterM").addEventListener("click",laterPay )
 
 //Event handler for submit & pay
-document.getElementById("subnpay").addEventListener("click", function (e) {
+function subnpay(e) {
     window.removeEventListener('beforeunload', unloadHandler);
 
     e.preventDefault();
@@ -943,7 +949,10 @@ document.getElementById("subnpay").addEventListener("click", function (e) {
     xmlHttp.setRequestHeader("Content-type", "application/json");
     xmlHttp.send(JSON.stringify(params));
 
-});
+}
+
+document.getElementById("subnpay").addEventListener("click", subnpay);
+document.getElementById("subnpayM").addEventListener("click", subnpay);
 
 //Takes the order id and initiates the payment
 function razorpayPayment(order_id) {
@@ -1050,6 +1059,8 @@ document.getElementById("link-pay-later").addEventListener('click', (e) => {
     e.preventDefault();
     const payLater = document.getElementById("paylater");
     payLater.classList.remove("hidden");
+    const payLaterM = document.getElementById("paylaterM");
+    payLaterM.classList.remove("hidden");
 })
 
 $(window).on("load", function () {
@@ -1091,6 +1102,22 @@ mediaQuery.addEventListener("change", handleMediaQueryChange);
 
 // Call the function initially to check the current state of the media query
 handleMediaQueryChange(mediaQuery);
+
+const mQ = window.matchMedia('(max-width: 470px')
+
+const mHandler = (mediaQuery) => {
+    if(mediaQuery.matches){
+        $("#mobile").css('display','block');
+        $("#pc").addClass("hidden");
+    }
+    else{
+        $("#mobile").css('display','none');
+        $("#pc").removeClass("hidden");
+    }
+};
+
+mQ.addEventListener("change",mHandler);
+mHandler(mQ);
 
 
 
