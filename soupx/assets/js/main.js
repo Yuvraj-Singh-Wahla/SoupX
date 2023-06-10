@@ -202,6 +202,8 @@ const setActivePanel = activePanelNum => {
 
     //show active panel
     DOMstrings.stepFormPanels.forEach((elem, index) => {
+        console.log("this is what you came for");
+        console.log(elem);
         if (index === activePanelNum) {
 
             elem.classList.add('js-active');
@@ -216,10 +218,6 @@ const setActivePanel = activePanelNum => {
 
         }
     });
-    if (activePanelNum==3){
-        // loadPreview();
-        loadReview();
-    }
 };
 
 
