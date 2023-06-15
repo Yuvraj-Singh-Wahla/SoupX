@@ -22,25 +22,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+const {getSubscriptionCustomers} = require('./soupx/assets/subCustomers');
+const {getLeads} = require('./soupx/assets/getLeads');
 
 var mysql = require('mysql');
 const { use } = require('express/lib/application');
 
-var con = mysql.createConnection({
-    host: "soupx-db.ct4awx1ga5he.eu-north-1.rds.amazonaws.com",
-    port: 3306,
-    user: "admin",
-    password: "SoupXadmin",
-    database: "SoupX_db",
-});
-
-con.connect((error) => {
-    if (error) {
-        console.log("Error connecting to the database:", error);
-        return;
-    }
-    console.log("Database Connected");
-})
+const {con} = require('./soupx/conn');
 
 const subscriptionsTable = `
 CREATE TABLE IF NOT EXISTS subscriptions (
@@ -162,6 +150,8 @@ app.post('/api/subLeads', async function (req, res) {
     });
 });
 
+app.get('/api/subscription/customers', getSubscriptionCustomers);
+app.get('/api/explore/leads', getLeads)
 
 //CREATE EXPLORE LEAD API
 app.post('/leads', async (req, res) => {
