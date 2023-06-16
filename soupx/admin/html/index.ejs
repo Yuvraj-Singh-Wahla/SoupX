@@ -1,10 +1,10 @@
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SoupX</title>
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/soupxlogo-transparent.png" />
   <link rel="stylesheet" href="/soupx/admin/assets/css/styles.min.css" />
+  <link rel="stylesheet" href="/soupx/admin/assets/css/subscription.css">
 </head>
 
 <body>
@@ -38,7 +38,7 @@
                 <span class="hide-menu">Explore Leads</span>
               </a>
             </li>
-           
+
             <li class="sidebar-item">
               <a class="sidebar-link" href="subscription" aria-expanded="false">
                 <span>
@@ -55,7 +55,7 @@
                 <span class="hide-menu">LogOut</span>
               </a>
             </li>
-           </nav>
+        </nav>
         <!-- End Sidebar navigation -->
       </div>
       <!-- End Sidebar scroll-->
@@ -63,16 +63,19 @@
     <!--  Sidebar End -->
     <!--  Main wrapper -->
     <div class="body-wrapper">
- 
+
       <div class="container-fluid">
-        
+
         <div class="row">
           <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card w-100">
               <div class="card-body p-4">
                 <h5 class="card-title fw-semibold mb-4">Explore Leads</h5>
                 <div class="table-responsive">
-                  <table class="table text-nowrap mb-0 align-middle">
+                  <div class="d-flex" style="justify-content: center;">
+                    <div class="loader"></div>
+                  </div>
+                  <table class="table text-nowrap mb-0 align-middle hidden">
                     <thead class="text-dark fs-4">
                       <tr>
                         <th class="border-bottom-0">
@@ -84,11 +87,11 @@
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Verification</h6>
                         </th>
-                        
+
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <!-- <tr>
                         <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
                         <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1">8445089222</h6>
@@ -96,7 +99,7 @@
                         <td class="border-bottom-0">
                           <p class="mb-0 fw-normal">Yes</p>
                         </td>
-                      </tr> 
+                      </tr>  -->
                     </tbody>
                   </table>
                 </div>
@@ -104,19 +107,19 @@
             </div>
           </div>
         </div>
-        
+
         <div class="py-6 px-6 text-center">
           <!-- <p class="mb-0 fs-4">Design and Developed by Sajal Gupta</p> -->
         </div>
       </div>
     </div>
   </div>
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/sidebarmenu.js"></script>
-  <script src="../assets/js/app.min.js"></script>
-  <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-  <script src="../assets/js/dashboard.js"></script>
+  <script src="/soupx/admin/assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="/soupx/admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/soupx/admin/assets/js/sidebarmenu.js"></script>
+  <script src="/soupx//admin/assets/js/exploreLeads.js"></script>
+  <script src="/soupx/admin/assets/js/app.min.js"></script>
+  <script src="/soupx/admin/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="/soupx/admin/assets/libs/simplebar/dist/simplebar.js"></script>
+  <script src="/soupx/admin/assets/js/dashboard.js"></script>
 </body>
-

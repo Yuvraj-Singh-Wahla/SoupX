@@ -1,0 +1,41 @@
+async function getSubscription() {
+    try {
+        const response = await fetch("http://localhost:3504/api/subscription/customers");
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.error("Error fetching subscription:", err);
+        throw err;
+    }
+}
+
+async function createTable() {
+    const data = await getSubscription();
+    console.log(data);
+
+    for (let i = 0; i < data.length; i++) {
+        // Create the <tr> element
+        var tableRow = $('<tr>');
+
+        // Create the <td> elements and their contents
+        var idCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0').attr('id', 'id').text(`${i}`));
+        var nameCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-1').attr('id', 'name').text(`${data[i].name}`));
+        var phoneCell = $('<td>').addClass('border-bottom-0').append($('<p>').addClass('mb-0 fw-normal').attr('id', 'phone').text(`${data[i].phone}`));
+        var badgeCell = $('<td>').addClass('border-bottom-0').append($('<div>').addClass('d-flex align-items-center gap-2').append($('<span>').addClass('badge bg-primary rounded-3 fw-semibold').attr('id', 'sex').text(`${data[i].sex}`)));
+        var ageCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id', 'age').text(`${data[i].age}`));
+        var amountCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id', 'amount').text(`${data[i].amt}`));
+        var paymentIdCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id', 'payment_id').text(`${data[i].razorpay_payment_id}`));
+        var payLaterCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id', 'payLater').text(`${data[i].payLater}`));
+
+        // Append the <td> elements to the <tr> element
+        tableRow.append(idCell, nameCell, phoneCell, badgeCell, ageCell,amountCell, paymentIdCell,payLaterCell);
+
+        // Append the <tr> element to the <tbody> element
+        $('.loader').css('display', 'none');
+        $('table').removeClass('hidden');
+        $('tbody').append(tableRow);
+
+    }
+}
+
+createTable();
