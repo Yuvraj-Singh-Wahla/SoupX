@@ -1,7 +1,7 @@
 const { con } = require("../conn");
 
 async function getSubscriptionCustomers(req, res) {
-  const query = "SELECT name, phone, sex, age, goal, amt, razorpay_payment_id, payLater FROM subscriptions";
+  const query = "SELECT * FROM subscriptions";
   
   try {
     const data = await new Promise((resolve, reject) => {

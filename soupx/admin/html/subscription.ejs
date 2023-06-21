@@ -41,7 +41,7 @@
                 <span class="hide-menu">Explore Leads</span>
               </a>
             </li>
-           
+
             <li class="sidebar-item">
               <a class="sidebar-link" href="subscription" aria-expanded="false">
                 <span>
@@ -58,7 +58,7 @@
                 <span class="hide-menu">LogOut</span>
               </a>
             </li>
-           </nav>
+        </nav>
         <!-- End Sidebar navigation -->
       </div>
       <!-- End Sidebar scroll-->
@@ -68,7 +68,7 @@
     <div class="body-wrapper">
 
       <div class="container-fluid">
-        
+
         <div class="row">
           <div class="col-lg-8 d-flex align-items-stretch">
             <div class="card w-100">
@@ -78,7 +78,7 @@
                   <div class="d-flex" style="justify-content: center;">
                     <div class="loader"></div>
                   </div>
-                  <table class="table text-nowrap mb-0 align-middle hidden">
+                  <table id="sub-table" class="table text-nowrap mb-0 align-middle hidden">
                     <thead class="text-dark fs-4">
                       <tr>
                         <th class="border-bottom-0">
@@ -93,28 +93,31 @@
                         <th class="border-bottom-0">
                           <h6 class="fw-semibold mb-0">Sex</h6>
                         </th>
+                        <!-- <th class="border-bottom-0"> -->
+                        <!-- <h6 class="fw-semibold mb-0">Age</h6> -->
                         <th class="border-bottom-0">
-                          <h6 class="fw-semibold mb-0">Age</h6>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Amount</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Payment ID</h6>
-                          </th>
-                          <th class="border-bottom-0">
-                            <h6 class="fw-semibold mb-0">Pay Later</h6>
-                          </th>
-                   
-                        
+                          <h6 class="fw-semibold mb-0">Amount</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Payment ID</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Pay Later</h6>
+                        </th>
+                        <th class="border-bottom-0">
+                          <h6 class="fw-semibold mb-0">Read More</h6>
+                        </th>
+
+
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="sub-body">
                       <!-- <tr> -->
-                        <!-- <td class="border-bottom-0"><h6 id="id" class="fw-semibold mb-0">1</h6></td>
+                      <!-- <td class="border-bottom-0"><h6 id="id" class="fw-semibold mb-0">1</h6></td>
                         <td class="border-bottom-0">
                             <h6 class="fw-semibold mb-1" id="name">Sunil Joshi</h6> -->
-                            <!-- <span class="fw-normal">Web Designer</span>                           -->
-                        <!-- </td>
+                      <!-- <span class="fw-normal">Web Designer</span>                           -->
+                      <!-- </td>
                         <td class="border-bottom-0">
                           <p class="mb-0 fw-normal" id="phone">Elite Admin</p>
                         </td>
@@ -129,12 +132,78 @@
                       </tr>  -->
                     </tbody>
                   </table>
+                  <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                      <!-- <span class="close" onclick="closeModal()">&times;</span>-->
+                      <h2 id="modal-title">Your Modal Title</h2>
+                      <div class="modal-body">
+                        <table class="table">
+                          <tr>
+                            <th>Name:</th>
+                            <td><span id="s_name"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Phone:</th>
+                            <td><span id="s_phone"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Address</th>
+                            <td><span id="s_address"></span></td>
+                          </tr>
+                          <tr>
+                            <th>City:</th>
+                            <td><span id="s_city"></span></td>
+                          </tr>
+                          <tr>
+                            <th>PIN Code:</th>
+                            <td><span id="s_pincode"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Goal:</th>
+                            <td><span id="s_goal"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Gender</th>
+                            <td><span id="s_gender"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Preferences:</th>
+                            <td><span id="s_prefs"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Selected Plan:</th>
+                            <td><span id="s_plan_name"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Plan Price:</th>
+                            <td><span id="s_plan_price"></span></td>
+                          </tr>
+                          <tr>
+                            <th>Addons:</th>
+                            <td><span id="s_plan_addons">None</span></td>
+                          </tr>
+                          <tr>
+                            <th>Selected Meals:</th>
+                            <td><span id="s_meals">Soup-Lunch</span></td>
+                          </tr>
+                          <tr>
+                            <th>Selected Days:</th>
+                            <td><span id="s_days"></span></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div class="d-flex" style="justify-content: flex-end;">
+                        <button onclick="closeModal()" class="modal-btn"><strong>Close</strong></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
+
         <div class="py-6 px-6 text-center">
           <!-- <p class="mb-0 fs-4">Design and Developed by Sajal Gupta</p> -->
         </div>
