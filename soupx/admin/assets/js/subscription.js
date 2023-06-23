@@ -1,7 +1,10 @@
+var list;
+
 async function getSubscription() {
     try {
         const response = await fetch("http://localhost:3504/api/subscription/customers");
         const data = await response.json();
+        list = data;
         return data;
     } catch (err) {
         console.error("Error fetching subscription:", err);
@@ -9,9 +12,9 @@ async function getSubscription() {
     }
 }
 
-async function handleReadMore(e){
+async function handleReadMore(e) {
     $("#myModal").css("display", "block");
-    const response = await getSubscription();
+    const response = list;
     const i = $(e.target).data("i");
     const data = response[i];
     $("#modal-title").text(data.name)
@@ -48,10 +51,10 @@ async function createTable() {
         var amountCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id', 'amount').text(`${data[i].amt}`));
         var paymentIdCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id', 'payment_id').text(`${data[i].razorpay_payment_id}`));
         var payLaterCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id', 'payLater').text(`${data[i].payLater}`));
-        var readMoreCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4 read-more').attr('id', 'payLater').text(`Read More`).attr('data-i',i).attr('onclick','handleReadMore(event)'));
+        var readMoreCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4 read-more').attr('id', 'payLater').text(`Read More`).attr('data-i', i).attr('onclick', 'handleReadMore(event)'));
         // var readMoreCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0 fs-4').attr('id','readMore').attr("data-i"),i).text("Read More");
         // Append the <td> elements to the <tr> element
-        tableRow.append(idCell, nameCell, phoneCell, badgeCell,amountCell, paymentIdCell,payLaterCell,readMoreCell);
+        tableRow.append(idCell, nameCell, phoneCell, badgeCell, amountCell, paymentIdCell, payLaterCell, readMoreCell);
 
         // Append the <tr> element to the <tbody> element
         $('.loader').css('display', 'none');
@@ -62,3 +65,9 @@ async function createTable() {
 }
 
 createTable();
+
+$(document).keyup(function (event) {
+    if (event.keyCode === 27) {
+        closeModal();
+    }
+});
