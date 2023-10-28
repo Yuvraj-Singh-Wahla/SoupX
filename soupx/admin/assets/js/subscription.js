@@ -2,7 +2,7 @@ var list;
 
 async function getSubscription() {
     try {
-        const response = await fetch("http://localhost:3504/api/subscription/customers");
+        const response = await fetch("http://soupx.in/api/subscription/customers");
         const data = await response.json();
         list = data;
         return data;
@@ -26,8 +26,9 @@ async function handleReadMore(e) {
     $("#s_goal").text(data.goal);
     $("#s_gender").text(data.sex);
     $("#s_prefs").text(data.preference);
-    // $("#s_plan_name").text(data.)
+    $("#s_plan_name").text(data.plan.name); 
     $("#s_days").text(data.days);
+    $("#s_amt").text(data.amt);
 }
 
 function closeModal() {
@@ -41,6 +42,7 @@ async function createTable() {
     for (let i = 0; i < data.length; i++) {
         // Create the <tr> element
         var tableRow = $('<tr>');
+        // list[i].plan = JSON.parse(list[i].plan);
 
         // Create the <td> elements and their contents
         var idCell = $('<td>').addClass('border-bottom-0').append($('<h6>').addClass('fw-semibold mb-0').attr('id', 'id').text(`${i}`));
